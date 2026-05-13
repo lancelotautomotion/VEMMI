@@ -1,655 +1,667 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VEMMI — Mécanique Générale & Maintenance Industrielle</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VEMMI — Mécanique générale, maintenance & mécano-soudure</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Archivo+Black&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E2A18;            /* deep forest near-black */
+    --ink-2:#2A3A20;          /* dark forest */
+    --steel:#9CA29D;          /* gear grey */
+    --paper:#F4F2EC;          /* warm off-white */
+    --paper-2:#E8E5DB;        /* darker paper */
+    --line:#1E2A18;
+    --mute:#6E7468;
+    --accent:#8DBF3F;         /* apple green (logo) */
+    --accent-2:#C7DA9C;       /* pale leaf — dark-section highlight */
+    --font-display:'Space Grotesk', ui-sans-serif, system-ui;
+    --font-display-tracking:-0.025em;
+    --font-display-weight:500;
+    --hl-h:14px; /* block height behind 'précision' */
+  }
 
-    :root {
-      --blue: #1a3a5c;
-      --blue-light: #2563a8;
-      --orange: #e07b2a;
-      --grey-bg: #f4f5f7;
-      --grey-text: #555;
-      --white: #fff;
-      --radius: 6px;
-    }
+  /* ===== Palette variants (logo green is default) ===== */
+  body[data-palette="steel"]{
+    --ink:#0B1A2B; --ink-2:#142A40; --steel:#2A4866;
+    --paper:#F1ECE2; --paper-2:#E1DACA;
+    --mute:#6B7B8C;
+    --accent:#3B7BB0; --accent-2:#B6D0E5;
+  }
+  body[data-palette="heritage"]{
+    --ink:#2A2017; --ink-2:#3A2E20; --steel:#9C8C75;
+    --paper:#F1EAD9; --paper-2:#E3D9C1;
+    --mute:#7A6A55;
+    --accent:#C4612A; --accent-2:#EFC68E;
+  }
+  body[data-palette="mono"]{
+    --ink:#0F0F0F; --ink-2:#1C1C1C; --steel:#8A8A86;
+    --paper:#F2F0EA; --paper-2:#E3E1DA;
+    --mute:#777570;
+    --accent:#0F0F0F; --accent-2:#BEBCB5;
+  }
 
-    html { scroll-behavior: smooth; }
+  /* ===== Typographic character ===== */
+  body[data-typo="editorial"]{
+    --font-display:'Fraunces', Georgia, serif;
+    --font-display-tracking:-0.02em;
+    --font-display-weight:500;
+  }
+  body[data-typo="brutalist"]{
+    --font-display:'Archivo Black','Arial Narrow',sans-serif;
+    --font-display-tracking:-0.045em;
+    --font-display-weight:900;
+  }
+  html,body{background:var(--paper); color:var(--ink); font-family:'Space Grotesk', ui-sans-serif, system-ui;}
+  .font-display{font-family:var(--font-display); letter-spacing:var(--font-display-tracking); font-weight:var(--font-display-weight);}
+  .font-serif{font-family:'Fraunces', serif; font-style:italic;}
+  .font-mono{font-family:'JetBrains Mono', monospace;}
+  .text-ink{color:var(--ink);} .bg-ink{background:var(--ink);}
+  .bg-ink-2{background:var(--ink-2);}
+  .text-paper{color:var(--paper);} .bg-paper{background:var(--paper);}
+  .bg-paper-2{background:var(--paper-2);}
+  .text-accent{color:var(--accent);} .bg-accent{background:var(--accent);}
+  .text-accent-2{color:var(--accent-2);} .bg-accent-2{background:var(--accent-2);}
+  .text-mute{color:var(--mute);}
+  .border-line{border-color:rgba(30,42,24,0.14);}
+  .border-line-dark{border-color:rgba(255,255,255,0.12);}
 
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: #222;
-      background: var(--white);
-      line-height: 1.65;
-    }
+  /* Subtle paper grain */
+  .grain{position:relative;}
+  .grain::after{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
 
-    /* ── HEADER ── */
-    header {
-      background: var(--blue);
-      color: var(--white);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,.35);
-    }
-    .header-inner {
-      max-width: 1100px;
-      margin: auto;
-      padding: 0 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-    }
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      color: inherit;
-    }
-    .logo-wrap img {
-      height: 44px;
-      width: auto;
-      object-fit: contain;
-    }
-    .logo-text {
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-    }
-    nav { display: flex; gap: 2rem; }
-    nav a {
-      color: rgba(255,255,255,.85);
-      text-decoration: none;
-      font-size: .92rem;
-      font-weight: 500;
-      transition: color .2s;
-    }
-    nav a:hover { color: var(--orange); }
+  /* Technical crosshair frame */
+  .crosshair{position:relative;}
+  .crosshair::before, .crosshair::after{content:"+"; position:absolute; font-family:'JetBrains Mono', monospace; color:var(--accent); font-size:14px; line-height:1;}
+  .crosshair::before{top:-7px; left:-7px;}
+  .crosshair::after{bottom:-7px; right:-7px;}
 
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      height: 520px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('cnc-hartford.jpg') center/cover no-repeat;
-      filter: brightness(.45);
-    }
-    .hero-content {
-      position: relative;
-      max-width: 1100px;
-      margin: auto;
-      padding: 0 1.5rem;
-      color: var(--white);
-    }
-    .hero-content h1 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: .8rem;
-    }
-    .hero-content p {
-      font-size: 1.15rem;
-      max-width: 560px;
-      opacity: .9;
-      margin-bottom: 1.6rem;
-    }
-    .btn {
-      display: inline-block;
-      padding: .7rem 1.8rem;
-      border-radius: var(--radius);
-      font-weight: 700;
-      text-decoration: none;
-      transition: background .2s, transform .15s;
-    }
-    .btn-orange {
-      background: var(--orange);
-      color: var(--white);
-    }
-    .btn-orange:hover { background: #c96a1a; transform: translateY(-1px); }
+  /* Marquee */
+  @keyframes scroll-x { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .marquee{display:flex; width:max-content; animation: scroll-x 40s linear infinite;}
 
-    /* ── SECTIONS ── */
-    section { padding: 5rem 1.5rem; }
-    .section-inner { max-width: 1100px; margin: auto; }
-    .section-title {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--blue);
-      margin-bottom: .4rem;
-    }
-    .section-sub {
-      color: var(--grey-text);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-    }
-    .divider {
-      width: 52px;
-      height: 4px;
-      background: var(--orange);
-      border-radius: 2px;
-      margin-bottom: 2rem;
-    }
+  /* Underline-on-hover for links */
+  .link-u{position:relative;}
+  .link-u::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .35s ease;}
+  .link-u:hover::after{transform:scaleX(1);}
 
-    /* ── CAPACITÉS RÉSUMÉES ── */
-    .caps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-    .cap-card {
-      background: var(--blue);
-      color: var(--white);
-      border-radius: var(--radius);
-      padding: 1.6rem 1.4rem;
-      text-align: center;
-    }
-    .cap-card .icon { font-size: 2.2rem; margin-bottom: .6rem; }
-    .cap-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
-    .cap-card p { font-size: .88rem; opacity: .85; }
+  /* Diagonal stripe pattern */
+  .stripes{
+    background-image: repeating-linear-gradient(135deg, var(--accent) 0 8px, transparent 8px 16px);
+  }
 
-    /* ── SERVICES ── */
-    #services { background: var(--grey-bg); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
-    .service-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,.07);
-      transition: box-shadow .2s, transform .2s;
-    }
-    .service-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.12); transform: translateY(-3px); }
-    .service-card img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-    }
-    .service-body { padding: 1.3rem 1.4rem; }
-    .service-body h3 { color: var(--blue); font-size: 1.05rem; font-weight: 700; margin-bottom: .45rem; }
-    .service-body p { font-size: .9rem; color: var(--grey-text); }
+  /* Section number tag */
+  .tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase;}
 
-    /* ── MACHINES TABLE ── */
-    .machines-tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .tab-btn {
-      padding: .45rem 1.1rem;
-      border: 2px solid var(--blue);
-      border-radius: var(--radius);
-      background: transparent;
-      color: var(--blue);
-      font-weight: 600;
-      font-size: .88rem;
-      cursor: pointer;
-      transition: background .2s, color .2s;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      background: var(--blue);
-      color: var(--white);
-    }
-    .tab-panel { display: none; overflow-x: auto; }
-    .tab-panel.active { display: block; }
-    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-    thead { background: var(--blue); color: var(--white); }
-    th, td { padding: .65rem 1rem; text-align: left; border-bottom: 1px solid #e0e0e0; }
-    tbody tr:hover { background: var(--grey-bg); }
+  /* Card hover lift */
+  .card{transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s;}
+  .card:hover{transform:translateY(-4px);}
+  .card .arrow{transition:transform .3s ease;}
+  .card:hover .arrow{transform:translate(4px,-4px);}
 
-    /* ── GALERIE ── */
-    #galerie { background: var(--grey-bg); }
-    .gallery-filter { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .filter-btn {
-      padding: .4rem 1rem;
-      border: 2px solid var(--blue-light);
-      border-radius: 20px;
-      background: transparent;
-      color: var(--blue-light);
-      font-size: .85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background .2s, color .2s;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--blue-light);
-      color: var(--white);
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-    .gallery-item {
-      border-radius: var(--radius);
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      position: relative;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .35s;
-    }
-    .gallery-item:hover img { transform: scale(1.06); }
-    .gallery-item .label {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: .5rem .75rem;
-      background: linear-gradient(transparent, rgba(0,0,0,.6));
-      color: #fff;
-      font-size: .8rem;
-      font-weight: 600;
-      opacity: 0;
-      transition: opacity .25s;
-    }
-    .gallery-item:hover .label { opacity: 1; }
-    .gallery-item[data-cat] { cursor: pointer; }
+  /* Reveal */
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+  .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;}
+  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
 
-    /* ── CONTACT ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
-    .contact-info h3 { color: var(--blue); font-size: 1.1rem; margin-bottom: 1rem; }
-    .contact-info p { margin-bottom: .55rem; color: var(--grey-text); }
-    .contact-info a { color: var(--blue-light); text-decoration: none; }
-    .contact-info a:hover { text-decoration: underline; }
-    .map-wrap {
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 300px;
-      background: #dde;
-    }
-    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+  /* Number ticker */
+  .ticker{font-variant-numeric: tabular-nums;}
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--blue);
-      color: rgba(255,255,255,.7);
-      text-align: center;
-      padding: 1.8rem 1rem;
-      font-size: .85rem;
-    }
-    footer strong { color: var(--white); }
+  /* Hover overlay for cards */
+  .img-zoom{overflow:hidden;}
+  .img-zoom img{transition: transform 1.2s cubic-bezier(.2,.7,.2,1);}
+  .img-zoom:hover img{transform:scale(1.06);}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { display: none; }
-      .hero-content h1 { font-size: 1.8rem; }
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  /* Dot grid */
+  .dotgrid{
+    background-image: radial-gradient(rgba(30,42,24,.18) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* Mark / accent block */
+  .corner-mark{
+    position:absolute; width:14px; height:14px;
+  }
+  .corner-mark.tl{top:0; left:0; border-top:1px solid var(--accent); border-left:1px solid var(--accent);}
+  .corner-mark.tr{top:0; right:0; border-top:1px solid var(--accent); border-right:1px solid var(--accent);}
+  .corner-mark.bl{bottom:0; left:0; border-bottom:1px solid var(--accent); border-left:1px solid var(--accent);}
+  .corner-mark.br{bottom:0; right:0; border-bottom:1px solid var(--accent); border-right:1px solid var(--accent);}
+
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:14px; padding:14px 20px;
+    background:var(--ink); color:var(--paper); border-radius:999px; font-weight:500;
+    transition:all .25s ease; border:1px solid var(--ink);
+  }
+  .btn-primary:hover{background:var(--accent); border-color:var(--accent); color:var(--ink);}
+  .btn-primary .dot{width:8px; height:8px; border-radius:999px; background:var(--accent); transition:background .25s;}
+  .btn-primary:hover .dot{background:var(--ink);}
+
+  .btn-ghost{
+    display:inline-flex; align-items:center; gap:10px; padding:12px 18px;
+    border:1px solid rgba(30,42,24,.22); border-radius:999px; transition:.2s; font-weight:500;
+  }
+  .btn-ghost:hover{border-color:var(--ink); background:var(--ink); color:var(--paper);}
+
+  .hairline{height:1px; background:linear-gradient(90deg, transparent, rgba(30,42,24,.28), transparent);}
+
+  /* ===== Editorial tone variants ===== */
+  /* Sober: strip the editorial flourishes */
+  body[data-tone="sober"] .font-serif{font-family:inherit; font-style:normal;}
+  body[data-tone="sober"] .marquee-wrap{display:none;}
+  body[data-tone="sober"] .deco-svg{display:none;}
+  body[data-tone="sober"] .corner-mark{display:none;}
+  body[data-tone="sober"] .hl-block{height:2px; bottom:-2px !important; background:var(--accent) !important;}
+  body[data-tone="sober"] .big-mark{font-size:9vw !important;}
+  body[data-tone="sober"] .grain::after{display:none;}
+  body[data-tone="sober"] .crosshair::before,
+  body[data-tone="sober"] .crosshair::after{display:none;}
+
+  /* Maximal: push the editorial dial up */
+  body[data-tone="maximal"] .marquee{animation-duration:22s;}
+  body[data-tone="maximal"] .hl-block{height:22px !important; bottom:6px !important;}
+  body[data-tone="maximal"] .big-mark{font-size:22vw !important; letter-spacing:-0.08em !important;}
+  body[data-tone="maximal"] .deco-svg{opacity:.55 !important;}
+  body[data-tone="maximal"] .corner-mark{width:22px; height:22px;}
+  body[data-tone="maximal"] .grain::after{opacity:.1;}
+
+</style>
 </head>
-<body>
+<body class="antialiased" data-palette="verdant" data-typo="industriel" data-tone="editorial">
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a class="logo-wrap" href="#">
-      <img src="vemmi-logo.png" alt="Logo VEMMI" />
-      <span class="logo-text">VEMMI</span>
+<!-- ============== HEADER ============== -->
+<header class="sticky top-0 z-40 bg-paper/90 backdrop-blur border-b border-line">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3 group" style="text-align: left">
+      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0">
+      <div class="leading-none hidden sm:block">
+        <div class="font-mono text-[9px] tracking-[0.22em] text-mute">VELAY ÉTUDES MÉCANIQUES</div>
+        <div class="font-mono text-[9px] tracking-[0.22em] text-mute mt-0.5">MAINTENANCE · INDUSTRIE</div>
+      </div>
     </a>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#machines">Machines</a>
-      <a href="#galerie">Galerie</a>
-      <a href="#contact">Contact</a>
+
+    <nav class="hidden lg:flex items-center gap-9 text-[14.5px]">
+      <a href="#" class="link-u">Accueil</a>
+      <a href="#savoir-faire" class="link-u">Savoir-faire</a>
+      <a href="#stock" class="link-u">Stock matière</a>
+      <a href="#contact" class="link-u">Contact</a>
     </nav>
+
+    <div class="flex items-center gap-5">
+      <a href="tel:+33471619328" class="hidden md:inline-flex items-center gap-2 font-mono text-[13px] tracking-wider link-u">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 3.5a1.5 1.5 0 0 1 1.5-1.5h1.6a1.5 1.5 0 0 1 1.49 1.32l.26 2.1a1.5 1.5 0 0 1-.81 1.51l-1.05.52a9 9 0 0 0 4.55 4.55l.52-1.05a1.5 1.5 0 0 1 1.51-.81l2.1.26A1.5 1.5 0 0 1 14 11.4V13a1.5 1.5 0 0 1-1.5 1.5C7.25 14.5 2.5 9.75 2.5 4.5 2.5 3.95 2.7 3.5 3 3.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+        04 71 61 93 28
+      </a>
+    </div>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <h1>Mécanique générale<br>& maintenance industrielle</h1>
-    <p>Usinage CN 4 axes, mécano-soudure, maintenance curative et préventive — en atelier ou sur site client.</p>
-    <a href="#contact" class="btn btn-orange">Nous contacter</a>
-  </div>
-</section>
+<!-- ============== HERO ============== -->
+<section class="relative overflow-hidden">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-10 lg:pt-14 pb-0">
 
-<!-- CAPACITÉS -->
-<section id="capacites">
-  <div class="section-inner">
-    <div class="section-title">Nos capacités</div>
-    <div class="divider"></div>
-    <div class="caps-grid">
-      <div class="cap-card">
-        <div class="icon">⚙️</div>
-        <h3>Tournage CN 4 axes</h3>
-        <p>Jusqu'à Ø 1000 × L 1000 mm</p>
-      </div>
-      <div class="cap-card">
-        <div class="icon">🏭</div>
-        <h3>Fraisage CN 4 axes</h3>
-        <p>Jusqu'à 2000 × 800 × 800 mm</p>
-      </div>
-      <div class="cap-card">
-        <div class="icon">🔥</div>
-        <h3>Soudure TIG / MIG</h3>
-        <p>Acier, inox, aluminium</p>
-      </div>
-      <div class="cap-card">
-        <div class="icon">🔧</div>
-        <h3>Maintenance industrielle</h3>
-        <p>Préventive &amp; curative, atelier ou site</p>
-      </div>
-      <div class="cap-card">
-        <div class="icon">📦</div>
-        <h3>Stock matières</h3>
-        <p>Acier, inox, alu, plastiques techniques</p>
-      </div>
-      <div class="cap-card">
-        <div class="icon">🤝</div>
-        <h3>Services particuliers</h3>
-        <p>Serrurerie, métallerie, réparation</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="grid grid-cols-12 gap-6 lg:gap-8 pt-2">
+      <!-- LEFT — typographic hero -->
+      <div class="col-span-12 lg:col-span-7 relative">
+        <div class="tag text-mute mb-6 rise">[ Atelier d'usinage de précision ]</div>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="section-inner">
-    <div class="section-title">Nos services</div>
-    <div class="divider"></div>
-    <div class="services-grid">
-      <div class="service-card">
-        <img src="cnc-chuck.jpg" alt="Usinage CNC" />
-        <div class="service-body">
-          <h3>Usinage</h3>
-          <p>Réalisation de toutes pièces mécaniques par tournage et fraisage, en petites ou grandes séries, sur 8 machines CN.</p>
+        <h1 class="font-display font-medium text-[58px] sm:text-[84px] lg:text-[112px] leading-[0.92] tracking-[-0.04em] rise delay-1">
+          La mécanique<br>
+          <span class="relative inline-block">
+            <span class="relative z-10">à la précision</span>
+            <span class="absolute hl-block left-0 right-0 bottom-[10px] h-[14px] bg-accent/90 -z-0"></span>
+          </span><br>
+          <span class="font-serif font-normal">du centième.</span>
+        </h1>
+
+        <div class="mt-10 grid grid-cols-12 gap-6 rise delay-2">
+          <p class="col-span-12 md:col-span-8 text-[17px] leading-[1.55] text-ink/80 max-w-[560px]">
+            VEMMI conçoit, usine, soude et entretient. Pièces unitaires, prototypes et petites séries — pour l'industrie, l'agricole, le TP, et les particuliers exigeants. Velay Études Mécaniques Maintenance Industrie, depuis Dunières (43).
+          </p>
+          <div class="col-span-12 md:col-span-4 flex md:justify-end items-start">
+            <a href="#savoir-faire" class="btn-ghost">
+              Voir nos savoir-faire
+              <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Stat strip — basique -->
+        <div class="mt-14 lg:mt-20 grid grid-cols-1 md:grid-cols-3 border-t border-line rise delay-3">
+          <div class="py-6 pr-6 md:border-r border-line">
+            <div class="font-mono text-[10px] tracking-[0.2em] text-mute mb-2">L'ÉQUIPE</div>
+            <div class="font-display text-[42px] leading-none ticker">11<span class="text-mute text-[20px] align-top ml-2">collaborateurs</span></div>
+          </div>
+          <div class="py-6 md:px-6 md:border-r border-line">
+            <div class="font-mono text-[10px] tracking-[0.2em] text-mute mb-2">CRÉÉE EN</div>
+            <div class="font-display text-[42px] leading-none ticker">2002</div>
+          </div>
+          <div class="py-6 md:pl-6">
+            <div class="font-mono text-[10px] tracking-[0.2em] text-mute mb-2">LOCALISATION</div>
+            <div class="font-display text-[42px] leading-none ticker">30<span class="text-mute text-[20px] align-top ml-2">min de St-Étienne</span></div>
+          </div>
         </div>
       </div>
-      <div class="service-card">
-        <img src="photos/Maintenance/Photo039.jpg" alt="Maintenance industrielle" />
-        <div class="service-body">
-          <h3>Maintenance industrielle</h3>
-          <p>Interventions sur site client ou en atelier — maintenance préventive et curative, réparation de vérins, déplacement de matériels.</p>
+
+      <!-- RIGHT — image stack -->
+      <div class="col-span-12 lg:col-span-5 relative rise delay-2">
+        <div class="relative img-zoom">
+          <img src="assets/cnc-hartford.jpg" alt="Centre d'usinage Hartford avec robot de chargement" class="w-full h-[520px] lg:h-[680px] object-cover">
+          <div class="corner-mark tl"></div>
+          <div class="corner-mark tr"></div>
+          <div class="corner-mark bl"></div>
+          <div class="corner-mark br"></div>
+          <!-- Spec overlay -->
+          <div class="absolute top-5 left-5 bg-paper px-3 py-2 font-mono text-[11px] tracking-wider flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
+            ATELIER · 43220
+          </div>
+          <div class="absolute bottom-5 right-5 bg-ink text-paper px-4 py-3 max-w-[260px]">
+            <div class="font-mono text-[10px] tracking-[0.2em] text-accent-2 mb-1">REF / HCMC-1682</div>
+            <div class="text-[14px] leading-snug">Centre d'usinage Hartford 4 axes — chargement robotisé jusqu'à 60 kg.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============== SAVOIR-FAIRE ============== -->
+<section id="savoir-faire" class="relative py-24 lg:py-32">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+
+    <div class="grid grid-cols-12 gap-8 mb-16">
+      <div class="col-span-12 lg:col-span-4">
+        <div class="tag text-accent mb-4">— Nos savoir-faire / 02</div>
+        <h2 class="font-display text-[44px] lg:text-[64px] leading-[0.95] tracking-[-0.03em]">
+          Quatre métiers, <br>
+          <span class="font-serif">un seul</span> atelier.
+        </h2>
+      </div>
+      <div class="col-span-12 lg:col-span-5 lg:col-start-7 self-end">
+        <p class="text-[17px] leading-[1.6] text-ink/80">
+          De la pièce de remplacement à l'ensemble mécano-soudé livré clé en main, nous intervenons sur l'ensemble de la chaîne — études, approvisionnement, usinage, soudure, assemblage et maintenance sur site.
+        </p>
+      </div>
+    </div>
+
+    <!-- Cards grid: 2 rows: one wide + one regular, then two regular -->
+    <div class="grid grid-cols-12 gap-5">
+
+      <!-- Card 01 — Usinage (featured) -->
+      <article class="card group col-span-12 lg:col-span-7 bg-ink text-paper relative overflow-hidden">
+        <div class="grid grid-cols-12 h-full">
+          <div class="col-span-12 md:col-span-6 p-7 lg:p-9 flex flex-col">
+            <div class="flex items-center justify-between mb-10">
+              <span class="font-mono text-[11px] tracking-[0.2em] text-accent-2">01 / USINAGE</span>
+              <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <h3 class="font-display text-[36px] lg:text-[44px] leading-[0.95] tracking-tight mb-4">Tournage &amp; fraisage CN<span class="text-accent">.</span></h3>
+            <p class="text-[14.5px] leading-[1.55] text-paper/70 mb-6">8 machines à commande numérique pour vos pièces unitaires, prototypes et petites séries. Capacité jusqu'à Ø 1000 × L 1000 mm en tournage, 2000 × 800 × 800 en fraisage 4 axes.</p>
+            <div class="mt-auto grid grid-cols-2 gap-x-4 gap-y-2 font-mono text-[11px] pt-6 border-t border-line-dark">
+              <div class="text-paper/50">→ Tournage CN 4 axes</div>
+              <div class="text-paper/50">→ Fraisage grande vitesse</div>
+              <div class="text-paper/50">→ Rectification plane</div>
+              <div class="text-paper/50">→ Mortaisage col de cygne</div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-6 relative img-zoom min-h-[260px]">
+            <img src="assets/lathe-shaft.jpg" alt="Tournage CN" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-accent text-ink font-mono text-[10px] tracking-wider px-2 py-1">FEATURED</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 02 — Mécano-soudure -->
+      <article class="card group col-span-12 lg:col-span-5 bg-paper-2 relative overflow-hidden border border-line">
+        <div class="img-zoom h-[240px]">
+          <img src="assets/mecanosoudure-green.jpg" alt="Mécano-soudure" class="w-full h-full object-cover">
+        </div>
+        <div class="p-7 lg:p-9">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-[11px] tracking-[0.2em] text-accent">02 / MÉCANO-SOUDURE</span>
+            <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3 class="font-display text-[28px] lg:text-[34px] leading-[1] tracking-tight mb-3">De A à Z<span class="font-serif italic font-normal text-ink/60">, soudé.</span></h3>
+          <p class="text-[14.5px] leading-[1.55] text-ink/75">Ensembles soudés sur plan : approvisionnement, débit, assemblage, soudure TIG / MIG, usinage de reprise et traitements de surface via partenaires.</p>
+          <div class="mt-5 flex flex-wrap gap-2 font-mono text-[10px]">
+            <span class="px-2 py-1 border border-line">ACIER</span>
+            <span class="px-2 py-1 border border-line">INOX</span>
+            <span class="px-2 py-1 border border-line">ALUMINIUM</span>
+            <span class="px-2 py-1 bg-ink text-paper">TIG · MIG</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 03 — Maintenance -->
+      <article class="card group col-span-12 lg:col-span-5 bg-paper border border-line relative overflow-hidden">
+        <div class="grid grid-cols-12">
+          <div class="col-span-7 p-7 lg:p-9">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-[11px] tracking-[0.2em] text-accent">03 / MAINTENANCE</span>
+              <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <h3 class="font-display text-[28px] lg:text-[34px] leading-[1] tracking-tight mb-3">Préventive<br><span class="font-serif italic font-normal text-ink/60">&amp;</span> curative.</h3>
+            <p class="text-[14.5px] leading-[1.55] text-ink/75 mb-5">Interventions sur site ou en atelier : pièces de remplacement, démontage/remontage, réparation de vérins, diagnostic et déménagement d'équipements.</p>
+            <div class="font-mono text-[10px] text-mute space-y-1">
+              <div>→ Sur site client</div>
+              <div>→ Vérins pneumatiques · hydrauliques</div>
+              <div>→ Partenaire automaticien &amp; robotique</div>
+            </div>
+          </div>
+          <div class="col-span-5 relative img-zoom">
+            <img src="assets/assembly-line.jpg" alt="Maintenance industrielle" class="absolute inset-0 w-full h-full object-cover">
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 04 — Particuliers -->
+      <article class="card group col-span-12 lg:col-span-7 bg-accent text-ink relative overflow-hidden">
+        <div class="grid grid-cols-12 h-full">
+          <div class="col-span-12 md:col-span-7 p-7 lg:p-9 flex flex-col">
+            <div class="flex items-center justify-between mb-10">
+              <span class="font-mono text-[11px] tracking-[0.2em]">04 / PARTICULIERS</span>
+              <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <h3 class="font-display text-[36px] lg:text-[44px] leading-[0.95] tracking-tight mb-4">Aussi pour <span class="font-serif italic font-normal">les particuliers</span>.</h3>
+            <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-6">Serrurerie, métallerie sur mesure, vente de matière à l'unité, réparation de matériels TP, agricoles ou forestiers. L'atelier vous est ouvert.</p>
+            <div class="mt-auto grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[11px] pt-6 border-t border-ink/20">
+              <div>→ Garde-corps · barrières</div>
+              <div>→ Escaliers · pergolas</div>
+              <div>→ Portails · mobilier</div>
+              <div>→ Vente matière à l'unité</div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-5 relative img-zoom min-h-[260px]">
+            <img src="assets/yellow-roller.jpg" alt="Travaux particuliers" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply">
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== STOCK MATIÈRE ============== -->
+<section id="stock" class="relative bg-ink text-paper py-24 lg:py-32 overflow-hidden grain">
+
+  <!-- Decorative crosshair grid -->
+  <svg class="deco-svg absolute top-10 right-10 opacity-30" width="120" height="120" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+    <path d="M60 0v120M0 60h120" stroke="#C7DA9C" stroke-dasharray="2 4"/>
+    <circle cx="60" cy="60" r="40" stroke="#C7DA9C" stroke-dasharray="2 4"/>
+    <circle cx="60" cy="60" r="20" stroke="#C7DA9C"/>
+    <circle cx="60" cy="60" r="2" fill="#8DBF3F"/>
+  </svg>
+
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 relative">
+
+    <div class="grid grid-cols-12 gap-8 mb-16">
+      <div class="col-span-12 lg:col-span-7">
+        <div class="tag text-accent-2 mb-4">— Stock matière / 03</div>
+        <h2 class="font-display text-[44px] lg:text-[72px] leading-[0.95] tracking-[-0.03em]">
+          Le stock qui dit <span class="font-serif italic font-normal">«&nbsp;oui&nbsp;»</span><br>
+          quand les autres attendent.
+        </h2>
+      </div>
+      <div class="col-span-12 lg:col-span-4 lg:col-start-9 self-end">
+        <p class="text-[16px] leading-[1.6] text-paper/70">
+          Aciers, inox, aluminiums, plastiques techniques, composants hydrauliques&nbsp;: nous tenons des stocks pour démarrer vos productions sans délai. Bruts, découpés (2 &amp; 5 axes) ou préusinés.
+        </p>
+      </div>
+    </div>
+
+    <!-- Material rows -->
+    <div class="border-t border-line-dark">
+
+      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
+        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·01</div>
+        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Aciers</div>
+        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
+          Doux et mi-durs <span class="font-mono text-paper/50">S235 · S355 · C35 · C45</span>. Alliés d'outillage <span class="font-mono text-paper/50">40CMD8T · 16NC6 · 35NCD16 · 55NCDV7</span>.
+        </div>
+        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
+          <span class="text-accent-2">Tôles</span> · ép. 0,5 → 300 mm
         </div>
       </div>
-      <div class="service-card">
-        <img src="mecanosoudure-green.jpg" alt="Mécano-soudure" />
-        <div class="service-body">
-          <h3>Mécano-soudure</h3>
-          <p>Fabrication d'ensembles mécano-soudés de A à Z : approvisionnement, assemblage, soudure TIG/MIG, usinage, traitements de surface.</p>
+
+      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
+        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·02</div>
+        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Aluminiums</div>
+        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
+          Nuances <span class="font-mono text-paper/50">2017 · 5083 · 7075</span>. Tôles avec découpe laser jusqu'à 15 mm, jet d'eau au-delà.
+        </div>
+        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
+          <span class="text-accent-2">Découpe</span> · laser + jet d'eau
         </div>
       </div>
-      <div class="service-card">
-        <img src="photos/Particuliers/20190712_185743.jpg" alt="Services aux particuliers" />
-        <div class="service-body">
-          <h3>Services aux particuliers</h3>
-          <p>Vente de matières, serrurerie &amp; métallerie (portails, garde-corps, escaliers, pergolas), réparation de matériels hydrauliques et agricoles.</p>
+
+      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
+        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·03</div>
+        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Inox</div>
+        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
+          Tôles d'épaisseur jusqu'à 120 mm. Compatible procédés TIG &amp; MIG en interne.
+        </div>
+        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
+          <span class="text-accent-2">Tôles</span> · ép. ≤ 120 mm
         </div>
       </div>
+
+      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
+        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·04</div>
+        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Plastiques tech.</div>
+        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
+          <span class="font-mono text-paper/50">PEHD · POM · PA6 · PTFE</span>. Tôles jusqu'à 100 mm d'épaisseur.
+        </div>
+        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
+          <span class="text-accent-2">Tôles</span> · ép. ≤ 100 mm
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
+        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·05</div>
+        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Hydraulique</div>
+        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
+          Barres chromées pour tiges de vérins. Tubes rodés pour fûts. Composants standards.
+        </div>
+        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
+          <span class="text-accent-2">Barres</span> · Ø 18 → 80 mm
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-6 py-7 group hover:bg-white/[0.02] transition">
+        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·06</div>
+        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Métaux jaunes</div>
+        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
+          Ronds bronze, laiton, fonte. Finitions laminé, étiré, corroyé ou rectifié — selon application.
+        </div>
+        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
+          <span class="text-accent-2">Ronds</span> · multi-finitions
+        </div>
+      </div>
+
     </div>
+
   </div>
 </section>
 
-<!-- MACHINES -->
-<section id="machines">
-  <div class="section-inner">
-    <div class="section-title">Parc machines</div>
-    <div class="divider"></div>
-    <div class="machines-tabs">
-      <button class="tab-btn active" data-tab="fraisage">Fraisage CN</button>
-      <button class="tab-btn" data-tab="tournage">Tournage CN</button>
-      <button class="tab-btn" data-tab="conventionnel">Conventionnel</button>
+<!-- ============== FOOTER ============== -->
+<footer id="contact" class="bg-ink text-paper relative grain">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-20 pb-10">
+
+    <div class="grid grid-cols-12 gap-8 mb-20">
+      <!-- Mark + tagline -->
+      <div class="col-span-12 lg:col-span-5">
+        <div class="flex items-center gap-4 mb-6">
+          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0">
+          <div>
+            <div class="font-mono text-[10px] tracking-[0.22em] text-paper/50 leading-relaxed">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div>
+          </div>
+        </div>
+        <p class="font-display text-[28px] lg:text-[36px] leading-[1.05] tracking-tight max-w-[440px]">
+          Précision, robustesse, <span class="font-serif italic">parole tenue</span> — depuis l'Yssingelais.
+        </p>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-span-6 lg:col-span-3">
+        <div class="font-mono text-[10px] tracking-[0.22em] text-accent-2 mb-5">CONTACT</div>
+        <div class="space-y-4 text-[15px]">
+          <a href="tel:+33471619328" class="block link-u">04 71 61 93 28</a>
+          <a href="tel:+33682923007" class="block link-u text-paper/70">06 82 92 30 07</a>
+          <a href="mailto:vemmisas@gmail.com" class="block link-u text-accent-2">vemmisas@gmail.com</a>
+        </div>
+      </div>
+
+      <!-- Adresse -->
+      <div class="col-span-6 lg:col-span-2">
+        <div class="font-mono text-[10px] tracking-[0.22em] text-accent-2 mb-5">ATELIER</div>
+        <address class="not-italic text-[15px] leading-[1.6] text-paper/80">
+          ZA du Solier<br>
+          9 rue de la Poissonnière<br>
+          43220 Dunières<br>
+          France
+        </address>
+      </div>
+
+      <!-- Navigation -->
+      <div class="col-span-12 lg:col-span-2">
+        <div class="font-mono text-[10px] tracking-[0.22em] text-accent-2 mb-5">PAGES</div>
+        <ul class="space-y-3 text-[15px]">
+          <li><a href="#" class="link-u">Accueil</a></li>
+          <li><a href="#savoir-faire" class="link-u text-paper/70">Savoir-faire</a></li>
+          <li><a href="#stock" class="link-u text-paper/70">Stock matière</a></li>
+          <li><a href="#contact" class="link-u text-paper/70">Contact</a></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="tab-panel active" id="tab-fraisage">
-      <table>
-        <thead><tr><th>Machine</th><th>Capacité (X × Y × Z)</th><th>Particularités</th></tr></thead>
-        <tbody>
-          <tr><td>HARTFORD vertical</td><td>2000 × 800 × 800 mm</td><td>4e axe continu, charge 3,5 T, robot de chargement jusqu'à 60 kg</td></tr>
-          <tr><td>HARTFORD vertical</td><td>1600 × 800 × 800 mm</td><td>4e axe continu (horizontal ou vertical), charge 3,5 T</td></tr>
-          <tr><td>HARTFORD grande vitesse</td><td>1000 × 700 × 500 mm</td><td>—</td></tr>
-          <tr><td>HAAS</td><td>1000 × 500 × 400 mm</td><td>—</td></tr>
-          <tr><td>Fraiseuse LAGUN (tête inclinable)</td><td>1850 × 700 × 900 mm</td><td>Conventionnelle</td></tr>
-          <tr><td>Fraiseuse HURON (tête inclinable)</td><td>1400 × 700 × 500 mm</td><td>Conventionnelle</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="hairline mb-12"></div>
 
-    <div class="tab-panel" id="tab-tournage">
-      <table>
-        <thead><tr><th>Machine</th><th>Capacité Ø × L</th><th>Passage broche</th><th>Particularités</th></tr></thead>
-        <tbody>
-          <tr><td>Tour CN CHALLENGER</td><td>Ø 1000 / Ø 720 × 1000 mm</td><td>Ø 101,6 mm (4")</td><td>—</td></tr>
-          <tr><td>Tour CN CMZ TBI520</td><td>Ø 600 × 1100 mm</td><td>Ø 80 mm</td><td>Contre-pointe motorisée</td></tr>
-          <tr><td>Tour CN CMZ TA-30-Y-640</td><td>Ø 600 × 1000 mm</td><td>Ø 80 mm</td><td>Axe Y, broche de fraisage</td></tr>
-          <tr><td>Tour CN HAAS FT30 (×2)</td><td>Ø 480 × 700 mm</td><td>Ø 76,2 mm (3")</td><td>Contre-pointe motorisée</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="tab-panel" id="tab-conventionnel">
-      <table>
-        <thead><tr><th>Machine</th><th>Capacité</th><th>Passage broche</th></tr></thead>
-        <tbody>
-          <tr><td>Tour ERNAULT SOMUA 550</td><td>Ø 550 × 1400 mm</td><td>Ø 51 mm (2")</td></tr>
-          <tr><td>Tour ERNAULT SOMUA 425</td><td>Ø 425 × 600 mm</td><td>Ø 51 mm (2")</td></tr>
-          <tr><td>Rectifieuse plane STEFOR 500 RTA</td><td>500 × 200 × 400 mm</td><td>—</td></tr>
-          <tr><td>Mortaiseuse col de cygne</td><td>Ø 800 mm, course 200 mm</td><td>—</td></tr>
-          <tr><td>Presse hydraulique 50 T</td><td>—</td><td>—</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- GALERIE -->
-<section id="galerie">
-  <div class="section-inner">
-    <div class="section-title">Galerie</div>
-    <div class="divider"></div>
-    <div class="gallery-filter">
-      <button class="filter-btn active" data-filter="all">Tout</button>
-      <button class="filter-btn" data-filter="usinage">Usinage</button>
-      <button class="filter-btn" data-filter="maintenance">Maintenance</button>
-      <button class="filter-btn" data-filter="soudure">Mécano-soudure</button>
-    </div>
-    <div class="gallery-grid" id="gallery">
-      <!-- Usinage -->
-      <div class="gallery-item" data-cat="usinage">
-        <img src="automation-jig.jpg" alt="Jig d'automatisation" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="cnc-chuck.jpg" alt="Mandrin CNC" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="cnc-lathe.jpg" alt="Tour CNC" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="cylinder-tanks.jpg" alt="Vérins" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="cutting-tool.jpg" alt="Outil de coupe" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="fixture-detail.jpg" alt="Montage de fixation" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="lathe-shaft.jpg" alt="Arbre au tour" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="milling-detail.jpg" alt="Détail fraisage" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="precision-hub.jpg" alt="Moyeu de précision" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="robot-cell.jpg" alt="Cellule robotisée" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="seat-rails.jpg" alt="Glissières" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="steel-plate.jpg" alt="Plateau acier" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="yellow-roller.jpg" alt="Rouleau" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <div class="gallery-item" data-cat="usinage">
-        <img src="wheel-molds.jpg" alt="Moules" loading="lazy" />
-        <div class="label">Usinage</div>
-      </div>
-      <!-- Maintenance -->
-      <div class="gallery-item" data-cat="maintenance">
-        <img src="photos/Maintenance/20181211_120732.jpg" alt="Maintenance" loading="lazy" />
-        <div class="label">Maintenance</div>
-      </div>
-      <div class="gallery-item" data-cat="maintenance">
-        <img src="photos/Maintenance/20181212_065217.jpg" alt="Maintenance" loading="lazy" />
-        <div class="label">Maintenance</div>
-      </div>
-      <div class="gallery-item" data-cat="maintenance">
-        <img src="photos/Maintenance/20191024_085523.jpg" alt="Maintenance" loading="lazy" />
-        <div class="label">Maintenance</div>
-      </div>
-      <div class="gallery-item" data-cat="maintenance">
-        <img src="photos/Maintenance/20200609_073333.jpg" alt="Maintenance" loading="lazy" />
-        <div class="label">Maintenance</div>
-      </div>
-      <div class="gallery-item" data-cat="maintenance">
-        <img src="photos/Maintenance/20200806_141246.jpg" alt="Maintenance" loading="lazy" />
-        <div class="label">Maintenance</div>
-      </div>
-      <div class="gallery-item" data-cat="maintenance">
-        <img src="photos/Maintenance/20200924_131330.jpg" alt="Maintenance" loading="lazy" />
-        <div class="label">Maintenance</div>
-      </div>
-      <div class="gallery-item" data-cat="maintenance">
-        <img src="photos/Maintenance/Photo039.jpg" alt="Maintenance" loading="lazy" />
-        <div class="label">Maintenance</div>
-      </div>
-      <!-- Mécano-soudure -->
-      <div class="gallery-item" data-cat="soudure">
-        <img src="mecanosoudure-green.jpg" alt="Mécano-soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20181212_065351.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20190222_133052.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20190307_171456.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20190628_080319.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20190723_195531.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20191122_074935.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20191211_153320.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20200114_062406.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
-      </div>
-      <div class="gallery-item" data-cat="soudure">
-        <img src="photos/Mécano-soudure/20200121_130415.jpg" alt="Soudure" loading="lazy" />
-        <div class="label">Mécano-soudure</div>
+    <!-- Bottom row -->
+    <div class="flex flex-col md:flex-row justify-between gap-4 font-mono text-[11px] tracking-[0.18em] text-paper/50">
+      <div>© 2008 — 2026 VEMMI SAS · TOUS DROITS RÉSERVÉS</div>
+      <div class="flex items-center gap-6">
+        <span>SIRET — XXX XXX XXX 00000</span>
+        <span class="hidden md:inline">MENTIONS LÉGALES</span>
+        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>ATELIER OUVERT · LUN–VEN</span>
       </div>
     </div>
   </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-inner">
-    <div class="section-title">Contact</div>
-    <div class="divider"></div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h3>VEMMI SAS</h3>
-        <p>🏭 ZA du Solier – 9 rue de la Poissonnière<br>43220 Dunières</p>
-        <p>📞 <a href="tel:+33471619328">04 71 61 93 28</a></p>
-        <p>📱 <a href="tel:+33682923007">06 82 92 30 07</a></p>
-        <p>✉️ <a href="mailto:vemmisas@gmail.com">vemmisas@gmail.com</a></p>
-        <br />
-        <p style="color:#555;font-size:.9rem">Ouvert du lundi au vendredi.<br>Interventions sur site disponibles.</p>
-      </div>
-      <div class="map-wrap">
-        <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=4.30%2C45.19%2C4.34%2C45.21&amp;layer=mapnik&amp;marker=45.2004%2C4.3198"
-          title="Localisation VEMMI — Dunières (43220)"
-          loading="lazy"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>&copy; 2025 <strong>VEMMI SAS</strong> — Velay Etudes Mécaniques Maintenance Industrie — Dunières (43220)</p>
 </footer>
 
-<script>
-  // Tabs machines
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    });
-  });
+<!-- ============== TWEAKS PANEL ============== -->
+<div id="tweaks-root"></div>
 
-  // Gallery filter
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.gallery-item').forEach(item => {
-        item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
-      });
-    });
-  });
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "palette": "verdant",
+    "typo": "industriel",
+    "tone": "editorial"
+  }/*EDITMODE-END*/;
+
+  function applyTweaks(t) {
+    document.body.setAttribute('data-palette', t.palette);
+    document.body.setAttribute('data-typo',    t.typo);
+    document.body.setAttribute('data-tone',    t.tone);
+  }
+
+  // Swatch SVG for the palette picker
+  const PALETTE_SWATCHES = {
+    verdant:   ['#8DBF3F','#1E2A18','#F4F2EC'],
+    steel:     ['#3B7BB0','#0B1A2B','#F1ECE2'],
+    heritage:  ['#C4612A','#2A2017','#F1EAD9'],
+    mono:      ['#0F0F0F','#8A8A86','#F2F0EA'],
+  };
+  function Swatch({ id, active }) {
+    const c = PALETTE_SWATCHES[id];
+    return (
+      <div style={{
+        display:'flex', height:18, borderRadius:4, overflow:'hidden',
+        outline: active ? '1.5px solid rgba(41,38,27,.7)' : '1px solid rgba(41,38,27,.15)',
+        outlineOffset: active ? 2 : 0,
+      }}>
+        {c.map((col,i)=> <div key={i} style={{flex:1, background:col}}/>)}
+      </div>
+    );
+  }
+
+  function App() {
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+    React.useEffect(() => { applyTweaks(t); }, [t.palette, t.typo, t.tone]);
+
+    return (
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Palette" />
+        <div className="twk-row">
+          <div className="twk-lbl"><span>Ambiance</span><span className="twk-val">{t.palette}</span></div>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:6}}>
+            {Object.keys(PALETTE_SWATCHES).map(id => (
+              <button key={id} onClick={()=>setTweak('palette', id)}
+                style={{
+                  appearance:'none', textAlign:'left',
+                  padding:'6px 8px', borderRadius:6, cursor:'default',
+                  background: t.palette===id ? 'rgba(0,0,0,.06)' : 'transparent',
+                  border:'1px solid '+(t.palette===id ? 'rgba(41,38,27,.4)' : 'rgba(41,38,27,.12)'),
+                  display:'flex', flexDirection:'column', gap:5,
+                }}>
+                <Swatch id={id} active={t.palette===id}/>
+                <span style={{fontSize:10.5, textTransform:'capitalize', letterSpacing:'.02em'}}>{id}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <TweakSection label="Caractère typographique" />
+        <TweakRadio
+          label="Display font"
+          value={t.typo}
+          options={[
+            {value:'industriel', label:'Industriel'},
+            {value:'editorial',  label:'Éditorial'},
+            {value:'brutalist',  label:'Brutaliste'},
+          ]}
+          onChange={(v)=> setTweak('typo', v)}
+        />
+
+        <TweakSection label="Tonalité éditoriale" />
+        <TweakRadio
+          label="Intensité"
+          value={t.tone}
+          options={[
+            {value:'sober',     label:'Sobre'},
+            {value:'editorial', label:'Éditorial'},
+            {value:'maximal',   label:'Maximal'},
+          ]}
+          onChange={(v)=> setTweak('tone', v)}
+        />
+
+        <div style={{
+          marginTop:8, padding:'8px 10px', borderRadius:6,
+          background:'rgba(0,0,0,.04)', fontSize:10.5, color:'rgba(41,38,27,.65)', lineHeight:1.4
+        }}>
+          Trois leviers expressifs : la palette change l'ambiance, le caractère change la voix typographique, la tonalité ajoute ou retire les fioritures éditoriales (italiques, ticker, repères techniques).
+        </div>
+      </TweaksPanel>
+    );
+  }
+
+  // Apply defaults on initial load (before mount) so refresh-state matches body data-* attrs
+  applyTweaks(TWEAK_DEFAULTS);
+
+  ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App/>);
 </script>
+
 </body>
 </html>
