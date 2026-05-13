@@ -179,7 +179,7 @@
 <header class="sticky top-0 z-40 bg-paper/90 backdrop-blur border-b border-line">
   <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
     <a href="#" class="flex items-center gap-3 group" style="text-align: left">
-      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0">
+      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0 mix-blend-multiply">
       <div class="leading-none hidden sm:block">
         <div class="font-mono text-[9px] tracking-[0.22em] text-mute">VELAY ÉTUDES MÉCANIQUES</div>
         <div class="font-mono text-[9px] tracking-[0.22em] text-mute mt-0.5">MAINTENANCE · INDUSTRIE</div>
@@ -190,7 +190,7 @@
       <a href="#" class="link-u">Accueil</a>
       <a href="#savoir-faire" class="link-u">Savoir-faire</a>
       <a href="#stock" class="link-u">Stock matière</a>
-      <a href="#contact" class="link-u">Contact</a>
+      <a href="contact.html" class="link-u">Contact</a>
     </nav>
 
     <div class="flex items-center gap-5">
@@ -500,7 +500,7 @@
       <!-- Mark + tagline -->
       <div class="col-span-12 lg:col-span-5">
         <div class="flex items-center gap-4 mb-6">
-          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0">
+          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0 mix-blend-screen">
           <div>
             <div class="font-mono text-[10px] tracking-[0.22em] text-paper/50 leading-relaxed">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div>
           </div>
@@ -538,7 +538,7 @@
           <li><a href="#" class="link-u">Accueil</a></li>
           <li><a href="#savoir-faire" class="link-u text-paper/70">Savoir-faire</a></li>
           <li><a href="#stock" class="link-u text-paper/70">Stock matière</a></li>
-          <li><a href="#contact" class="link-u text-paper/70">Contact</a></li>
+          <li><a href="contact.html" class="link-u text-paper/70">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -557,111 +557,6 @@
   </div>
 </footer>
 
-<!-- ============== TWEAKS PANEL ============== -->
-<div id="tweaks-root"></div>
-
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel">
-  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-    "palette": "verdant",
-    "typo": "industriel",
-    "tone": "editorial"
-  }/*EDITMODE-END*/;
-
-  function applyTweaks(t) {
-    document.body.setAttribute('data-palette', t.palette);
-    document.body.setAttribute('data-typo',    t.typo);
-    document.body.setAttribute('data-tone',    t.tone);
-  }
-
-  // Swatch SVG for the palette picker
-  const PALETTE_SWATCHES = {
-    verdant:   ['#8DBF3F','#1E2A18','#F4F2EC'],
-    steel:     ['#3B7BB0','#0B1A2B','#F1ECE2'],
-    heritage:  ['#C4612A','#2A2017','#F1EAD9'],
-    mono:      ['#0F0F0F','#8A8A86','#F2F0EA'],
-  };
-  function Swatch({ id, active }) {
-    const c = PALETTE_SWATCHES[id];
-    return (
-      <div style={{
-        display:'flex', height:18, borderRadius:4, overflow:'hidden',
-        outline: active ? '1.5px solid rgba(41,38,27,.7)' : '1px solid rgba(41,38,27,.15)',
-        outlineOffset: active ? 2 : 0,
-      }}>
-        {c.map((col,i)=> <div key={i} style={{flex:1, background:col}}/>)}
-      </div>
-    );
-  }
-
-  function App() {
-    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-    React.useEffect(() => { applyTweaks(t); }, [t.palette, t.typo, t.tone]);
-
-    return (
-      <TweaksPanel title="Tweaks">
-        <TweakSection label="Palette" />
-        <div className="twk-row">
-          <div className="twk-lbl"><span>Ambiance</span><span className="twk-val">{t.palette}</span></div>
-          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:6}}>
-            {Object.keys(PALETTE_SWATCHES).map(id => (
-              <button key={id} onClick={()=>setTweak('palette', id)}
-                style={{
-                  appearance:'none', textAlign:'left',
-                  padding:'6px 8px', borderRadius:6, cursor:'default',
-                  background: t.palette===id ? 'rgba(0,0,0,.06)' : 'transparent',
-                  border:'1px solid '+(t.palette===id ? 'rgba(41,38,27,.4)' : 'rgba(41,38,27,.12)'),
-                  display:'flex', flexDirection:'column', gap:5,
-                }}>
-                <Swatch id={id} active={t.palette===id}/>
-                <span style={{fontSize:10.5, textTransform:'capitalize', letterSpacing:'.02em'}}>{id}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <TweakSection label="Caractère typographique" />
-        <TweakRadio
-          label="Display font"
-          value={t.typo}
-          options={[
-            {value:'industriel', label:'Industriel'},
-            {value:'editorial',  label:'Éditorial'},
-            {value:'brutalist',  label:'Brutaliste'},
-          ]}
-          onChange={(v)=> setTweak('typo', v)}
-        />
-
-        <TweakSection label="Tonalité éditoriale" />
-        <TweakRadio
-          label="Intensité"
-          value={t.tone}
-          options={[
-            {value:'sober',     label:'Sobre'},
-            {value:'editorial', label:'Éditorial'},
-            {value:'maximal',   label:'Maximal'},
-          ]}
-          onChange={(v)=> setTweak('tone', v)}
-        />
-
-        <div style={{
-          marginTop:8, padding:'8px 10px', borderRadius:6,
-          background:'rgba(0,0,0,.04)', fontSize:10.5, color:'rgba(41,38,27,.65)', lineHeight:1.4
-        }}>
-          Trois leviers expressifs : la palette change l'ambiance, le caractère change la voix typographique, la tonalité ajoute ou retire les fioritures éditoriales (italiques, ticker, repères techniques).
-        </div>
-      </TweaksPanel>
-    );
-  }
-
-  // Apply defaults on initial load (before mount) so refresh-state matches body data-* attrs
-  applyTweaks(TWEAK_DEFAULTS);
-
-  ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App/>);
-</script>
 
 </body>
 </html>
