@@ -86,7 +86,7 @@
 <header class="sticky top-0 z-40 bg-paper/90 backdrop-blur border-b border-line">
   <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
     <a href="index.html" class="flex items-center gap-3 group">
-      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0 mix-blend-multiply">
+      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0" data-logo>
       <div class="leading-none hidden sm:block">
         <div class="font-mono text-[9px] tracking-[0.22em] text-mute">VELAY ÉTUDES MÉCANIQUES</div>
         <div class="font-mono text-[9px] tracking-[0.22em] text-mute mt-0.5">MAINTENANCE · INDUSTRIE</div>
@@ -262,7 +262,7 @@
     <div class="grid grid-cols-12 gap-8 mb-20">
       <div class="col-span-12 lg:col-span-5">
         <div class="flex items-center gap-4 mb-6">
-          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0 mix-blend-screen">
+          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0" data-logo>
           <div>
             <div class="font-mono text-[10px] tracking-[0.22em] text-paper/50 leading-relaxed">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div>
           </div>
@@ -349,5 +349,35 @@
   }
 </script>
 
+<script>
+(function(){
+  function stripWhite(img){
+    var W=img.naturalWidth, H=img.naturalHeight;
+    if(!W||!H) return;
+    var c=document.createElement('canvas');
+    c.width=W; c.height=H;
+    c.style.width=img.width+'px'; c.style.height=img.height+'px';
+    c.className=img.className; c.setAttribute('aria-label',img.alt||'');
+    var ctx=c.getContext('2d');
+    try{
+      ctx.drawImage(img,0,0);
+      var d=ctx.getImageData(0,0,W,H);
+      for(var i=0;i<d.data.length;i+=4){
+        if(d.data[i]>228&&d.data[i+1]>228&&d.data[i+2]>228) d.data[i+3]=0;
+      }
+      ctx.putImageData(d,0,0);
+      img.replaceWith(c);
+    }catch(e){}
+  }
+  function process(){
+    document.querySelectorAll('img[data-logo]').forEach(function(img){
+      if(img.complete&&img.naturalWidth) stripWhite(img);
+      else img.addEventListener('load',function(){stripWhite(img);},{once:true});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',process);
+  else process();
+})();
+</script>
 </body>
 </html>
