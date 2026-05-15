@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mécano-soudure — VEMMI Mécanique générale & maintenance industrielle</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E2A18; --paper:#F4F2EC; --paper-2:#E8E5DB;
+    --mute:#6E7468; --accent:#8DBF3F; --accent-2:#C7DA9C;
+  }
+  html,body{background:var(--paper); color:var(--ink); font-family:'Space Grotesk', ui-sans-serif, system-ui;}
+  .font-display{font-family:'Space Grotesk', ui-sans-serif; letter-spacing:-0.025em; font-weight:500;}
+  .font-serif{font-family:'Fraunces', serif; font-style:italic;}
+  .font-mono{font-family:'JetBrains Mono', monospace;}
+  .text-ink{color:var(--ink);} .bg-ink{background:var(--ink);}
+  .text-paper{color:var(--paper);} .bg-paper{background:var(--paper);}
+  .bg-paper-2{background:var(--paper-2);}
+  .text-accent{color:var(--accent);} .bg-accent{background:var(--accent);}
+  .text-accent-2{color:var(--accent-2);}
+  .text-mute{color:var(--mute);}
+  .border-line{border-color:rgba(30,42,24,0.14);}
+  .border-line-dark{border-color:rgba(255,255,255,0.12);}
+  .link-u{position:relative;}
+  .link-u::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .35s ease;}
+  .link-u:hover::after{transform:scaleX(1);}
+  .tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase;}
+  .hairline{height:1px; background:linear-gradient(90deg, transparent, rgba(30,42,24,.28), transparent);}
+  .img-zoom{overflow:hidden;}
+  .img-zoom img{transition: transform 1.2s cubic-bezier(.2,.7,.2,1);}
+  .img-zoom:hover img{transform:scale(1.06);}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+  .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;}
+  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
+  table{width:100%; border-collapse:collapse; font-size:.9rem;}
+  thead{background:var(--ink); color:var(--paper);}
+  th,td{padding:.65rem 1rem; text-align:left; border-bottom:1px solid rgba(30,42,24,.1);}
+  tbody tr:hover{background:var(--paper-2);}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-40 bg-paper border-b border-line">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0">
+      <div class="leading-none hidden sm:block">
+        <div class="font-mono text-[9px] tracking-[0.22em] text-mute">VELAY ÉTUDES MÉCANIQUES</div>
+        <div class="font-mono text-[9px] tracking-[0.22em] text-mute mt-0.5">MAINTENANCE · INDUSTRIE</div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-[13.5px]">
+      <a href="index.html" class="link-u">Accueil</a>
+      <a href="usinage.html" class="link-u">Usinage</a>
+      <a href="mecano-soudure.html" class="link-u font-semibold text-accent">Mécano-soudure</a>
+      <a href="maintenance.html" class="link-u">Maintenance</a>
+      <a href="particuliers.html" class="link-u">Particuliers</a>
+      <a href="contact.html" class="link-u">Contact</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <a href="tel:+33471619328" class="hidden md:inline-flex items-center gap-2 font-mono text-[13px] tracking-wider link-u">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 3.5a1.5 1.5 0 0 1 1.5-1.5h1.6a1.5 1.5 0 0 1 1.49 1.32l.26 2.1a1.5 1.5 0 0 1-.81 1.51l-1.05.52a9 9 0 0 0 4.55 4.55l.52-1.05a1.5 1.5 0 0 1 1.51-.81l2.1.26A1.5 1.5 0 0 1 14 11.4V13a1.5 1.5 0 0 1-1.5 1.5C7.25 14.5 2.5 9.75 2.5 4.5 2.5 3.95 2.7 3.5 3 3.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+        04 71 61 93 28
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="bg-paper pt-16 pb-0">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <div class="grid grid-cols-12 gap-8 items-end">
+      <div class="col-span-12 lg:col-span-7 pb-12">
+        <div class="tag text-mute mb-6 rise">[ Mécano-soudure / 02 ]</div>
+        <h1 class="font-display text-[52px] lg:text-[72px] xl:text-[88px] leading-[1] tracking-tight mb-6 rise delay-1">
+          De A à Z,<br>
+          <span class="font-serif">soudé.</span>
+        </h1>
+        <p class="text-[18px] lg:text-[20px] text-mute leading-[1.55] max-w-[560px] rise delay-2">
+          Fabrication d'ensembles mécano-soudés sur plan : approvisionnement, débit, assemblage, soudure TIG/MIG, usinage de reprise et traitements de surface via partenaires.
+        </p>
+      </div>
+      <div class="col-span-12 lg:col-span-5">
+        <div class="img-zoom h-[520px]">
+          <img src="assets/mecanosoudure-green.jpg" alt="Soudure VEMMI" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- MATÉRIAUX -->
+<section class="py-16 lg:py-20 bg-paper">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <div class="mb-12">
+      <div class="tag text-accent mb-3">Matériaux</div>
+      <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight">Acier, inox, aluminium</h2>
+      <p class="text-mute mt-3 max-w-[560px]">Nous travaillons tous les métaux courants, soudables en TIG ou MIG, avec approvisionnement géré de bout en bout.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-paper-2 rounded-lg p-8 border border-line">
+        <div class="w-10 h-10 bg-ink rounded flex items-center justify-center mb-6">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#F4F2EC" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="#F4F2EC" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="font-display text-[22px] tracking-tight mb-3">Acier</h3>
+        <p class="text-mute text-[15px] leading-relaxed">Aciers doux, mi-durs et alliés. S235, S355, C35, C45, 40CMD8T, 16NC6… Tôles de 0,5 à 300 mm d'épaisseur, toutes formes disponibles en stock.</p>
+      </div>
+      <div class="bg-paper-2 rounded-lg p-8 border border-line">
+        <div class="w-10 h-10 bg-ink rounded flex items-center justify-center mb-6">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#F4F2EC" stroke-width="1.5"/><path d="M12 3v18M3 12h18" stroke="#F4F2EC" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="font-display text-[22px] tracking-tight mb-3">Inox</h3>
+        <p class="text-mute text-[15px] leading-relaxed">Aciers inoxydables pour environnements exigeants. Tôles jusqu'à 120 mm d'épaisseur. Finitions et traitements de surface via nos partenaires spécialisés.</p>
+      </div>
+      <div class="bg-paper-2 rounded-lg p-8 border border-line">
+        <div class="w-10 h-10 bg-ink rounded flex items-center justify-center mb-6">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polygon points="12,3 21,9 21,15 12,21 3,15 3,9" stroke="#F4F2EC" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <h3 class="font-display text-[22px] tracking-tight mb-3">Aluminium</h3>
+        <p class="text-mute text-[15px] leading-relaxed">Nuances 2017, 5083, 7075… Tôles découpées laser (1–15 mm) ou jet d'eau (au-delà de 15 mm). Idéal pour les structures légères et les pièces techniques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCÉDÉS -->
+<section class="py-16 lg:py-20 bg-paper-2">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <div class="mb-12">
+      <div class="tag text-accent mb-3">Savoir-faire</div>
+      <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight">Procédés de soudage</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-paper rounded-lg p-10 border border-line">
+        <div class="tag text-accent mb-4">TIG</div>
+        <h3 class="font-display text-[28px] tracking-tight mb-4">Soudage TIG</h3>
+        <p class="text-mute text-[15px] leading-relaxed mb-4">
+          Tungsten Inert Gas — procédé à l'arc sous protection gazeuse avec électrode non fusible. Soudures fines, propres et très précises, adaptées à l'inox et à l'aluminium.
+        </p>
+        <ul class="space-y-2 text-[14px]">
+          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Finition esthétique supérieure</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Idéal pour faibles épaisseurs</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Acier, inox, aluminium</li>
+        </ul>
+      </div>
+      <div class="bg-paper rounded-lg p-10 border border-line">
+        <div class="tag text-accent mb-4">MIG</div>
+        <h3 class="font-display text-[28px] tracking-tight mb-4">Soudage MIG</h3>
+        <p class="text-mute text-[15px] leading-relaxed mb-4">
+          Metal Inert Gas — procédé semi-automatique à fil continu. Productif et polyvalent, il convient aux assemblages structurels et aux fortes épaisseurs sur acier et aluminium.
+        </p>
+        <ul class="space-y-2 text-[14px]">
+          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Cadences élevées</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Fortes épaisseurs</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Grandes structures soudées</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESTATIONS -->
+<section class="py-16 lg:py-20 bg-paper">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <div class="grid grid-cols-12 gap-12 items-start">
+      <div class="col-span-12 lg:col-span-5">
+        <div class="tag text-accent mb-3">Périmètre</div>
+        <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight mb-6">
+          Une prestation<br><span class="font-serif">clé en main.</span>
+        </h2>
+        <p class="text-mute text-[16px] leading-relaxed">
+          De la réception du plan à la livraison de la pièce finie, nous gérons chaque étape pour vous offrir un ensemble mécano-soudé prêt à l'emploi.
+        </p>
+      </div>
+      <div class="col-span-12 lg:col-span-7">
+        <ul class="space-y-0">
+          <li class="flex items-start gap-5 py-5 border-b border-line">
+            <span class="tag text-accent shrink-0 mt-0.5 w-6">01</span>
+            <div>
+              <div class="font-semibold text-[16px]">Approvisionnement matières</div>
+              <div class="text-mute text-[14px] mt-1">Achat et réception des bruts — aciers, inox, aluminium — dans les nuances et formats adaptés à votre plan.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-5 py-5 border-b border-line">
+            <span class="tag text-accent shrink-0 mt-0.5 w-6">02</span>
+            <div>
+              <div class="font-semibold text-[16px]">Débit &amp; découpe</div>
+              <div class="text-mute text-[14px] mt-1">Sciage, découpe laser ou jet d'eau selon le matériau et l'épaisseur.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-5 py-5 border-b border-line">
+            <span class="tag text-accent shrink-0 mt-0.5 w-6">03</span>
+            <div>
+              <div class="font-semibold text-[16px]">Assemblage &amp; soudure</div>
+              <div class="text-mute text-[14px] mt-1">Pointage, assemblage sur gabarit, soudure TIG ou MIG par nos soudeurs qualifiés.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-5 py-5 border-b border-line">
+            <span class="tag text-accent shrink-0 mt-0.5 w-6">04</span>
+            <div>
+              <div class="font-semibold text-[16px]">Usinage de reprise</div>
+              <div class="text-mute text-[14px] mt-1">Tournage et fraisage CN pour les cotes fonctionnelles après soudure, avec nos 8 machines CN.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-5 py-5">
+            <span class="tag text-accent shrink-0 mt-0.5 w-6">05</span>
+            <div>
+              <div class="font-semibold text-[16px]">Traitements de surface</div>
+              <div class="text-mute text-[14px] mt-1">Peinture, grenaillage, galvanisation, anodisation — via nos partenaires spécialisés.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section class="py-16 lg:py-20 bg-paper-2">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <div class="mb-10">
+      <div class="tag text-accent mb-3">Réalisations</div>
+      <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight">Galerie</h2>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20181212_065351.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20190222_133052.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20190307_171456.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20190628_080319.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20190723_195531.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20191122_074935.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20191211_153320.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20200114_062406.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+      <div class="img-zoom aspect-[4/3]"><img src="photos/Mécano-soudure/20200121_130415.jpg" alt="Mécano-soudure VEMMI" class="w-full h-full object-cover"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 bg-accent">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 text-center">
+    <div class="tag text-ink/60 mb-4">[ Demande de devis ]</div>
+    <h2 class="font-display text-[36px] lg:text-[52px] tracking-tight leading-tight text-ink mb-6">
+      Un projet de soudure ?<br><span class="font-serif">Parlons-en.</span>
+    </h2>
+    <p class="text-ink/70 text-[17px] max-w-[500px] mx-auto mb-10">
+      Envoyez-nous vos plans ou décrivez votre besoin. Nous prenons en charge l'ensemble de la fabrication de A à Z.
+    </p>
+    <a href="contact.html" class="inline-flex items-center gap-3 bg-ink text-paper px-8 py-4 font-mono text-[13px] tracking-[0.18em] uppercase hover:opacity-80 transition-opacity">
+      Nous contacter
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-paper border-t border-line">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-20 pb-10">
+    <div class="grid grid-cols-12 gap-8 mb-20">
+      <div class="col-span-12 lg:col-span-5">
+        <div class="flex items-center gap-4 mb-6">
+          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0">
+          <div><div class="font-mono text-[10px] tracking-[0.22em] text-mute leading-relaxed">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div></div>
+        </div>
+        <p class="font-display text-[28px] lg:text-[36px] leading-[1.05] tracking-tight max-w-[440px]">
+          Précision, robustesse, <span class="font-serif italic">parole tenue</span> — depuis l'Yssingelais.
+        </p>
+      </div>
+      <div class="col-span-6 lg:col-span-3">
+        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">CONTACT</div>
+        <div class="space-y-4 text-[15px]">
+          <a href="tel:+33471619328" class="block link-u">04 71 61 93 28</a>
+          <a href="tel:+33682923007" class="block link-u text-ink/60">06 82 92 30 07</a>
+          <a href="mailto:vemmisas@gmail.com" class="block link-u text-accent">vemmisas@gmail.com</a>
+        </div>
+      </div>
+      <div class="col-span-6 lg:col-span-2">
+        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">ATELIER</div>
+        <address class="not-italic text-[15px] leading-[1.6] text-ink/70">ZA du Solier<br>9 rue de la Poissonnière<br>43220 Dunières<br>France</address>
+      </div>
+      <div class="col-span-12 lg:col-span-2">
+        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">PAGES</div>
+        <ul class="space-y-2 text-[14px]">
+          <li><a href="index.html" class="link-u">Accueil</a></li>
+          <li><a href="usinage.html" class="link-u text-ink/70">Usinage</a></li>
+          <li><a href="mecano-soudure.html" class="link-u text-ink/70">Mécano-soudure</a></li>
+          <li><a href="maintenance.html" class="link-u text-ink/70">Maintenance</a></li>
+          <li><a href="particuliers.html" class="link-u text-ink/70">Particuliers</a></li>
+          <li><a href="contact.html" class="link-u text-ink/70">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hairline mb-12"></div>
+    <div class="flex flex-col md:flex-row justify-between gap-4 font-mono text-[11px] tracking-[0.18em] text-ink/40">
+      <div>© 2008 — 2026 VEMMI SAS · TOUS DROITS RÉSERVÉS</div>
+      <div class="flex items-center gap-6">
+        <span>SIRET — XXX XXX XXX 00000</span>
+        <span class="hidden md:inline">MENTIONS LÉGALES</span>
+        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>ATELIER OUVERT · LUN–VEN</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
