@@ -1,310 +1,407 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Maintenance industrielle — VEMMI Mécanique générale & maintenance industrielle</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Maintenance industrielle — VEMMI</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#1E2A18; --paper:#F4F2EC; --paper-2:#E8E5DB;
-    --mute:#6E7468; --accent:#8DBF3F; --accent-2:#C7DA9C;
+  :root {
+    --bg:      #0C0E0B;
+    --bg-2:    #141610;
+    --bg-3:    #1B1E17;
+    --fg:      #EDEAD3;
+    --fg-2:    rgba(237,234,211,0.55);
+    --fg-3:    rgba(237,234,211,0.20);
+    --line:    rgba(237,234,211,0.07);
+    --line-2:  rgba(237,234,211,0.13);
+    --green:   #8DBF3F;
+    --green-2: #A8D455;
+    --forest:  #3A5530;
+    --gear:    #B0ADA2;
+    --white:     #FFFFFF;
+    --white-ink: #0C0E0B;
+    --line-w:    rgba(12,14,11,0.10);
+    --line-w2:   rgba(12,14,11,0.06);
   }
-  html,body{background:var(--paper); color:var(--ink); font-family:'Space Grotesk', ui-sans-serif, system-ui;}
-  .font-display{font-family:'Space Grotesk', ui-sans-serif; letter-spacing:-0.025em; font-weight:500;}
-  .font-serif{font-family:'Fraunces', serif; font-style:italic;}
-  .font-mono{font-family:'JetBrains Mono', monospace;}
-  .text-ink{color:var(--ink);} .bg-ink{background:var(--ink);}
-  .text-paper{color:var(--paper);} .bg-paper{background:var(--paper);}
-  .bg-paper-2{background:var(--paper-2);}
-  .text-accent{color:var(--accent);} .bg-accent{background:var(--accent);}
-  .text-accent-2{color:var(--accent-2);}
-  .text-mute{color:var(--mute);}
-  .border-line{border-color:rgba(30,42,24,0.14);}
-  .border-line-dark{border-color:rgba(255,255,255,0.12);}
-  .link-u{position:relative;}
-  .link-u::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .35s ease;}
-  .link-u:hover::after{transform:scaleX(1);}
-  .tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase;}
-  .hairline{height:1px; background:linear-gradient(90deg, transparent, rgba(30,42,24,.28), transparent);}
-  .img-zoom{overflow:hidden;}
-  .img-zoom img{transition: transform 1.2s cubic-bezier(.2,.7,.2,1);}
-  .img-zoom:hover img{transform:scale(1.06);}
-  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
-  .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;}
-  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
-  table{width:100%; border-collapse:collapse; font-size:.9rem;}
-  thead{background:var(--ink); color:var(--paper);}
-  th,td{padding:.65rem 1rem; text-align:left; border-bottom:1px solid rgba(30,42,24,.1);}
-  tbody tr:hover{background:var(--paper-2);}
+
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content:''; position:fixed; inset:0; z-index:9000;
+    pointer-events:none;
+    background: repeating-linear-gradient(
+      0deg, transparent 0px, transparent 3px,
+      rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px
+    );
+  }
+
+  .head { font-family:'Barlow Condensed',sans-serif; font-weight:900; line-height:.88; text-transform:uppercase; letter-spacing:-.02em; }
+  .head-xl { font-size:clamp(52px,8vw,120px); }
+  .head-lg  { font-size:clamp(46px,6.5vw,96px); }
+  .head-md  { font-size:clamp(28px,3.5vw,52px); }
+  .head-sm  { font-size:clamp(22px,2.5vw,34px); }
+
+  .mono   { font-family:'IBM Plex Mono',monospace; }
+  .italic { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; text-transform:none; letter-spacing:0; }
+
+  .tag   { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gear); }
+  .coord { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--green); }
+
+  .c-green  { color:var(--green); }
+  .c-forest { color:var(--forest); }
+  .c-gear   { color:var(--gear); }
+  .c-fg2    { color:var(--fg-2); }
+  .c-ink    { color:var(--white-ink); }
+
+  .corner { position:absolute; width:32px; height:32px; }
+  .corner.tl { top:0;    left:0;  border-top:1.5px solid var(--green); border-left:1.5px  solid var(--green); }
+  .corner.tr { top:0;    right:0; border-top:1.5px solid var(--green); border-right:1.5px solid var(--green); }
+  .corner.bl { bottom:0; left:0;  border-bottom:1.5px solid var(--green); border-left:1.5px  solid var(--green); }
+  .corner.br { bottom:0; right:0; border-bottom:1.5px solid var(--green); border-right:1.5px solid var(--green); }
+
+  .photo { position:relative; overflow:hidden; }
+  .photo img {
+    width:100%; height:100%; object-fit:cover;
+    filter:grayscale(15%) contrast(1.06);
+    transition:filter .7s ease, transform 1.3s cubic-bezier(.2,.7,.2,1);
+  }
+  .photo:hover img { filter:grayscale(0%) contrast(1); transform:scale(1.045); }
+  .photo::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(150deg, transparent 45%, rgba(58,85,48,.35) 100%);
+    pointer-events:none; mix-blend-mode:multiply;
+  }
+
+  .ghost {
+    font-family:'Barlow Condensed',sans-serif; font-weight:900;
+    color:rgba(237,234,211,.03); line-height:1;
+    user-select:none; pointer-events:none; position:absolute; letter-spacing:-.04em;
+  }
+
+  .grain { position:relative; }
+  .grain::after {
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:.045;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .8 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .btn-dark {
+    display:inline-flex; align-items:center; gap:12px;
+    background:var(--green); color:var(--white-ink);
+    padding:14px 24px; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    text-decoration:none; font-weight:600;
+    transition:background .2s;
+  }
+  .btn-dark:hover { background:var(--green-2); }
+
+  .btn-ghost-dark {
+    display:inline-flex; align-items:center; gap:12px;
+    border:1px solid var(--line-2); color:var(--fg);
+    padding:13px 23px; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    text-decoration:none;
+    transition:border-color .2s, background .2s;
+  }
+  .btn-ghost-dark:hover { border-color:var(--green); color:var(--green); background:rgba(141,191,63,.05); }
+
+  .btn-white {
+    display:inline-flex; align-items:center; gap:12px;
+    background:var(--white-ink); color:var(--white);
+    padding:14px 24px; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    text-decoration:none; font-weight:600;
+    transition:background .2s;
+  }
+  .btn-white:hover { background:var(--forest); }
+
+  .lk { position:relative; text-decoration:none; color:inherit; }
+  .lk::after { content:''; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
+  .lk:hover::after { transform:scaleX(1); }
+
+  .vert { writing-mode:vertical-rl; transform:rotate(180deg); }
+
+  @keyframes rise { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+  .rise { animation:rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .d1{animation-delay:.1s} .d2{animation-delay:.22s} .d3{animation-delay:.38s} .d4{animation-delay:.55s}
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+  .pulse { animation:pulse 2.4s ease infinite; }
+
+  @media (max-width:1023px) {
+    .hero-inner  { grid-template-columns:1fr !important; }
+    .hero-photo  { display:none; }
+    .footer-grid { grid-template-columns:1fr 1fr !important; }
+    .desktop-nav { display:none !important; }
+    .vert-lab    { display:none; }
+    .two-col     { grid-template-columns:1fr !important; }
+    .three-col   { grid-template-columns:1fr !important; }
+    .six-grid    { grid-template-columns:1fr 1fr !important; }
+  }
+  @media (max-width:640px) {
+    .hero-btns   { flex-direction:column; }
+    .six-grid    { grid-template-columns:1fr !important; }
+  }
 </style>
 </head>
-<body class="antialiased">
+<body>
 
 <!-- HEADER -->
-<header class="sticky top-0 z-40 bg-paper border-b border-line">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3">
-      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0">
-      <div class="leading-none hidden sm:block">
-        <div class="font-mono text-[9px] tracking-[0.22em] text-mute">VELAY ÉTUDES MÉCANIQUES</div>
-        <div class="font-mono text-[9px] tracking-[0.22em] text-mute mt-0.5">MAINTENANCE · INDUSTRIE</div>
+<header style="position:sticky;top:0;z-index:40;background:#FFFFFF;border-bottom:1px solid rgba(12,14,11,0.10);">
+  <div style="max-width:1440px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="index.html" style="display:flex;align-items:center;gap:16px;text-decoration:none;flex-shrink:0;">
+      <img src="assets/vemmi-logo.png" alt="VEMMI" width="44" height="44">
+      <div style="border-left:1px solid rgba(12,14,11,0.10);padding-left:16px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#0C0E0B;font-weight:600;">VEMMI</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#B0ADA2;margin-top:3px;">Dunières · 43220</div>
       </div>
     </a>
-    <nav class="hidden lg:flex items-center gap-7 text-[13.5px]">
-      <a href="index.html" class="link-u">Accueil</a>
-      <a href="usinage.html" class="link-u">Usinage</a>
-      <a href="mecano-soudure.html" class="link-u">Mécano-soudure</a>
-      <a href="maintenance.html" class="link-u font-semibold text-accent">Maintenance</a>
-      <a href="particuliers.html" class="link-u">Particuliers</a>
-      <a href="contact.html" class="link-u">Contact</a>
+    <nav class="desktop-nav" style="display:flex;align-items:center;gap:28px;">
+      <a href="index.html"          class="lk" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,14,11,.55);">Accueil</a>
+      <a href="usinage.html"        class="lk" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,14,11,.55);">Usinage</a>
+      <a href="mecano-soudure.html" class="lk" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,14,11,.55);">Mécano-soudure</a>
+      <a href="maintenance.html"    class="lk" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8DBF3F;font-weight:600;">Maintenance</a>
+      <a href="particuliers.html"   class="lk" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,14,11,.55);">Particuliers</a>
     </nav>
-    <div class="flex items-center gap-5">
-      <a href="tel:+33471619328" class="hidden md:inline-flex items-center gap-2 font-mono text-[13px] tracking-wider link-u">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 3.5a1.5 1.5 0 0 1 1.5-1.5h1.6a1.5 1.5 0 0 1 1.49 1.32l.26 2.1a1.5 1.5 0 0 1-.81 1.51l-1.05.52a9 9 0 0 0 4.55 4.55l.52-1.05a1.5 1.5 0 0 1 1.51-.81l2.1.26A1.5 1.5 0 0 1 14 11.4V13a1.5 1.5 0 0 1-1.5 1.5C7.25 14.5 2.5 9.75 2.5 4.5 2.5 3.95 2.7 3.5 3 3.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
-        04 71 61 93 28
-      </a>
+    <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+      <a href="tel:+33471619328" class="lk" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:#0C0E0B;text-decoration:none;">04 71 61 93 28</a>
+      <a href="contact.html" class="btn-white" style="padding:10px 18px;">Contact →</a>
     </div>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="bg-paper pt-16 pb-0">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-    <div class="grid grid-cols-12 gap-8 items-end">
-      <div class="col-span-12 lg:col-span-7 pb-12">
-        <div class="tag text-mute mb-6 rise">[ Maintenance industrielle / 03 ]</div>
-        <h1 class="font-display text-[52px] lg:text-[72px] xl:text-[88px] leading-[1] tracking-tight mb-6 rise delay-1">
-          Préventive &amp;<br>
-          <span class="font-serif">curative.</span>
+<section style="position:relative;overflow:hidden;background:var(--bg);" class="grain">
+  <div class="ghost" style="font-size:clamp(240px,38vw,520px);bottom:-80px;left:-30px;z-index:0;">M</div>
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;position:relative;z-index:1;">
+    <div style="display:flex;align-items:center;gap:16px;padding:22px 0 34px;border-bottom:1px solid var(--line);">
+      <span class="tag">[ Maintenance industrielle / 03 ]</span>
+      <div style="flex:1;height:1px;background:var(--line-2);"></div>
+      <span class="coord">43220 · FR</span>
+    </div>
+    <div class="hero-inner" style="display:grid;grid-template-columns:1fr 500px;gap:48px;align-items:start;padding:52px 0 0;">
+      <div>
+        <h1 class="head head-xl rise" style="margin-bottom:6px;">
+          PRÉVENTIVE &amp;<br>
+          CURATIVE.
         </h1>
-        <p class="text-[18px] lg:text-[20px] text-mute leading-[1.55] max-w-[560px] rise delay-2">
+        <p class="rise d2" style="font-size:15px;line-height:1.7;color:var(--fg-2);max-width:520px;margin-top:36px;margin-bottom:32px;">
           Interventions en atelier ou sur site client. Diagnostic, réparation, remplacement de pièces — pour l'industrie, l'agricole, les TP et les machines spéciales.
         </p>
+        <div class="hero-btns rise d3" style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="#modes" class="btn-dark">
+            Nos prestations
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+          <a href="contact.html" class="btn-ghost-dark">Demander un devis</a>
+        </div>
       </div>
-      <div class="col-span-12 lg:col-span-5">
-        <div class="img-zoom h-[520px]">
-          <img src="assets/assembly-line.jpg" alt="Maintenance industrielle VEMMI" class="w-full h-full object-cover">
+      <div class="hero-photo photo rise d2" style="height:640px;position:relative;z-index:1;">
+        <img src="photos/Maintenance/20200806_141246.jpg" alt="Maintenance industrielle VEMMI">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(12,14,11,.88) 0%,transparent 80%);padding:20px;">
+          <div class="coord" style="margin-bottom:5px;">ATELIER · SITE CLIENT · DIAGNOSTIC</div>
+          <div style="font-size:13px;line-height:1.45;color:var(--fg-2);">Interventions rapides — vérins, machines spéciales</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="hairline"></div>
-
-<!-- TYPES DE MAINTENANCE -->
-<section class="py-16 lg:py-20 bg-paper">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-    <div class="mb-12">
-      <div class="tag text-accent mb-3">Approche</div>
-      <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight">Deux modes d'intervention</h2>
+<!-- DEUX MODES -->
+<section id="modes" style="padding:96px 0;background:var(--bg-2);position:relative;overflow:hidden;" class="grain">
+  <div class="ghost" style="font-size:clamp(180px,28vw,400px);right:-60px;bottom:-60px;z-index:0;">D</div>
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;position:relative;z-index:1;">
+    <div style="margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">— Types d'intervention / 01</div>
+      <h2 class="head head-lg">DEUX MODES<br>D'INTERVENTION</h2>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="bg-paper-2 rounded-lg p-10 border border-line">
-        <div class="tag text-accent mb-4">Préventive</div>
-        <h3 class="font-display text-[28px] tracking-tight mb-4">Maintenance préventive</h3>
-        <p class="text-mute text-[15px] leading-relaxed">
-          Inspections planifiées, contrôles d'usure, remplacement anticipé des pièces d'usure. Nous analysons l'état de vos équipements et formulons des recommandations pour améliorer vos process et allonger la durée de vie de vos machines.
-        </p>
+    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-2);">
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:32px;">
+        <div class="coord" style="margin-bottom:16px;">01</div>
+        <h3 class="head head-md" style="margin-bottom:18px;">PRÉVENTIVE</h3>
+        <p style="font-size:14px;line-height:1.7;color:var(--fg-2);">Inspections planifiées, contrôles d'usure, remplacement anticipé. Analyse de l'état des équipements et recommandations.</p>
       </div>
-      <div class="bg-paper-2 rounded-lg p-10 border border-line">
-        <div class="tag text-accent mb-4">Curative</div>
-        <h3 class="font-display text-[28px] tracking-tight mb-4">Maintenance curative</h3>
-        <p class="text-mute text-[15px] leading-relaxed">
-          Intervention rapide après panne ou casse. Diagnostic, réalisation de pièces de remplacement dans nos ateliers CN, démontage et remontage d'équipements sur site ou en atelier pour minimiser l'arrêt de production.
-        </p>
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:32px;">
+        <div class="coord" style="margin-bottom:16px;">02</div>
+        <h3 class="head head-md" style="margin-bottom:18px;">CURATIVE</h3>
+        <p style="font-size:14px;line-height:1.7;color:var(--fg-2);">Intervention rapide après panne. Diagnostic, réalisation de pièces de remplacement CN, démontage/remontage sur site ou en atelier.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRESTATIONS -->
-<section class="py-16 lg:py-20 bg-paper-2">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-    <div class="mb-12">
-      <div class="tag text-accent mb-3">Prestations</div>
-      <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight">Ce que nous faisons</h2>
-      <p class="text-mute mt-3 max-w-[560px]">Interventions en atelier ou directement sur votre site, selon vos contraintes de production.</p>
+<section style="padding:96px 0;background:var(--bg);position:relative;overflow:hidden;" class="grain">
+  <div class="ghost" style="font-size:clamp(180px,28vw,400px);left:-60px;bottom:-60px;z-index:0;">P</div>
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;position:relative;z-index:1;">
+    <div style="margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">— Prestations / 02</div>
+      <h2 class="head head-lg">NOS PRESTATIONS</h2>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-line rounded-lg overflow-hidden">
-      <div class="bg-paper p-8 border-b border-r-0 lg:border-r border-line">
-        <div class="tag text-accent mb-3">01</div>
-        <h3 class="font-display text-[20px] tracking-tight mb-3">Réalisation de pièces de remplacement</h3>
-        <p class="text-mute text-[14px] leading-relaxed">
-          Fabrication sur mesure de pièces mécaniques introuvables dans le commerce, à partir d'un plan, d'une pièce usée ou d'une simple description. Tournage et fraisage CN disponibles pour toutes matières.
-        </p>
+    <div class="six-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-2);">
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:28px;">
+        <div class="coord" style="margin-bottom:12px;">01</div>
+        <h3 class="head head-sm" style="margin-bottom:14px;">PIÈCES DE<br>REMPLACEMENT</h3>
+        <p style="font-size:13px;line-height:1.65;color:var(--fg-2);">Fabrication sur mesure à partir d'un plan, d'une pièce usée ou d'une description.</p>
       </div>
-      <div class="bg-paper p-8 border-b border-line">
-        <div class="tag text-accent mb-3">02</div>
-        <h3 class="font-display text-[20px] tracking-tight mb-3">Démontage &amp; remontage d'équipements</h3>
-        <p class="text-mute text-[14px] leading-relaxed">
-          Intervention sur site ou en atelier pour le démontage complet de sous-ensembles, leur réparation ou remplacement, puis remontage et réglage dans les règles de l'art.
-        </p>
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:28px;">
+        <div class="coord" style="margin-bottom:12px;">02</div>
+        <h3 class="head head-sm" style="margin-bottom:14px;">DÉMONTAGE &amp;<br>REMONTAGE</h3>
+        <p style="font-size:13px;line-height:1.65;color:var(--fg-2);">Sur site ou en atelier, réparation ou remplacement, réglage dans les règles de l'art.</p>
       </div>
-      <div class="bg-paper p-8 border-b border-r-0 lg:border-r border-line">
-        <div class="tag text-accent mb-3">03</div>
-        <h3 class="font-display text-[20px] tracking-tight mb-3">Réparation de vérins</h3>
-        <p class="text-mute text-[14px] leading-relaxed">
-          Réfection de vérins pneumatiques et hydrauliques : remplacement des joints, rodage des fûts, rectification des tiges. Stock de barres chromées (Ø 18 à 80 mm) et tubes rodés pour livraison rapide.
-        </p>
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:28px;">
+        <div class="coord" style="margin-bottom:12px;">03</div>
+        <h3 class="head head-sm" style="margin-bottom:14px;">RÉPARATION<br>DE VÉRINS</h3>
+        <p style="font-size:13px;line-height:1.65;color:var(--fg-2);">Vérins pneumatiques et hydrauliques : joints, rodage des fûts, rectification des tiges. Stock Ø 18–80 mm.</p>
       </div>
-      <div class="bg-paper p-8 border-b border-line">
-        <div class="tag text-accent mb-3">04</div>
-        <h3 class="font-display text-[20px] tracking-tight mb-3">Analyse &amp; recommandations</h3>
-        <p class="text-mute text-[14px] leading-relaxed">
-          Diagnostic de l'état de vos équipements, identification des points d'usure critiques, recommandations d'amélioration de process pour réduire les arrêts non planifiés.
-        </p>
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:28px;">
+        <div class="coord" style="margin-bottom:12px;">04</div>
+        <h3 class="head head-sm" style="margin-bottom:14px;">ANALYSE &amp;<br>RECOMMANDATIONS</h3>
+        <p style="font-size:13px;line-height:1.65;color:var(--fg-2);">Diagnostic, identification des points d'usure critiques, recommandations pour réduire les arrêts.</p>
       </div>
-      <div class="bg-paper p-8 border-r-0 lg:border-r border-line">
-        <div class="tag text-accent mb-3">05</div>
-        <h3 class="font-display text-[20px] tracking-tight mb-3">Déplacements &amp; déménagements industriels</h3>
-        <p class="text-mute text-[14px] leading-relaxed">
-          Transport, manutention et repositionnement de matériels industriels lourds. Chargement, arrimage et mise en place sur votre site ou chez vos clients.
-        </p>
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:28px;">
+        <div class="coord" style="margin-bottom:12px;">05</div>
+        <h3 class="head head-sm" style="margin-bottom:14px;">DÉPLACEMENTS<br>INDUSTRIELS</h3>
+        <p style="font-size:13px;line-height:1.65;color:var(--fg-2);">Transport, manutention, repositionnement de matériels lourds.</p>
       </div>
-      <div class="bg-paper p-8">
-        <div class="tag text-accent mb-3">Secteurs</div>
-        <h3 class="font-display text-[20px] tracking-tight mb-3">Tous secteurs d'activité</h3>
-        <ul class="space-y-2 text-[14px] text-mute">
-          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Industrie manufacturière</li>
-          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Agriculture &amp; agroalimentaire</li>
-          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Travaux publics &amp; BTP</li>
-          <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent flex-shrink-0"></span>Machines spéciales</li>
-        </ul>
+      <div style="background:var(--bg-3);border:1px solid var(--line-2);padding:28px;">
+        <div class="coord" style="margin-bottom:12px;">—</div>
+        <h3 class="head head-sm" style="margin-bottom:14px;">SECTEURS</h3>
+        <p style="font-size:13px;line-height:1.9;color:var(--fg-2);">Industrie manufacturière<br>Agriculture &amp; agroalimentaire<br>Travaux publics &amp; BTP<br>Machines spéciales</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- AUTOMATISME & ROBOTIQUE -->
-<section class="py-16 lg:py-20 bg-paper">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-    <div class="grid grid-cols-12 gap-12 items-center">
-      <div class="col-span-12 lg:col-span-6">
-        <div class="tag text-accent mb-3">Partenariat</div>
-        <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight mb-6">
-          Automatisme<br>&amp; <span class="font-serif">robotique.</span>
-        </h2>
-        <p class="text-[16px] text-mute leading-relaxed mb-6">
-          Notre partenaire automaticien complète notre offre pour tous vos projets d'automatisation et de robotique industrielle.
-        </p>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-accent-2 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="text-[15px]">Maintenance et dépannage d'automatismes existants</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-accent-2 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="text-[15px]">Étude, conception et réalisation de nouveaux automatismes</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-accent-2 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="text-[15px]">Projets de robotique industrielle — cellules robotisées clé en main</span>
-          </li>
-        </ul>
-      </div>
-      <div class="col-span-12 lg:col-span-6">
-        <div class="img-zoom aspect-[4/3] rounded-lg overflow-hidden">
-          <img src="assets/robot-cell.jpg" alt="Cellule robotisée" class="w-full h-full object-cover">
+<section style="padding:96px 0;background:var(--bg-2);position:relative;overflow:hidden;" class="grain">
+  <div class="ghost" style="font-size:clamp(180px,28vw,400px);right:-60px;bottom:-60px;z-index:0;">R</div>
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;position:relative;z-index:1;">
+    <div style="margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">— Automatisme &amp; Robotique / 03</div>
+      <h2 class="head head-lg">AUTOMATISME<br>&amp; ROBOTIQUE</h2>
+    </div>
+    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+      <div>
+        <p style="font-size:15px;line-height:1.75;color:var(--fg-2);margin-bottom:36px;">Notre partenaire automaticien complète notre offre.</p>
+        <div style="border-top:1px solid var(--line-2);">
+          <div style="display:flex;align-items:start;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);">
+            <span class="coord" style="flex-shrink:0;">01</span>
+            <span style="font-size:14px;color:var(--fg-2);">Maintenance automatismes existants</span>
+          </div>
+          <div style="display:flex;align-items:start;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);">
+            <span class="coord" style="flex-shrink:0;">02</span>
+            <span style="font-size:14px;color:var(--fg-2);">Étude et conception nouveaux automatismes</span>
+          </div>
+          <div style="display:flex;align-items:start;gap:20px;padding:18px 0;">
+            <span class="coord" style="flex-shrink:0;">03</span>
+            <span style="font-size:14px;color:var(--fg-2);">Robotique industrielle clé en main</span>
+          </div>
         </div>
+      </div>
+      <div class="photo" style="height:420px;position:relative;">
+        <img src="assets/robot-cell.jpg" alt="Robotique industrielle VEMMI">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- GALERIE -->
-<section class="py-16 lg:py-20 bg-paper-2">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-    <div class="mb-10">
-      <div class="tag text-accent mb-3">Interventions</div>
-      <h2 class="font-display text-[36px] lg:text-[48px] tracking-tight leading-tight">Galerie</h2>
+<section style="padding:96px 0;background:var(--bg);position:relative;overflow:hidden;" class="grain">
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;position:relative;z-index:1;">
+    <div style="margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">— Galerie / 04</div>
+      <h2 class="head head-lg">PHOTOS<br>D'ATELIER</h2>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="img-zoom aspect-[4/3]"><img src="photos/Maintenance/20181211_120732.jpg" alt="Maintenance VEMMI" class="w-full h-full object-cover"></div>
-      <div class="img-zoom aspect-[4/3]"><img src="photos/Maintenance/20181212_065217.jpg" alt="Maintenance VEMMI" class="w-full h-full object-cover"></div>
-      <div class="img-zoom aspect-[4/3]"><img src="photos/Maintenance/20191024_085523.jpg" alt="Maintenance VEMMI" class="w-full h-full object-cover"></div>
-      <div class="img-zoom aspect-[4/3]"><img src="photos/Maintenance/20200609_073333.jpg" alt="Maintenance VEMMI" class="w-full h-full object-cover"></div>
-      <div class="img-zoom aspect-[4/3]"><img src="photos/Maintenance/20200806_141246.jpg" alt="Maintenance VEMMI" class="w-full h-full object-cover"></div>
-      <div class="img-zoom aspect-[4/3]"><img src="photos/Maintenance/20200924_131330.jpg" alt="Maintenance VEMMI" class="w-full h-full object-cover"></div>
-      <div class="img-zoom aspect-[4/3]"><img src="photos/Maintenance/Photo039.jpg" alt="Maintenance VEMMI" class="w-full h-full object-cover"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+      <div class="photo" style="height:280px;overflow:hidden;"><img src="photos/Maintenance/20181211_120732.jpg" alt="Maintenance VEMMI"></div>
+      <div class="photo" style="height:280px;overflow:hidden;"><img src="photos/Maintenance/20181212_065217.jpg" alt="Maintenance VEMMI"></div>
+      <div class="photo" style="height:280px;overflow:hidden;"><img src="photos/Maintenance/20191024_085523.jpg" alt="Maintenance VEMMI"></div>
+      <div class="photo" style="height:280px;overflow:hidden;"><img src="photos/Maintenance/20200609_073333.jpg" alt="Maintenance VEMMI"></div>
+      <div class="photo" style="height:280px;overflow:hidden;"><img src="photos/Maintenance/20200806_141246.jpg" alt="Maintenance VEMMI"></div>
+      <div class="photo" style="height:280px;overflow:hidden;"><img src="photos/Maintenance/20200924_131330.jpg" alt="Maintenance VEMMI"></div>
+      <div class="photo" style="height:280px;overflow:hidden;"><img src="photos/Maintenance/Photo039.jpg" alt="Maintenance VEMMI"></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="py-20 bg-accent">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 text-center">
-    <div class="tag text-ink/60 mb-4">[ Demande d'intervention ]</div>
-    <h2 class="font-display text-[36px] lg:text-[52px] tracking-tight leading-tight text-ink mb-6">
-      Une machine en panne ?<br><span class="font-serif">On intervient.</span>
+<section style="padding:88px 0;background:#8DBF3F;position:relative;overflow:hidden;">
+  <div class="ghost" style="font-size:clamp(220px,30vw,420px);right:-60px;top:-80px;color:rgba(12,14,11,.07);">!</div>
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;position:relative;z-index:1;text-align:center;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(12,14,11,.50);margin-bottom:18px;">[ Urgence ou devis maintenance ]</div>
+    <h2 class="head" style="font-size:clamp(56px,9vw,120px);color:#0C0E0B;margin-bottom:20px;line-height:.88;">
+      Une machine en panne ?<br>On intervient.
     </h2>
-    <p class="text-ink/70 text-[17px] max-w-[500px] mx-auto mb-10">
-      Décrivez-nous votre problème — nous vous rappelons rapidement pour convenir d'une intervention en atelier ou sur site.
+    <p style="font-size:16px;color:rgba(12,14,11,.60);max-width:460px;margin:0 auto 40px;line-height:1.65;">
+      Décrivez votre problème — nous vous rappelons rapidement.
     </p>
-    <a href="contact.html" class="inline-flex items-center gap-3 bg-ink text-paper px-8 py-4 font-mono text-[13px] tracking-[0.18em] uppercase hover:opacity-80 transition-opacity">
-      Nous contacter
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" style="display:inline-flex;align-items:center;gap:12px;background:#0C0E0B;color:#EDEAD3;padding:15px 28px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:600;">Formulaire contact →</a>
+      <a href="tel:+33471619328" style="display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(12,14,11,.25);color:#0C0E0B;padding:14px 27px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;">04 71 61 93 28</a>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-paper border-t border-line">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-20 pb-10">
-    <div class="grid grid-cols-12 gap-8 mb-20">
-      <div class="col-span-12 lg:col-span-5">
-        <div class="flex items-center gap-4 mb-6">
-          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0">
-          <div><div class="font-mono text-[10px] tracking-[0.22em] text-mute leading-relaxed">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div></div>
-        </div>
-        <p class="font-display text-[28px] lg:text-[36px] leading-[1.05] tracking-tight max-w-[440px]">
-          Précision, robustesse, <span class="font-serif italic">parole tenue</span> — depuis l'Yssingelais.
-        </p>
+<footer style="background:#FFFFFF;border-top:1px solid rgba(12,14,11,0.10);padding:56px 0 32px;">
+  <div style="max-width:1440px;margin:0 auto;padding:0 48px;">
+    <div class="footer-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px;">
+      <div>
+        <img src="assets/vemmi-logo.png" alt="VEMMI" width="52" height="52" style="margin-bottom:16px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#B0ADA2;line-height:1.8;margin-bottom:16px;">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div>
+        <p class="head c-ink" style="font-size:20px;line-height:1.15;">Précision, robustesse, <span class="italic" style="color:var(--forest);">parole tenue.</span></p>
       </div>
-      <div class="col-span-6 lg:col-span-3">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">CONTACT</div>
-        <div class="space-y-4 text-[15px]">
-          <a href="tel:+33471619328" class="block link-u">04 71 61 93 28</a>
-          <a href="tel:+33682923007" class="block link-u text-ink/60">06 82 92 30 07</a>
-          <a href="mailto:vemmisas@gmail.com" class="block link-u text-accent">vemmisas@gmail.com</a>
-        </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#3A5530;margin-bottom:18px;">Contact</div>
+        <a href="tel:+33471619328" class="lk c-ink" style="display:block;margin-bottom:10px;font-size:14px;">04 71 61 93 28</a>
+        <a href="tel:+33682923007" class="lk" style="display:block;margin-bottom:10px;font-size:14px;color:rgba(12,14,11,.50);">06 82 92 30 07</a>
+        <a href="mailto:vemmisas@gmail.com" class="lk c-green" style="display:block;font-size:14px;">vemmisas@gmail.com</a>
       </div>
-      <div class="col-span-6 lg:col-span-2">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">ATELIER</div>
-        <address class="not-italic text-[15px] leading-[1.6] text-ink/70">ZA du Solier<br>9 rue de la Poissonnière<br>43220 Dunières<br>France</address>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#3A5530;margin-bottom:18px;">Atelier</div>
+        <address style="font-style:normal;font-size:14px;line-height:1.75;color:rgba(12,14,11,.55);">ZA du Solier<br>9 rue de la Poissonnière<br>43220 Dunières<br>France</address>
       </div>
-      <div class="col-span-12 lg:col-span-2">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">PAGES</div>
-        <ul class="space-y-2 text-[14px]">
-          <li><a href="index.html" class="link-u">Accueil</a></li>
-          <li><a href="usinage.html" class="link-u text-ink/70">Usinage</a></li>
-          <li><a href="mecano-soudure.html" class="link-u text-ink/70">Mécano-soudure</a></li>
-          <li><a href="maintenance.html" class="link-u text-ink/70">Maintenance</a></li>
-          <li><a href="particuliers.html" class="link-u text-ink/70">Particuliers</a></li>
-          <li><a href="contact.html" class="link-u text-ink/70">Contact</a></li>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#3A5530;margin-bottom:18px;">Pages</div>
+        <ul style="list-style:none;padding:0;">
+          <li style="margin-bottom:8px;"><a href="index.html" class="lk" style="font-size:13px;color:rgba(12,14,11,.55);">Accueil</a></li>
+          <li style="margin-bottom:8px;"><a href="usinage.html" class="lk" style="font-size:13px;color:rgba(12,14,11,.55);">Usinage</a></li>
+          <li style="margin-bottom:8px;"><a href="mecano-soudure.html" class="lk" style="font-size:13px;color:rgba(12,14,11,.55);">Mécano-soudure</a></li>
+          <li style="margin-bottom:8px;"><a href="maintenance.html" class="lk c-ink" style="font-size:13px;">Maintenance</a></li>
+          <li style="margin-bottom:8px;"><a href="particuliers.html" class="lk" style="font-size:13px;color:rgba(12,14,11,.55);">Particuliers</a></li>
+          <li><a href="contact.html" class="lk" style="font-size:13px;color:rgba(12,14,11,.55);">Contact</a></li>
         </ul>
       </div>
     </div>
-    <div class="hairline mb-12"></div>
-    <div class="flex flex-col md:flex-row justify-between gap-4 font-mono text-[11px] tracking-[0.18em] text-ink/40">
-      <div>© 2008 — 2026 VEMMI SAS · TOUS DROITS RÉSERVÉS</div>
-      <div class="flex items-center gap-6">
-        <span>SIRET — XXX XXX XXX 00000</span>
-        <span class="hidden md:inline">MENTIONS LÉGALES</span>
-        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>ATELIER OUVERT · LUN–VEN</span>
+    <div style="height:1px;background:rgba(12,14,11,0.10);margin-bottom:22px;"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(12,14,11,.28);">© 2002 — 2026 VEMMI SAS · TOUS DROITS RÉSERVÉS</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="pulse" style="width:6px;height:6px;border-radius:50%;background:#8DBF3F;display:inline-block;"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#B0ADA2;">ATELIER OUVERT · LUN–VEN</span>
       </div>
     </div>
   </div>
 </footer>
+
 </body>
 </html>
