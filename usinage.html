@@ -149,6 +149,8 @@
     .hero-photo  { display:none; }
     .footer-grid { grid-template-columns:1fr 1fr !important; }
     .desktop-nav { display:none !important; }
+    .ham-btn { display:flex !important; }
+    .header-tel { display:none !important; }
     .vert-lab    { display:none; }
     .two-col     { grid-template-columns:1fr !important; }
   }
@@ -505,5 +507,15 @@
   </div>
 </footer>
 
+<script>
+function toggleSidebar(){
+  var s=document.getElementById('sidebar');
+  var o=document.getElementById('sidebar-overlay');
+  var open=s.style.right==='0px';
+  s.style.right=open?'-320px':'0px';
+  o.style.display=open?'none':'block';
+  document.body.style.overflow=open?'':'hidden';
+}
+</script>
 </body>
 </html>
