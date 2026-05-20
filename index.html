@@ -251,11 +251,30 @@
       border-radius: var(--radius-lg);
       background: var(--surface);
       border: 1px solid var(--line);
-      padding: 32px 28px;
+      padding: 0;
+      position: relative; overflow: hidden;
       display: flex; flex-direction: column;
       text-decoration: none; color: var(--fg);
       transition: border-color .25s, background .25s;
       min-height: 260px;
+    }
+    .svc-content {
+      padding: 32px 28px;
+      display: flex; flex-direction: column;
+      flex: 1; position: relative; z-index: 1;
+      width: 62%;
+    }
+    .svc-img {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 48%;
+    }
+    .svc-img img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: saturate(0.75) contrast(1.08);
+      opacity: 0; transition: opacity .5s;
+    }
+    .svc-img .svc-fade {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to right, var(--surface) 0%, transparent 60%);
     }
     .svc-card-lg:hover {
       border-color: var(--accent);
@@ -284,6 +303,8 @@
       .hero-h1 { font-size: clamp(36px, 10vw, 70px) !important; }
       .peanut-desktop { display: none !important; }
       .peanut-mobile  { display: flex !important; }
+      .svc-img { display: none !important; }
+      .svc-content { width: 100% !important; }
     }
     .peanut-mobile {
       display: none;
@@ -488,89 +509,117 @@
 
       <!-- USINAGE -->
       <a href="usinage.html" class="svc-card-lg">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
-          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+            </div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">01 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">USINAGE</div>
+            </div>
           </div>
-          <div>
-            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">01 / 04</div>
-            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Usinage</div>
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Tournage et fraisage CN jusqu'à Ø&nbsp;1000&nbsp;mm. 8&nbsp;machines CN et 3&nbsp;conventionnelles pour tous volumes, de la pièce unique à la grande série.
+          </p>
+          <div class="cta-card">
+            Découvrir nos capacités
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </div>
         </div>
-        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
-          Tournage et fraisage CN jusqu'à Ø&nbsp;1000&nbsp;mm. 8&nbsp;machines CN et 3&nbsp;conventionnelles pour tous volumes, de la pièce unique à la grande série.
-        </p>
-        <div class="cta-card">
-          Découvrir nos capacités
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        <div class="svc-img">
+          <img src="photos/Usinage/20200317_132018.jpg" alt="Usinage CN VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
         </div>
       </a>
 
       <!-- MAINTENANCE -->
       <a href="maintenance.html" class="svc-card-lg">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
-          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9 9a2.8 2.8 0 1 1-4-4z"/><path d="m16 2 6 6"/></svg>
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9 9a2.8 2.8 0 1 1-4-4z"/><path d="m16 2 6 6"/></svg>
+            </div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">02 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">MAINTENANCE</div>
+            </div>
           </div>
-          <div>
-            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">02 / 04</div>
-            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Maintenance</div>
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Interventions préventives et curatives sur site ou en atelier. Vérins pneumatiques et hydrauliques, démontage, remontage et analyse de process.
+          </p>
+          <div class="cta-card">
+            En savoir plus
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </div>
         </div>
-        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
-          Interventions préventives et curatives sur site ou en atelier. Vérins pneumatiques et hydrauliques, démontage, remontage et analyse de process.
-        </p>
-        <div class="cta-card">
-          En savoir plus
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        <div class="svc-img">
+          <img src="photos/Maintenance/20200806_141246.jpg" alt="Maintenance industrielle VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
         </div>
       </a>
 
       <!-- MÉCANO-SOUDURE -->
       <a href="mecano-soudure.html" class="svc-card-lg">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
-          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
+            </div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">03 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">MÉCANO-SOUDURE</div>
+            </div>
           </div>
-          <div>
-            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">03 / 04</div>
-            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Mécano-soudure</div>
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Fabrication d'ensembles soudés de A à Z — acier, inox, aluminium. Procédés TIG et MIG, traitements de surface via partenaires.
+          </p>
+          <div class="cta-card">
+            Voir nos réalisations
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </div>
         </div>
-        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
-          Fabrication d'ensembles soudés de A à Z — acier, inox, aluminium. Procédés TIG et MIG, traitements de surface via partenaires.
-        </p>
-        <div class="cta-card">
-          Voir nos réalisations
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        <div class="svc-img">
+          <img src="photos/Mécano-soudure/20190723_195531.jpg" alt="Mécano-soudure VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
         </div>
       </a>
 
       <!-- PARTICULIERS -->
       <a href="particuliers.html" class="svc-card-lg">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
-          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">04 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">PARTICULIERS</div>
+            </div>
           </div>
-          <div>
-            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">04 / 04</div>
-            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Particuliers</div>
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Serrurerie et métallerie sur mesure, garde-corps, portails, escaliers. Réparation de matériels agricoles, hydrauliques et pneumatiques.
+          </p>
+          <div class="cta-card">
+            Voir les services
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </div>
         </div>
-        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
-          Serrurerie et métallerie sur mesure, garde-corps, portails, escaliers. Réparation de matériels agricoles, hydrauliques et pneumatiques.
-        </p>
-        <div class="cta-card">
-          Voir les services
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        <div class="svc-img">
+          <img src="photos/Particuliers/20190712_185743.jpg" alt="Services particuliers VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
         </div>
       </a>
     </div>
