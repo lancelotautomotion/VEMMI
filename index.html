@@ -302,6 +302,9 @@
       .peanut-mobile  { display: flex !important; }
       .svc-card-lg { grid-template-columns: 1fr !important; }
       .svc-img { display: none !important; }
+      .stats-grid { grid-template-columns: 1fr 1fr !important; }
+      .stats-grid > div { border-left: none !important; border-top: 1px solid var(--line); }
+      .stats-grid > div:nth-child(-n+2) { border-top: none; }
     }
     .peanut-mobile {
       display: none;
@@ -501,6 +504,56 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ─── Barre des Capacités ─── -->
+    <div style="margin:0 16px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+                padding:40px 28px;">
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;" class="stats-grid">
+
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; padding:8px 12px;">
+          <div class="display" style="font-size:clamp(36px,4vw,52px); font-weight:800; color:var(--accent); line-height:1;">8</div>
+          <div style="font-size:14px; font-weight:600; color:var(--fg);">Machines CN</div>
+          <div class="mono" style="font-size:11.5px; color:var(--fg-3);">Usinage haute précision</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; padding:8px 12px;
+                    border-left:1px solid var(--line);">
+          <div class="display" style="font-size:clamp(28px,3vw,42px); font-weight:800; color:var(--fg); line-height:1;">Ø&nbsp;1000&nbsp;<span style="font-size:0.55em; color:var(--fg-2);">mm</span></div>
+          <div style="font-size:14px; font-weight:600; color:var(--fg);">Capacité max</div>
+          <div class="mono" style="font-size:11.5px; color:var(--fg-3);">En tournage</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; padding:8px 12px;
+                    border-left:1px solid var(--line);">
+          <div class="display" style="font-size:clamp(28px,3vw,42px); font-weight:800; color:var(--fg); line-height:1;">3,5&nbsp;<span style="font-size:0.55em; color:var(--fg-2);">T</span></div>
+          <div style="font-size:14px; font-weight:600; color:var(--fg);">Charge max</div>
+          <div class="mono" style="font-size:11.5px; color:var(--fg-3);">En fraisage</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; padding:8px 12px;
+                    border-left:1px solid var(--line);">
+          <div class="display" style="font-size:clamp(28px,3vw,38px); font-weight:800; font-style:italic; color:var(--fg); line-height:1;">De A à Z</div>
+          <div style="font-size:14px; font-weight:600; color:var(--fg);">Projets intégrés</div>
+          <div class="mono" style="font-size:11.5px; color:var(--fg-3);">Usinage &amp; Mécano-soudure</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Séparateur Plan de Coupe ─── -->
+    <div style="padding:32px 16px 0;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="flex:1; height:1px; background:var(--line);"></div>
+        <span class="mono" style="font-size:11px; font-weight:600; letter-spacing:.18em;
+                                   text-transform:uppercase; color:var(--fg-3); white-space:nowrap; padding:0 4px;">
+          Nos périmètres d'intervention
+        </span>
+        <div style="flex:1; height:1px; background:var(--line);"></div>
+      </div>
+      <p style="text-align:center; font-size:13px; color:var(--fg-3); margin:14px 0 24px; line-height:1.6;">
+        De la réparation d'urgence sur site client à la fabrication de moyennes séries dans nos ateliers.
+      </p>
     </div>
 
     <!-- ─── Grille services 2×2 ─── -->
