@@ -581,28 +581,60 @@
                                 background:var(--surface); border:1px solid var(--line);"
          class="stock-band">
       <!-- Texte -->
-      <div style="padding:40px 36px; display:flex; flex-direction:column; justify-content:center; gap:0;">
+      <div style="padding:40px 36px; display:flex; flex-direction:column; justify-content:flex-start; gap:0;">
         <div class="section-badge" style="margin-bottom:14px;">Stock permanent</div>
         <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(28px,3vw,42px);
-                                    line-height:0.96; margin:0 0 16px;">MATIÈRES EN STOCK.</h2>
-        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; max-width:420px;">
-          Aciers doux et alliés, inox jusqu'à 120&nbsp;mm, aluminiums, plastiques techniques. Découpe laser (1–15&nbsp;mm) et jet d'eau (jusqu'à 100&nbsp;mm). Appro rapide chez nos fournisseurs.
-        </p>
-        <!-- Tags matières -->
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;">
-          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
-                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Acier</span>
-          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
-                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Inox</span>
-          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
-                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Aluminium</span>
-          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
-                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Plastiques techniques</span>
+                                    line-height:0.96; margin:0 0 24px;">MATIÈRES EN STOCK.</h2>
+        <!-- Grille matières -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px 24px;">
+          <div>
+            <div class="mono" style="font-size:10.5px; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">Acier</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.65; margin:0;">
+              S235, S355, C35, C45 — doux &amp; mi-durs<br>
+              40CMD8T, 16NC6, 35NCD16, 55NCDV7 — alliés<br>
+              Tôles : 0,5 à 300&nbsp;mm d'épaisseur
+            </p>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10.5px; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">Aluminium</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.65; margin:0;">
+              Nuances 2017, 5083, 7075<br>
+              Découpe laser 1–15&nbsp;mm<br>
+              Jet d'eau au-delà de 15&nbsp;mm
+            </p>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10.5px; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">Inox</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.65; margin:0;">
+              Tôles jusqu'à 120&nbsp;mm d'épaisseur
+            </p>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10.5px; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">Plastiques techniques</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.65; margin:0;">
+              PEHD, POM, PA6, PTFE<br>
+              Tôles jusqu'à 100&nbsp;mm d'épaisseur
+            </p>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10.5px; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">Composants hydrauliques</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.65; margin:0;">
+              Barres chromées Ø&nbsp;18 à Ø&nbsp;80&nbsp;mm<br>
+              Tubes rodés pour fûts de vérins
+            </p>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10.5px; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">Formes disponibles</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.65; margin:0;">
+              Ronds laminé, étiré, corroyé, rectifié<br>
+              Acier, inox, alu, bronze, laiton, fonte, plastique<br>
+              Composants mécaniques standard
+            </p>
+          </div>
         </div>
-        <a href="mailto:vemmisas@gmail.com" class="cta-card" style="align-self:flex-start;">
-          Demander un devis matières
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-        </a>
+        <p class="mono" style="font-size:11px; color:var(--fg-3); margin:18px 0 0; line-height:1.5;">
+          ▸ Appro rapide : matières brutes, découpées ou préusinées disponibles en délais courts.
+        </p>
       </div>
       <!-- Image -->
       <div style="position:relative; min-height:260px;">
@@ -616,15 +648,74 @@
       </div>
     </div>
 
-    <!-- ─── Footer strip ─── -->
-    <div class="footer-band mono">
-      <span>ZA du Solier · 9 rue de la Poissonnière · 43220 Dunières</span>
-      <span style="display:flex; gap:18px; flex-wrap:wrap;">
-        <span>VEMMI SAS</span>
-        <span>SIRET : ————————</span>
-        <span style="color:var(--accent);">● Atelier ouvert</span>
-      </span>
+    <!-- ─── Bandeau Contact ─── -->
+    <div style="margin:0 16px 16px; border-radius:var(--radius-lg); overflow:hidden;
+                background:var(--accent); padding:52px 40px;
+                display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px;">
+      <h2 class="display" style="font-weight:800; font-size:clamp(24px,3vw,40px);
+                                  line-height:1.1; color:#1a1a18; margin:0;">
+        Un projet, une question ?
+      </h2>
+      <p style="font-size:15px; color:rgba(26,26,24,0.72); margin:0; max-width:380px; line-height:1.6;">
+        Notre équipe répond à toutes vos demandes de devis, d'information ou de partenariat.
+      </p>
+      <a href="contact.html"
+         style="display:inline-flex; align-items:center; gap:8px; padding:13px 26px;
+                border-radius:999px; background:#1a1a18; color:var(--fg);
+                font-size:14px; font-weight:600; font-family:'Archivo',sans-serif;
+                text-decoration:none; transition:opacity .2s;"
+         onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+        Contactez-nous
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+      </a>
     </div>
+
+    <!-- ─── Footer ─── -->
+    <footer style="margin:0 0 0; padding:40px 36px 32px;
+                   border-top:1px solid var(--line);
+                   display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:32px 24px;
+                   background:var(--bg);">
+      <!-- Col 1 : Identité -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="display" style="font-size:20px; font-weight:800; letter-spacing:.04em; color:var(--fg);">VEMMI</div>
+        <p class="mono" style="font-size:11.5px; color:var(--fg-3); line-height:1.9; margin:0;">
+          ZA du Solier<br>
+          9 rue de la Poissonnière<br>
+          43220 Dunières
+        </p>
+        <p class="mono" style="font-size:11.5px; color:var(--fg-3); line-height:1.9; margin:0;">
+          04&nbsp;71&nbsp;61&nbsp;93&nbsp;28<br>
+          06&nbsp;82&nbsp;92&nbsp;30&nbsp;07
+        </p>
+        <a href="mailto:vemmisas@gmail.com" class="mono"
+           style="font-size:11.5px; color:var(--accent); text-decoration:none;">vemmisas@gmail.com</a>
+      </div>
+      <!-- Col 2 : Services -->
+      <div>
+        <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:12px;">Services</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;">
+          <li><a href="usinage.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Usinage CN</a></li>
+          <li><a href="mecano-soudure.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Mécano-soudure</a></li>
+          <li><a href="maintenance.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Maintenance industrielle</a></li>
+          <li><a href="particuliers.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Particuliers</a></li>
+        </ul>
+      </div>
+      <!-- Col 3 : Entreprise -->
+      <div>
+        <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:12px;">Entreprise</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;">
+          <li><a href="contact.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Contact &amp; devis</a></li>
+        </ul>
+      </div>
+    </footer>
+    <div class="mono" style="padding:14px 36px; border-top:1px solid var(--line);
+                              display:flex; justify-content:space-between; align-items:center;
+                              font-size:11px; color:var(--fg-3); flex-wrap:wrap; gap:8px;
+                              background:var(--bg);">
+      <span>© 2025 VEMMI SAS · Velay Etudes Mécaniques Maintenance Industrie</span>
+      <span style="color:var(--accent);">● Atelier ouvert</span>
+    </div>
+
   </div><!-- /main block -->
 
 </div><!-- /inner -->
