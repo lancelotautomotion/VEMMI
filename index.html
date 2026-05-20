@@ -1104,6 +1104,21 @@
     if (img.complete) img.style.opacity = '1';
     else img.addEventListener('load', () => img.style.opacity = '1');
   });
+
+  /* ── Peanut auto-scale — fit SVG (647px) to its container ── */
+  const PEANUT_W = 646.80;
+  function scalePeanut() {
+    const wrapper = document.querySelector('.peanut-desktop');
+    const inner   = wrapper?.querySelector('div');
+    if (!wrapper || !inner) return;
+    const available = wrapper.offsetWidth;
+    const scale = Math.min(1, available / PEANUT_W);
+    inner.style.transform       = scale < 1 ? `scale(${scale})` : '';
+    inner.style.transformOrigin = 'left center';
+    wrapper.style.height        = scale < 1 ? `${44 * scale}px` : '';
+  }
+  scalePeanut();
+  window.addEventListener('resize', scalePeanut);
 </script>
 </body>
 </html>
