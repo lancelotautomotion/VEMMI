@@ -262,10 +262,10 @@
       padding: 32px 28px;
       display: flex; flex-direction: column;
       flex: 1; position: relative; z-index: 1;
-      width: 62%;
+      width: 55%; box-sizing: border-box; overflow: hidden;
     }
     .svc-img {
-      position: absolute; right: 0; top: 0; bottom: 0; width: 48%;
+      position: absolute; right: 0; top: 0; bottom: 0; width: 55%;
     }
     .svc-img img {
       position: absolute; inset: 0; width: 100%; height: 100%;
@@ -274,7 +274,7 @@
     }
     .svc-img .svc-fade {
       position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(to right, var(--surface) 0%, transparent 60%);
+      background: linear-gradient(to right, var(--surface) 0%, color-mix(in oklch, var(--surface) 50%, transparent) 55%, transparent 80%);
     }
     .svc-card-lg:hover {
       border-color: var(--accent);
