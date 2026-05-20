@@ -174,7 +174,7 @@
       filter: grayscale(0.15) opacity(1) contrast(1);
     }
     .map-wrap iframe {
-      width: 100%; height: 100%; border: none; display: block;
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: block;
     }
 
     /* ── Stripe fallback bg ── */
@@ -357,7 +357,7 @@
       </div>
 
       <!-- ══ Colonne droite : Infos + Carte ══ -->
-      <div style="display:flex; flex-direction:column; gap:28px; height:100%;">
+      <div style="display:flex; flex-direction:column; gap:28px;">
 
         <!-- Bloc coordonnées -->
         <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px 28px 8px;">
@@ -424,7 +424,7 @@
         <!-- Google Map -->
         <div style="flex:1; display:flex; flex-direction:column;">
           <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.15em; text-transform:uppercase; margin-bottom:12px;">Localisation</div>
-          <div class="map-wrap" style="flex:1; height:auto;">
+          <div class="map-wrap" style="flex:1;">
             <iframe
               src="https://maps.google.com/maps?q=VEMMI+ZA+du+Solier+9+rue+de+la+Poissonni%C3%A8re+43220+Duni%C3%A8res&output=embed&z=15"
               title="VEMMI — ZA du Solier, 43220 Dunières"
