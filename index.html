@@ -314,7 +314,6 @@
       .nav-hide { display: none !important; }
       .nav-actions-group { display: none !important; }
       /* Footer 1 colonne */
-      .main-card { border-top-left-radius: 40px !important; }
       .footer-grid { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
       /* Paddings intérieurs réduits */
       .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
@@ -331,6 +330,14 @@
       .valeurs-grid > div:last-child { border-bottom: none !important; }
       /* Stock / Contact bands */
       .stock-band > div:first-child { padding: 24px 20px !important; }
+      /* Outer wrapper compressed on mobile */
+      .page-outer { padding: 8px !important; }
+      .page-inner { width: 100% !important; }
+      .main-card { padding: 8px !important; border-top-left-radius: 40px !important; }
+      /* Remove inner section margins so full card width is used */
+      .valeurs-grid { margin-left: 0 !important; margin-right: 0 !important; border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+      .stock-band { margin-left: 0 !important; margin-right: 0 !important; border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+      .contact-band { margin-left: 0 !important; margin-right: 0 !important; border-radius: var(--radius-lg) !important; }
     }
 </style>
 </head>
@@ -339,8 +346,8 @@
 <!-- ═══════════════════════════════════════════════════════════
      OUTER WRAPPER
 ═══════════════════════════════════════════════════════════ -->
-<div style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:hidden;">
-<div style="position:relative; width:96%; max-width:1800px; margin:0 auto;">
+<div class="page-outer" style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:hidden;">
+<div class="page-inner" style="position:relative; width:96%; max-width:1800px; margin:0 auto;">
 
   <!-- ══════════════════════════════════════════════════════
        LOGO — absolute transparent bay · DO NOT MODIFY
@@ -763,7 +770,7 @@
     </div>
 
     <!-- ─── Bandeau Contact ─── -->
-    <div style="margin:0 16px 16px; border-radius:var(--radius-lg); overflow:hidden;
+    <div class="contact-band" style="margin:0 16px 16px; border-radius:var(--radius-lg); overflow:hidden;
                 background:var(--accent); padding:52px 40px;
                 display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px;">
       <h2 class="display" style="font-weight:800; font-size:clamp(24px,3vw,40px);

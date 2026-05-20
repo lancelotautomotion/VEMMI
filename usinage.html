@@ -112,7 +112,6 @@
       /* Paddings page intérieure */
       .page-header-inner { padding: 28px 20px 8px !important; }
       /* Footer 1 colonne */
-      .main-card { border-top-left-radius: 40px !important; }
       .footer-grid { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
       /* Paddings intérieurs réduits */
       .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
@@ -120,6 +119,10 @@
       .section-pad { padding-left: 16px !important; padding-right: 16px !important; }
       .section-img { margin-left: 0 !important; margin-right: 0 !important; }
       .section-cta { margin-left: 0 !important; margin-right: 0 !important; padding-left: 20px !important; padding-right: 20px !important; }
+      /* Outer wrapper compressed on mobile */
+      .page-outer { padding: 8px !important; }
+      .page-inner { width: 100% !important; }
+      .main-card { padding: 8px !important; border-top-left-radius: 40px !important; }
     }
 </style>
 
@@ -148,8 +151,8 @@
 </head>
 <body>
 
-<div style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:hidden;">
-<div style="position:relative; width:96%; max-width:1800px; margin:0 auto;">
+<div class="page-outer" style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:hidden;">
+<div class="page-inner" style="position:relative; width:96%; max-width:1800px; margin:0 auto;">
 
   <!-- LOGO -->
   <div class="nav-logo" style="position:absolute; top:0; left:0; width:220px; height:100px; z-index:30;
