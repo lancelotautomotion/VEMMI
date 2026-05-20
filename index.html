@@ -298,32 +298,12 @@
     }
     @media (max-width: 720px) {
       .hero-h1 { font-size: clamp(36px, 10vw, 70px) !important; }
-      .peanut-desktop { display: none !important; }
-      .peanut-mobile  { display: flex !important; }
       .svc-card-lg { grid-template-columns: 1fr !important; }
       .svc-img { display: none !important; }
       .valeurs-grid { grid-template-columns: 1fr 1fr !important; }
       .valeurs-grid > div { border-right: none !important; border-bottom: 1px solid var(--line); }
       .valeurs-grid > div:nth-last-child(-n+2) { border-bottom: none; }
     }
-    .peanut-mobile {
-      display: none;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .peanut-pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 10px 16px; border-radius: 999px;
-      border: 1px solid var(--accent);
-      color: var(--accent); font-weight: 600; font-size: 13px;
-      text-decoration: none; background: color-mix(in oklch, var(--accent) 5%, transparent);
-      transition: background .15s, color .15s;
-      white-space: nowrap;
-    }
-    .peanut-pill:hover {
-      background: color-mix(in oklch, var(--accent) 14%, transparent);
-    }
-    .peanut-pill svg { flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -413,46 +393,26 @@
             <p style="margin:0;">Grâce à notre parc de 8&nbsp;machines à commande numérique (CN), nous garantissons réactivité et précision d'usinage. De la pièce unitaire à la moyenne série, nous concevons des solutions fiables pour assurer la continuité de votre production.</p>
           </div>
 
-          <!-- LinkedTags — peanut 4 bulles cliquables (desktop) -->
-          <div class="peanut-desktop" style="margin-top:auto; max-width:100%;">
-            <div style="position:relative; width:646.80px; height:44px; display:inline-block;">
-              <svg width="646.80" height="44" viewBox="0 0 646.80 44" style="display:block; overflow:visible;">
-                <path d="M 22.00,0 L 124.40,0 C 139.76,0 134.96,15.84 148.40,15.84 C 161.84,15.84 157.04,0 172.40,0 L 268.40,0 C 283.76,0 278.96,15.84 292.40,15.84 C 305.84,15.84 301.04,0 316.40,0 L 466.00,0 C 481.36,0 476.56,15.84 490.00,15.84 C 503.44,15.84 498.64,0 514.00,0 L 624.80,0 A 22.0,22.0 0 0 1 646.80,22.0 A 22.0,22.0 0 0 1 624.80,44 L 514.00,44 C 498.64,44 503.44,28.16 490.00,28.16 C 476.56,28.16 481.36,44 466.00,44 L 316.40,44 C 301.04,44 305.84,28.16 292.40,28.16 C 278.96,28.16 283.76,44 268.40,44 L 172.40,44 C 157.04,44 161.84,28.16 148.40,28.16 C 134.96,28.16 139.76,44 124.40,44 L 22.00,44 A 22.0,22.0 0 0 1 0,22.0 A 22.0,22.0 0 0 1 22.00,0 Z"
-                  fill="color-mix(in oklch, var(--accent) 5%, transparent)"
-                  stroke="var(--accent)" stroke-width="1.5"/>
-              </svg>
-              <a href="maintenance.html"
-                 style="position:absolute; top:0; left:0; width:148.40px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
-                 onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Maintenance</a>
-              <a href="usinage.html"
-                 style="position:absolute; top:0; left:148.40px; width:144px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
-                 onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Usinage</a>
-              <a href="mecano-soudure.html"
-                 style="position:absolute; top:0; left:292.40px; width:197.60px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
-                 onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Mécano-soudure</a>
-              <a href="particuliers.html"
-                 style="position:absolute; top:0; left:490.00px; width:156.80px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
-                 onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Particuliers</a>
-            </div>
-          </div>
-
-          <!-- Pills individuelles (mobile ≤720px) -->
-          <div class="peanut-mobile" style="margin-top:auto;">
-            <a href="maintenance.html" class="peanut-pill">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-              Maintenance
+          <!-- CTAs hero -->
+          <div style="margin-top:auto; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#sec-services"
+               style="display:inline-flex; align-items:center; gap:8px; padding:12px 22px;
+                      border-radius:999px; border:1.5px solid var(--accent);
+                      color:var(--accent); font-size:14px; font-weight:600;
+                      font-family:'Archivo',sans-serif; text-decoration:none; transition:background .15s;"
+               onmouseover="this.style.background='color-mix(in oklch,var(--accent) 10%,transparent)'"
+               onmouseout="this.style.background='transparent'">
+              Périmètre d'intervention
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
             </a>
-            <a href="usinage.html" class="peanut-pill">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-              Usinage
-            </a>
-            <a href="mecano-soudure.html" class="peanut-pill">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-              Mécano-soudure
-            </a>
-            <a href="particuliers.html" class="peanut-pill">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-              Particuliers
+            <a href="contact.html"
+               style="display:inline-flex; align-items:center; gap:8px; padding:12px 22px;
+                      border-radius:999px; background:var(--accent);
+                      color:#fff; font-size:14px; font-weight:600;
+                      font-family:'Archivo',sans-serif; text-decoration:none; transition:opacity .15s;"
+               onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+              Nous contacter
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
             </a>
           </div>
         </div>
@@ -931,20 +891,6 @@
     else img.addEventListener('load', () => img.style.opacity = '1');
   });
 
-  /* ── Peanut auto-scale — fit SVG (647px) to its container ── */
-  const PEANUT_W = 646.80;
-  function scalePeanut() {
-    const wrapper = document.querySelector('.peanut-desktop');
-    const inner   = wrapper?.querySelector('div');
-    if (!wrapper || !inner) return;
-    const available = wrapper.offsetWidth;
-    const scale = Math.min(1, available / PEANUT_W);
-    inner.style.transform       = scale < 1 ? `scale(${scale})` : '';
-    inner.style.transformOrigin = 'left center';
-    wrapper.style.height        = scale < 1 ? `${44 * scale}px` : '';
-  }
-  scalePeanut();
-  window.addEventListener('resize', scalePeanut);
 </script>
 </body>
 </html>
