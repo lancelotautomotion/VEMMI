@@ -240,21 +240,48 @@
     @keyframes progress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
 
     /* ── Responsive ── */
+    /* ── 2×2 service cards ── */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 16px 12px;
+    }
+    .svc-card-lg {
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 32px 28px;
+      display: flex; flex-direction: column;
+      text-decoration: none; color: var(--fg);
+      transition: border-color .25s, background .25s;
+      min-height: 260px;
+    }
+    .svc-card-lg:hover {
+      border-color: var(--accent);
+      background: color-mix(in oklch, var(--accent) 4%, var(--surface));
+    }
+    .cta-card {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 999px;
+      border: 1px solid var(--accent);
+      color: var(--accent); font-size: 13.5px; font-weight: 600;
+      align-self: flex-start;
+      transition: background .15s;
+    }
+    .svc-card-lg:hover .cta-card {
+      background: color-mix(in oklch, var(--accent) 12%, transparent);
+    }
+
     @media (max-width: 1100px) {
-      .grid-main, .grid-bottom { grid-template-columns: 1fr !important; }
-      .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
-      .section-grid { grid-template-columns: 1fr !important; }
-      .section-grid-rev { direction: ltr !important; }
-      .parti-cards { grid-template-columns: 1fr 1fr !important; }
-      .contact-grid { grid-template-columns: 1fr !important; }
-      .mat-grid { grid-template-columns: 1fr 1fr !important; }
+      .grid-main { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 900px) {
+      .grid-2x2 { grid-template-columns: 1fr !important; }
+      .stock-band { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 720px) {
-      .services-grid { grid-template-columns: 1fr !important; }
       .hero-h1 { font-size: clamp(36px, 10vw, 70px) !important; }
-      .parti-cards { grid-template-columns: 1fr !important; }
-      .full-section { padding: 40px 20px 48px !important; }
-      .ref-thumb { flex: 0 0 140px !important; }
       .peanut-desktop { display: none !important; }
       .peanut-mobile  { display: flex !important; }
     }
@@ -371,16 +398,16 @@
                   fill="color-mix(in oklch, var(--accent) 5%, transparent)"
                   stroke="var(--accent)" stroke-width="1.5"/>
               </svg>
-              <a href="#sec-maintenance" onclick="event.preventDefault();document.getElementById('sec-maintenance').scrollIntoView({behavior:'smooth'})"
+              <a href="maintenance.html"
                  style="position:absolute; top:0; left:0; width:148.40px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
                  onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Maintenance</a>
-              <a href="#sec-usinage" onclick="event.preventDefault();document.getElementById('sec-usinage').scrollIntoView({behavior:'smooth'})"
+              <a href="usinage.html"
                  style="position:absolute; top:0; left:148.40px; width:144px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
                  onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Usinage</a>
-              <a href="#sec-soudure" onclick="event.preventDefault();document.getElementById('sec-soudure').scrollIntoView({behavior:'smooth'})"
+              <a href="mecano-soudure.html"
                  style="position:absolute; top:0; left:292.40px; width:197.60px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
                  onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Mécano-soudure</a>
-              <a href="#sec-particuliers" onclick="event.preventDefault();document.getElementById('sec-particuliers').scrollIntoView({behavior:'smooth'})"
+              <a href="particuliers.html"
                  style="position:absolute; top:0; left:490.00px; width:156.80px; height:44px; display:grid; place-items:center; color:var(--accent); font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none; transition:opacity .15s;"
                  onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Particuliers</a>
             </div>
@@ -388,19 +415,19 @@
 
           <!-- Pills individuelles (mobile ≤720px) -->
           <div class="peanut-mobile" style="margin-top:auto;">
-            <a href="#sec-maintenance" onclick="event.preventDefault();document.getElementById('sec-maintenance').scrollIntoView({behavior:'smooth'})" class="peanut-pill">
+            <a href="maintenance.html" class="peanut-pill">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
               Maintenance
             </a>
-            <a href="#sec-usinage" onclick="event.preventDefault();document.getElementById('sec-usinage').scrollIntoView({behavior:'smooth'})" class="peanut-pill">
+            <a href="usinage.html" class="peanut-pill">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
               Usinage
             </a>
-            <a href="#sec-soudure" onclick="event.preventDefault();document.getElementById('sec-soudure').scrollIntoView({behavior:'smooth'})" class="peanut-pill">
+            <a href="mecano-soudure.html" class="peanut-pill">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
               Mécano-soudure
             </a>
-            <a href="#sec-particuliers" onclick="event.preventDefault();document.getElementById('sec-particuliers').scrollIntoView({behavior:'smooth'})" class="peanut-pill">
+            <a href="particuliers.html" class="peanut-pill">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
               Particuliers
             </a>
@@ -425,7 +452,7 @@
         <div style="position:absolute; top:0; bottom:0; right:22%; width:1px;
                     background:rgba(255,255,255,.18); pointer-events:none;"></div>
         <!-- Help button -->
-        <button onclick="document.getElementById('sec-machines').scrollIntoView({behavior:'smooth'})"
+        <button onclick="document.getElementById('sec-services').scrollIntoView({behavior:'smooth'})"
                 style="position:absolute; top:18px; right:18px; width:40px; height:40px;
                        border-radius:50%; border:1px solid rgba(255,255,255,.35);
                        background:rgba(0,0,0,.35); color:#fff; backdrop-filter:blur(8px);
@@ -456,484 +483,136 @@
       </div>
     </div>
 
-    <!-- ─── Bottom grid — services + machine ref (existing) ─── -->
-    <div id="sec-services" class="grid-bottom" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:16px; padding:0 16px 16px;">
+    <!-- ─── Grille services 2×2 ─── -->
+    <div id="sec-services" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 16px 12px;" class="grid-2x2">
 
-      <!-- Service cards -->
-      <div class="services-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
-
-        <!-- 01 Usinage -->
-        <button class="svc-card active" onclick="scrollToSection('sec-usinage')">
-          <span class="mono" style="position:absolute; top:22px; right:22px; font-size:10.5px; color:var(--accent); letter-spacing:.1em;">01 / 04</span>
-          <div class="svc-icon" style="background:var(--accent); color:#fff;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      <!-- USINAGE -->
+      <a href="usinage.html" class="svc-card-lg">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                      display:grid; place-items:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
           </div>
-          <div class="display" style="font-size:19px; font-weight:700; margin-bottom:4px;">Usinage</div>
-          <div class="mono" style="font-size:10.5px; color:var(--fg-3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">Tournage · Fraisage CN</div>
-          <div style="font-size:13px; color:var(--fg-2); line-height:1.5; margin-bottom:12px;">Toutes pièces mécaniques en petites ou grandes séries.</div>
-          <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; color:var(--accent);">
-            <span class="mono" style="font-size:11px;">8 CN · 3 conv.</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          </div>
-        </button>
-
-        <!-- 02 Maintenance -->
-        <button class="svc-card" onclick="scrollToSection('sec-maintenance')">
-          <span class="mono" style="position:absolute; top:22px; right:22px; font-size:10.5px; color:var(--fg-3); letter-spacing:.1em;">02 / 04</span>
-          <div class="svc-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9 9a2.8 2.8 0 1 1-4-4z"/></svg>
-          </div>
-          <div class="display" style="font-size:19px; font-weight:700; margin-bottom:4px;">Maintenance</div>
-          <div class="mono" style="font-size:10.5px; color:var(--fg-3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">Préventive & Curative</div>
-          <div style="font-size:13px; color:var(--fg-2); line-height:1.5; margin-bottom:12px;">Interventions sur site client ou en atelier, vérins, démontage/remontage.</div>
-          <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; color:var(--fg-3);">
-            <span class="mono" style="font-size:11px;">Site · Atelier</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          </div>
-        </button>
-
-        <!-- 03 Mécano-soudure -->
-        <button class="svc-card" onclick="scrollToSection('sec-soudure')">
-          <span class="mono" style="position:absolute; top:22px; right:22px; font-size:10.5px; color:var(--fg-3); letter-spacing:.1em;">03 / 04</span>
-          <div class="svc-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
-          </div>
-          <div class="display" style="font-size:19px; font-weight:700; margin-bottom:4px;">Mécano-soudure</div>
-          <div class="mono" style="font-size:10.5px; color:var(--fg-3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">TIG · MIG — A à Z</div>
-          <div style="font-size:13px; color:var(--fg-2); line-height:1.5; margin-bottom:12px;">Ensembles soudés sur acier, inox et aluminium, traitements de surface inclus.</div>
-          <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; color:var(--fg-3);">
-            <span class="mono" style="font-size:11px;">Acier · Inox · Alu</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          </div>
-        </button>
-
-        <!-- 04 Particuliers -->
-        <button class="svc-card" onclick="scrollToSection('sec-particuliers')">
-          <span class="mono" style="position:absolute; top:22px; right:22px; font-size:10.5px; color:var(--fg-3); letter-spacing:.1em;">04 / 04</span>
-          <div class="svc-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
-          </div>
-          <div class="display" style="font-size:19px; font-weight:700; margin-bottom:4px;">Stock matières</div>
-          <div class="mono" style="font-size:10.5px; color:var(--fg-3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">Aciers · Inox · Alu</div>
-          <div style="font-size:13px; color:var(--fg-2); line-height:1.5; margin-bottom:12px;">Stock permanent et appro rapide, découpe laser et jet d'eau jusqu'à 100 mm.</div>
-          <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; color:var(--fg-3);">
-            <span class="mono" style="font-size:11px;">Ø18 → Ø1000</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          </div>
-        </button>
-      </div>
-
-      <!-- Machine reference card -->
-      <div id="sec-machines" class="ref-card">
-        <div class="ref-thumb">
-          <div aria-hidden class="stripe-bg" style="position:absolute; inset:0;"></div>
-          <img src="photos/Usinage/20200317_132018.jpg" alt=""
-               style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(0.85) contrast(1.04);">
-          <div class="mono" style="position:absolute; top:10px; left:12px; color:#fff;
-                                    font-size:9.5px; padding:3px 8px; background:rgba(0,0,0,.55);
-                                    border-radius:999px; letter-spacing:.1em; text-transform:uppercase;"
-               id="ref-label">Fraisage CN</div>
-        </div>
-        <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
-          <div style="display:flex; justify-content:space-between; align-items:baseline;">
-            <div class="mono" style="font-size:10.5px; color:var(--fg-3); letter-spacing:.12em; text-transform:uppercase;">
-              Parc machines · réf. <span id="ref-num">01</span>/04
-            </div>
-            <button onclick="toggleRefAuto()" class="mono" id="ref-auto-btn"
-                    style="background:transparent; border:1px solid var(--line); border-radius:999px;
-                           padding:3px 10px; font-size:10px; color:var(--fg-3); letter-spacing:.1em; text-transform:uppercase;">
-              ⏸ pause
-            </button>
-          </div>
-          <div class="display" style="font-size:24px; font-weight:700; margin-top:8px;" id="ref-title">HARTFORD vertical 4e axe</div>
-          <div class="mono" style="color:var(--accent); font-size:13px; margin-top:4px;" id="ref-spec">2000 × 800 × 800 mm</div>
-          <div style="font-size:13.5px; color:var(--fg-2); line-height:1.5; margin-top:10px;" id="ref-note">
-            Charge utile 3,5 T · Robot de chargement jusqu'à 60 kg.
-          </div>
-          <div style="margin-top:auto; padding-top:18px; display:flex; align-items:center; gap:10px;">
-            <button onclick="setRef(0)" class="ref-dot" data-i="0" style="flex:1; height:4px; padding:0; border:0; border-radius:2px; background:var(--accent); position:relative; overflow:hidden;">
-              <span id="ref-progress" style="position:absolute; inset:0; transform-origin:left; background:rgba(255,255,255,.35); animation:progress 5s linear infinite;"></span>
-            </button>
-            <button onclick="setRef(1)" class="ref-dot" data-i="1" style="flex:1; height:4px; padding:0; border:0; border-radius:2px; background:var(--line-2);"></button>
-            <button onclick="setRef(2)" class="ref-dot" data-i="2" style="flex:1; height:4px; padding:0; border:0; border-radius:2px; background:var(--line-2);"></button>
-            <button onclick="setRef(3)" class="ref-dot" data-i="3" style="flex:1; height:4px; padding:0; border:0; border-radius:2px; background:var(--line-2);"></button>
-            <button onclick="setRef((refIdx-1+4)%4)"
-                    style="width:26px; height:26px; border-radius:50%; border:1px solid var(--line-2);
-                           background:transparent; color:var(--fg-2); display:grid; place-items:center;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg>
-            </button>
-            <button onclick="setRef((refIdx+1)%4)"
-                    style="width:26px; height:26px; border-radius:50%; border:1px solid var(--line-2);
-                           background:transparent; color:var(--fg-2); display:grid; place-items:center;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
-            </button>
+          <div>
+            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">01 / 04</div>
+            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Usinage</div>
           </div>
         </div>
-      </div>
+        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+          Tournage et fraisage CN jusqu'à Ø&nbsp;1000&nbsp;mm. 8&nbsp;machines CN et 3&nbsp;conventionnelles pour tous volumes, de la pièce unique à la grande série.
+        </p>
+        <div class="cta-card">
+          Découvrir nos capacités
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        </div>
+      </a>
+
+      <!-- MAINTENANCE -->
+      <a href="maintenance.html" class="svc-card-lg">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                      display:grid; place-items:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9 9a2.8 2.8 0 1 1-4-4z"/><path d="m16 2 6 6"/></svg>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">02 / 04</div>
+            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Maintenance</div>
+          </div>
+        </div>
+        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+          Interventions préventives et curatives sur site ou en atelier. Vérins pneumatiques et hydrauliques, démontage, remontage et analyse de process.
+        </p>
+        <div class="cta-card">
+          En savoir plus
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        </div>
+      </a>
+
+      <!-- MÉCANO-SOUDURE -->
+      <a href="mecano-soudure.html" class="svc-card-lg">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                      display:grid; place-items:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">03 / 04</div>
+            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Mécano-soudure</div>
+          </div>
+        </div>
+        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+          Fabrication d'ensembles soudés de A à Z — acier, inox, aluminium. Procédés TIG et MIG, traitements de surface via partenaires.
+        </p>
+        <div class="cta-card">
+          Voir nos réalisations
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        </div>
+      </a>
+
+      <!-- PARTICULIERS -->
+      <a href="particuliers.html" class="svc-card-lg">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+          <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                      display:grid; place-items:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div>
+            <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">04 / 04</div>
+            <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">Particuliers</div>
+          </div>
+        </div>
+        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+          Serrurerie et métallerie sur mesure, garde-corps, portails, escaliers. Réparation de matériels agricoles, hydrauliques et pneumatiques.
+        </p>
+        <div class="cta-card">
+          Voir les services
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        </div>
+      </a>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION — USINAGE
-    ═══════════════════════════════════════════════════════ -->
-    <div id="sec-usinage" class="full-section">
-      <div class="section-badge">01 · Usinage de précision</div>
-      <div class="section-grid">
-        <!-- Text col -->
-        <div>
-          <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(36px,4vw,58px);
-                                      line-height:0.96; margin:0 0 24px; text-wrap:balance;">
-            TOURNAGE &amp; FRAISAGE CN.
-          </h2>
-          <p style="color:var(--fg-2); font-size:15px; line-height:1.65; max-width:540px; margin:0 0 32px;">
-            Réalisation de toutes pièces mécaniques par tournage et fraisage, en petites ou grandes séries.
-            Notre parc comprend <strong style="color:var(--fg);">8 machines CN</strong> et <strong style="color:var(--fg);">3 machines conventionnelles</strong>
-            couvrant des diamètres jusqu'à Ø 1000 mm et des longueurs jusqu'à 2000 mm.
-          </p>
-          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:36px;">
-            <span class="pill" style="font-size:12.5px; padding:8px 14px;">
-              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 6px var(--accent);"></span>
-              4 axes continus
-            </span>
-            <span class="pill" style="font-size:12.5px; padding:8px 14px;">Robot de chargement 60 kg</span>
-            <span class="pill" style="font-size:12.5px; padding:8px 14px;">Ø 101,6 mm passage broche</span>
-          </div>
-          <a href="#" class="pill pill-accent" style="display:inline-flex;">
-            Demander un devis usinage
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          </a>
+    <!-- ─── Bandeau Stock Matières ─── -->
+    <div id="sec-stock" style="margin:0 16px 16px; border-radius:var(--radius-lg);
+                                overflow:hidden; display:grid; grid-template-columns:1fr 1fr;
+                                background:var(--surface); border:1px solid var(--line);"
+         class="stock-band">
+      <!-- Texte -->
+      <div style="padding:40px 36px; display:flex; flex-direction:column; justify-content:center; gap:0;">
+        <div class="section-badge" style="margin-bottom:14px;">Stock permanent</div>
+        <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(28px,3vw,42px);
+                                    line-height:0.96; margin:0 0 16px;">MATIÈRES EN STOCK.</h2>
+        <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; max-width:420px;">
+          Aciers doux et alliés, inox jusqu'à 120&nbsp;mm, aluminiums, plastiques techniques. Découpe laser (1–15&nbsp;mm) et jet d'eau (jusqu'à 100&nbsp;mm). Appro rapide chez nos fournisseurs.
+        </p>
+        <!-- Tags matières -->
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;">
+          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
+                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Acier</span>
+          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
+                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Inox</span>
+          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
+                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Aluminium</span>
+          <span style="padding:5px 12px; border-radius:999px; border:1px solid var(--line-2);
+                       font-size:12px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace;">Plastiques techniques</span>
         </div>
-
-        <!-- Table col -->
-        <div>
-          <div class="mono" style="font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-                                    color:var(--fg-3); margin-bottom:12px;">Capacités — fraisage CN</div>
-          <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; margin-bottom:20px;">
-            <table class="spec-table">
-              <thead><tr>
-                <th>Machine</th>
-                <th>Capacité X × Y × Z</th>
-                <th>Particularités</th>
-              </tr></thead>
-              <tbody>
-                <tr><td>HARTFORD vertical</td><td class="accent">2000 × 800 × 800 mm</td><td style="color:var(--fg-3);">4e axe · robot 60 kg</td></tr>
-                <tr><td>HARTFORD vertical</td><td class="accent">1600 × 800 × 800 mm</td><td style="color:var(--fg-3);">4e axe · charge 3,5 T</td></tr>
-                <tr><td>HARTFORD GV</td><td class="accent">1000 × 700 × 500 mm</td><td style="color:var(--fg-3);">Grande vitesse</td></tr>
-                <tr><td>HAAS</td><td class="accent">1000 × 500 × 400 mm</td><td style="color:var(--fg-3);">—</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mono" style="font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-                                    color:var(--fg-3); margin-bottom:12px;">Capacités — tournage CN</div>
-          <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden;">
-            <table class="spec-table">
-              <thead><tr>
-                <th>Machine</th>
-                <th>Ø max × L</th>
-                <th>Particularités</th>
-              </tr></thead>
-              <tbody>
-                <tr><td>Tour CN CHALLENGER</td><td class="accent">Ø 1000 × 1000 mm</td><td style="color:var(--fg-3);">Broche Ø 101,6 mm</td></tr>
-                <tr><td>CMZ TBI520</td><td class="accent">Ø 600 × 1100 mm</td><td style="color:var(--fg-3);">Contre-pointe motorisée</td></tr>
-                <tr><td>CMZ TA-30-Y-640</td><td class="accent">Ø 600 × 1000 mm</td><td style="color:var(--fg-3);">Axe Y · broche fraisage</td></tr>
-                <tr><td>HAAS FT30 (×2)</td><td class="accent">Ø 480 × 700 mm</td><td style="color:var(--fg-3);">Contre-pointe motorisée</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION — MÉCANO-SOUDURE (avec photo)
-    ═══════════════════════════════════════════════════════ -->
-    <div id="sec-soudure" class="full-section">
-      <div class="section-badge">03 · Mécano-soudure</div>
-      <div class="section-grid" style="direction:rtl; gap:56px;">
-        <!-- Photo col (right in natural order, left via rtl trick) -->
-        <div style="direction:ltr;">
-          <div style="position:relative; border-radius:var(--radius-xl); overflow:hidden;
-                      aspect-ratio:4/3; background:var(--surface);">
-            <div aria-hidden class="stripe-bg" style="position:absolute; inset:0;"></div>
-            <img src="photos/Mécano-soudure/20190723_195531.jpg"
-                 alt="Soudure TIG en atelier VEMMI"
-                 style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-                        filter:saturate(0.9) contrast(1.08);">
-            <!-- Overlay gradient from bottom -->
-            <div style="position:absolute; inset:0; pointer-events:none;
-                        background:linear-gradient(180deg, transparent 40%, rgba(0,0,0,.55) 100%);"></div>
-            <!-- Caption -->
-            <div class="mono" style="position:absolute; bottom:20px; left:24px; color:#fff;">
-              <div style="font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-                           color:rgba(255,255,255,.65); margin-bottom:4px;">Procédé</div>
-              <div style="font-size:18px; font-weight:600; letter-spacing:.04em;">TIG · MIG</div>
-            </div>
-            <!-- Accent dot -->
-            <div style="position:absolute; top:20px; right:20px; width:10px; height:10px;
-                        border-radius:50%; background:var(--accent);
-                        box-shadow:0 0 16px var(--accent);"></div>
-          </div>
-        </div>
-
-        <!-- Text col -->
-        <div style="direction:ltr;">
-          <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(36px,4vw,58px);
-                                      line-height:0.96; margin:0 0 24px; text-wrap:balance;">
-            FABRICATION DE A À Z.
-          </h2>
-          <p style="color:var(--fg-2); font-size:15px; line-height:1.65; max-width:520px; margin:0 0 28px;">
-            Fabrication complète d'ensembles mécano-soudés : approvisionnement, assemblage, soudure,
-            usinage et traitements de surface via nos partenaires.
-          </p>
-
-          <!-- Material pills -->
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;">
-            <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
-                        padding:12px 18px; display:flex; align-items:center; gap:10px;">
-              <span style="width:8px; height:8px; border-radius:50%; background:var(--fg-3);"></span>
-              <span style="font-weight:600; font-size:14px;">Acier</span>
-            </div>
-            <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
-                        padding:12px 18px; display:flex; align-items:center; gap:10px;">
-              <span style="width:8px; height:8px; border-radius:50%; background:var(--fg-2);"></span>
-              <span style="font-weight:600; font-size:14px;">Inox</span>
-            </div>
-            <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
-                        padding:12px 18px; display:flex; align-items:center; gap:10px;">
-              <span style="width:8px; height:8px; border-radius:50%; background:var(--accent);"></span>
-              <span style="font-weight:600; font-size:14px;">Aluminium</span>
-            </div>
-          </div>
-
-          <ul class="svc-list" style="margin-bottom:36px;">
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Approvisionnement complet</strong> — matières brutes, découpées ou préusinées</div>
-            </li>
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Assemblage & soudure</strong> — procédés TIG et MIG sur tous métaux</div>
-            </li>
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Usinage final & traitements</strong> — via partenaires traiteurs de surface</div>
-            </li>
-          </ul>
-
-          <a href="#" class="pill pill-accent" style="display:inline-flex;">
-            Demander un devis soudure
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION — MAINTENANCE INDUSTRIELLE
-    ═══════════════════════════════════════════════════════ -->
-    <div id="sec-maintenance" class="full-section">
-      <div class="section-badge">02 · Maintenance industrielle</div>
-      <div class="section-grid">
-        <!-- Text col -->
-        <div>
-          <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(36px,4vw,58px);
-                                      line-height:0.96; margin:0 0 24px; text-wrap:balance;">
-            PRÉVENTIVE &amp; CURATIVE.
-          </h2>
-          <p style="color:var(--fg-2); font-size:15px; line-height:1.65; max-width:520px; margin:0 0 32px;">
-            Interventions aussi bien <strong style="color:var(--fg);">sur site client</strong> que dans nos ateliers.
-            Nous assurons la continuité de vos équipements et intervenons en urgence pour minimiser les arrêts de production.
-          </p>
-          <a href="#" class="pill pill-accent" style="display:inline-flex; margin-bottom:32px;">
-            Contacter notre équipe
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          </a>
-
-          <!-- Partner mention -->
-          <div style="background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-md);
-                      padding:18px 20px; display:flex; gap:14px; align-items:flex-start;">
-            <div style="flex-shrink:0; width:36px; height:36px; border-radius:50%;
-                        background:color-mix(in oklch, var(--accent) 10%, var(--surface));
-                        border:1px solid var(--accent); display:grid; place-items:center;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
-            </div>
-            <div>
-              <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Automatisme & Robotique</div>
-              <div style="color:var(--fg-2); font-size:13px; line-height:1.5;">Notre partenaire automaticien assure la maintenance, l'étude et la réalisation d'automatismes industriels et de projets de robotique.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Services list col -->
-        <div>
-          <ul class="svc-list">
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Réalisation de pièces de remplacement</strong> — fabrication sur mesure en urgence</div>
-            </li>
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Démontage & remontage d'équipements</strong> — toutes technologies industrielles</div>
-            </li>
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Réparation de vérins</strong> — pneumatiques et hydrauliques</div>
-            </li>
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Analyse & recommandations</strong> — état des équipements et amélioration de process</div>
-            </li>
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Déplacements de matériels industriels</strong> — logistique et déménagement d'atelier</div>
-            </li>
-            <li>
-              <span class="bullet"></span>
-              <div><strong style="color:var(--fg);">Maintenance préventive planifiée</strong> — contrats sur mesure, suivi régulier</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION — PARTICULIERS & STOCK MATIÈRES
-    ═══════════════════════════════════════════════════════ -->
-    <div id="sec-particuliers" class="full-section">
-      <div class="section-badge">04 · Particuliers & Stock matières</div>
-      <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(36px,4vw,56px);
-                                  line-height:0.96; margin:0 0 12px; max-width:800px; text-wrap:balance;">
-        SERRURERIE, MATIÈRES & RÉPARATION.
-      </h2>
-      <p style="color:var(--fg-2); font-size:15px; line-height:1.65; max-width:680px; margin:0 0 40px;">
-        VEMMI accueille également les particuliers et les artisans pour la vente de matières,
-        la fabrication sur mesure et la réparation de matériels.
-      </p>
-
-      <!-- 3 sub-cards -->
-      <div class="parti-cards">
-        <!-- Vente matières -->
-        <div class="parti-card">
-          <div style="width:40px; height:40px; border-radius:12px; background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; margin-bottom:20px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
-          </div>
-          <div class="display" style="font-weight:700; font-size:20px; margin-bottom:8px;">Vente de matières</div>
-          <p style="color:var(--fg-2); font-size:13.5px; line-height:1.6; margin:0 0 20px;">
-            Aciers, inox, aluminiums, métaux jaunes, plastiques et composites techniques.
-            Sur stock ou sur commande avec appro rapide.
-          </p>
-          <div class="mat-grid" style="grid-template-columns:1fr 1fr;">
-            <div class="mat-chip">
-              <div class="mono" style="font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:4px;">Aciers</div>
-              <div style="font-size:12.5px; font-weight:600;">S235, S355, C45…</div>
-            </div>
-            <div class="mat-chip">
-              <div class="mono" style="font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:4px;">Aluminiums</div>
-              <div style="font-size:12.5px; font-weight:600;">2017, 5083, 7075</div>
-            </div>
-            <div class="mat-chip">
-              <div class="mono" style="font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:4px;">Inox</div>
-              <div style="font-size:12.5px; font-weight:600;">Tôles ≤ 120 mm</div>
-            </div>
-            <div class="mat-chip">
-              <div class="mono" style="font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:4px;">Plastiques</div>
-              <div style="font-size:12.5px; font-weight:600;">PEHD, POM, PA6…</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Serrurerie -->
-        <div class="parti-card">
-          <div style="width:40px; height:40px; border-radius:12px; background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; margin-bottom:20px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <div class="display" style="font-weight:700; font-size:20px; margin-bottom:8px;">Serrurerie & métallerie</div>
-          <p style="color:var(--fg-2); font-size:13.5px; line-height:1.6; margin:0 0 20px;">
-            Étude, fabrication et pose de structures et mobiliers métalliques sur mesure.
-          </p>
-          <ul class="svc-list" style="gap:8px;">
-            <li style="padding:12px 14px; font-size:13px;">
-              <span class="bullet"></span>Barrières, garde-corps, brise-vues
-            </li>
-            <li style="padding:12px 14px; font-size:13px;">
-              <span class="bullet"></span>Escaliers, pergolas, tonnelles
-            </li>
-            <li style="padding:12px 14px; font-size:13px;">
-              <span class="bullet"></span>Portails, mobilier métallique
-            </li>
-          </ul>
-        </div>
-
-        <!-- Maintenance matériels -->
-        <div class="parti-card">
-          <div style="width:40px; height:40px; border-radius:12px; background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; margin-bottom:20px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9 9a2.8 2.8 0 1 1-4-4z"/></svg>
-          </div>
-          <div class="display" style="font-weight:700; font-size:20px; margin-bottom:8px;">Maintenance & réparation</div>
-          <p style="color:var(--fg-2); font-size:13.5px; line-height:1.6; margin:0 0 20px;">
-            Réparation de matériels hydrauliques, pneumatiques, agricoles, forestiers et machines spéciales.
-          </p>
-          <ul class="svc-list" style="gap:8px;">
-            <li style="padding:12px 14px; font-size:13px;">
-              <span class="bullet"></span>Matériels hydrauliques & pneumatiques
-            </li>
-            <li style="padding:12px 14px; font-size:13px;">
-              <span class="bullet"></span>Engins de travaux publics & agricoles
-            </li>
-            <li style="padding:12px 14px; font-size:13px;">
-              <span class="bullet"></span>Machines spéciales & forestières
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION — CONTACT
-    ═══════════════════════════════════════════════════════ -->
-    <div class="full-section" style="padding-bottom:48px;">
-      <div class="section-badge">Contact</div>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:0;">
-        <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(36px,4vw,56px);
-                                    line-height:0.96; margin:0; text-wrap:balance; max-width:600px;">
-          TRAVAILLONS ENSEMBLE.
-        </h2>
-        <a href="mailto:vemmisas@gmail.com" class="pill pill-accent" style="display:inline-flex;">
-          Envoyer un message
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        <a href="mailto:vemmisas@gmail.com" class="cta-card" style="align-self:flex-start;">
+          Demander un devis matières
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
         </a>
       </div>
-
-      <div class="contact-grid">
-        <div class="contact-cell">
-          <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3);">Adresse</div>
-          <div style="font-size:15px; font-weight:600; line-height:1.5; margin-top:4px;">
-            ZA du Solier<br>9 rue de la Poissonnière<br>43220 Dunières
-          </div>
-        </div>
-        <div class="contact-cell">
-          <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3);">Téléphone</div>
-          <a href="tel:0471619328" style="font-size:22px; font-weight:700; color:var(--fg); margin-top:4px; display:block; font-family:'JetBrains Mono',monospace; letter-spacing:.04em;">
-            04 71 61 93 28
-          </a>
-          <a href="tel:0682923007" style="font-size:16px; font-weight:600; color:var(--fg-2); font-family:'JetBrains Mono',monospace; letter-spacing:.04em;">
-            06 82 92 30 07
-          </a>
-        </div>
-        <div class="contact-cell">
-          <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3);">Email</div>
-          <a href="mailto:vemmisas@gmail.com" style="font-size:15px; font-weight:600; color:var(--accent); margin-top:4px; display:block; word-break:break-all;">
-            vemmisas@gmail.com
-          </a>
-          <div style="margin-top:12px; display:flex; align-items:center; gap:8px;">
-            <span style="width:8px; height:8px; border-radius:50%; background:var(--accent);
-                         box-shadow:0 0 8px var(--accent);"></span>
-            <span class="mono" style="font-size:11px; color:var(--fg-3); letter-spacing:.08em; text-transform:uppercase;">Atelier ouvert</span>
-          </div>
-        </div>
+      <!-- Image -->
+      <div style="position:relative; min-height:260px;">
+        <div aria-hidden class="stripe-bg" style="position:absolute; inset:0;"></div>
+        <img src="photos/Usinage/20200909_105400.jpg"
+             alt="Stock de matières premières VEMMI"
+             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+                    filter:saturate(0.75) contrast(1.08); opacity:0; transition:opacity .5s;">
+        <div style="position:absolute; inset:0; pointer-events:none;
+                    background:linear-gradient(90deg, var(--surface) 0%, transparent 30%);"></div>
       </div>
     </div>
 
@@ -968,17 +647,17 @@
       <div>
         <div class="mono" style="font-size:10.5px; color:var(--fg-3); letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px;">Services</div>
         <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
-          <li><a href="#sec-usinage" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Usinage</a></li>
-          <li><a href="#sec-maintenance" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Maintenance industrielle</a></li>
-          <li><a href="#sec-soudure" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Mécano-soudure</a></li>
-          <li><a href="#sec-particuliers" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Services aux particuliers</a></li>
+          <li><a href="usinage.html" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Usinage</a></li>
+          <li><a href="maintenance.html" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Maintenance industrielle</a></li>
+          <li><a href="mecano-soudure.html" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Mécano-soudure</a></li>
+          <li><a href="particuliers.html" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Services aux particuliers</a></li>
         </ul>
       </div>
       <div>
         <div class="mono" style="font-size:10.5px; color:var(--fg-3); letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px;">Atelier</div>
         <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
-          <li><a href="#sec-machines" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Parc machines</a></li>
-          <li><a href="#sec-particuliers" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Stock matières</a></li>
+          <li><a href="#sec-services" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Parc machines</a></li>
+          <li><a href="#sec-stock" onclick="closeMenu(this)" style="font-size:15px; font-weight:600;">Stock matières</a></li>
           <li><a href="#" style="font-size:15px; font-weight:600; color:var(--fg-3);">Capacités</a></li>
         </ul>
       </div>
@@ -1024,78 +703,6 @@
     }
   }
 
-  /* ── Reference slider ── */
-  const refs = [
-    {
-      label: 'Fraisage CN',
-      title: 'HARTFORD vertical 4e axe',
-      spec: '2000 × 800 × 800 mm',
-      note: 'Charge utile 3,5 T · Robot de chargement jusqu\'à 60 kg.',
-      img: 'photos/Usinage/20200317_132018.jpg'
-    },
-    {
-      label: 'Tournage CN',
-      title: 'Tour CN CHALLENGER',
-      spec: 'Ø 1000 × 1000 mm',
-      note: 'Banc rompu Ø 720 — passage broche Ø 101,6 mm (4").',
-      img: 'photos/Usinage/20200909_105400.jpg'
-    },
-    {
-      label: 'Tournage CN',
-      title: 'CMZ TA-30-Y-640',
-      spec: 'Ø 600 × 1000 mm',
-      note: 'Axe Y, contre-pointe motorisée et broche de fraisage.',
-      img: 'photos/Usinage/20200706_121316.jpg'
-    },
-    {
-      label: 'Rectification',
-      title: 'STEFOR 500 RTA',
-      spec: '500 × 200 × 400 mm',
-      note: 'Rectifieuse plane — finitions rectifiées sur matières dures.',
-      img: 'photos/Usinage/20191213_071341.jpg'
-    }
-  ];
-
-  let refIdx = 0;
-  let refAuto = true;
-  let refTimer = null;
-
-  function setRef(i, pauseAuto = true) {
-    refIdx = i;
-    if (pauseAuto) { refAuto = false; clearInterval(refTimer); updateAutoBtn(); }
-    const r = refs[i];
-    document.getElementById('ref-label').textContent = r.label;
-    document.getElementById('ref-title').textContent = r.title;
-    document.getElementById('ref-spec').textContent = r.spec;
-    document.getElementById('ref-note').textContent = r.note;
-    const thumb = document.querySelector('.ref-thumb img');
-    if (thumb) thumb.src = r.img;
-    document.querySelectorAll('.ref-dot').forEach((d, j) => {
-      d.style.background = j === i ? 'var(--accent)' : 'var(--line-2)';
-    });
-    const prog = document.getElementById('ref-progress');
-    if (prog) { prog.style.animation = 'none'; void prog.offsetWidth; prog.style.animation = ''; }
-    document.getElementById('ref-num').textContent = String(i + 1).padStart(2, '0');
-  }
-
-  function updateAutoBtn() {
-    const btn = document.getElementById('ref-auto-btn');
-    btn.textContent = refAuto ? '⏸ pause' : '▶ auto';
-  }
-
-  function toggleRefAuto() {
-    refAuto = !refAuto;
-    updateAutoBtn();
-    if (refAuto) startRefTimer();
-    else clearInterval(refTimer);
-  }
-
-  function startRefTimer() {
-    clearInterval(refTimer);
-    refTimer = setInterval(() => setRef((refIdx + 1) % refs.length, false), 5000);
-  }
-
-  startRefTimer();
 
   /* ── Hero image fade-in ── */
   document.querySelectorAll('img').forEach(img => {
