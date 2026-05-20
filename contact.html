@@ -167,12 +167,8 @@
       border: 1px solid var(--line);
       position: relative;
       min-height: 200px;
-      transition: filter .35s, opacity .35s;
-      filter: grayscale(1) opacity(0.65) contrast(1.1);
     }
-    .map-wrap:hover {
-      filter: grayscale(0.15) opacity(1) contrast(1);
-    }
+    .map-wrap:hover { opacity: .9; }
     .map-wrap iframe {
       position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: block;
     }
@@ -344,9 +340,6 @@
               Envoyer le message
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
             </button>
-            <p style="font-size:12px; color:var(--fg-3); margin:0; line-height:1.5;">
-              * Champs obligatoires. Réponse sous 24&nbsp;h en jours ouvrés.
-            </p>
           </div>
 
           <!-- Feedback -->
@@ -412,10 +405,11 @@
             </div>
             <div>
               <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:4px;">Horaires d'atelier</div>
-              <p class="mono" style="font-size:12px; color:var(--fg-2); line-height:1.8; margin:0;">
-                Lun–Ven &nbsp;07 h 30 — 12 h 00<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13 h 30 — 17 h 00
-              </p>
+              <div class="mono" style="font-size:12px; color:var(--fg-2); margin:0;
+                   display:grid; grid-template-columns:auto 1fr; gap:0 14px; line-height:1.9;">
+                <span style="color:var(--fg-3);">Lun–Ven</span><span>07 h 30 — 12 h 00</span>
+                <span></span><span>13 h 30 — 17 h 00</span>
+              </div>
             </div>
           </div>
 
@@ -598,26 +592,31 @@
 
   /* ── Map height sync ── */
   function syncMapHeight() {
-    if (window.innerWidth < 860) return;
-    const grid = document.querySelector('.contact-2col');
+    const grid    = document.querySelector('.contact-2col');
     const mapWrap = document.getElementById('map-wrap');
-    if (!grid || !mapWrap) return;
+    if (!grid || !mapWrap || window.innerWidth < 860) {
+      if (mapWrap) mapWrap.style.height = '';
+      return;
+    }
 
-    const leftCol = grid.children[0];
-    const mapNote = mapWrap.nextElementSibling;
+    const leftCol  = grid.children[0];
+    const rightCol = grid.children[1];
+    const mapNote  = mapWrap.nextElementSibling;
 
-    // Reset so measurements are fresh
-    mapWrap.style.height = '200px';
-    void mapWrap.offsetHeight; // force reflow
+    // Reset to minimal height, force reflow, then measure
+    mapWrap.style.height = '1px';
+    void mapWrap.offsetHeight;
 
-    const leftBottom = leftCol.getBoundingClientRect().bottom;
-    const mapTop    = mapWrap.getBoundingClientRect().top;
-    const noteH     = mapNote ? mapNote.getBoundingClientRect().height + 10 : 0;
+    // leftCol.offsetHeight = actual layout height of the form (scroll-independent)
+    const leftH   = leftCol.offsetHeight;
+    // Distance from right-col top to map top (difference cancels scroll offset)
+    const toMap   = mapWrap.getBoundingClientRect().top - rightCol.getBoundingClientRect().top;
+    const noteH   = mapNote ? mapNote.offsetHeight + 10 : 0;
 
-    const h = Math.max(200, leftBottom - mapTop - noteH);
-    mapWrap.style.height = h + 'px';
+    mapWrap.style.height = Math.max(220, leftH - toMap - noteH) + 'px';
   }
 
+  document.addEventListener('DOMContentLoaded', () => setTimeout(syncMapHeight, 80));
   window.addEventListener('load', syncMapHeight);
   window.addEventListener('resize', syncMapHeight);
 </script>
