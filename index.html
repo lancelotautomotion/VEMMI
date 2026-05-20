@@ -820,13 +820,12 @@
   .sb-overlay.sb-open { opacity:1; pointer-events:auto; }
 
   .sb-panel {
-    position:fixed; top:0; right:0; height:100%; z-index:50;
+    position:fixed; top:0; left:0; height:100%; z-index:50;
     width:100%; max-width:400px;
-    background:var(--bg); border-left:1px solid var(--line);
+    background:var(--bg);
     display:flex; flex-direction:column;
-    transform:translateX(100%);
+    transform:translateX(-100%);
     transition:transform .3s cubic-bezier(.4,0,.2,1);
-    overflow:hidden;
   }
   .sb-panel.sb-open { transform:translateX(0); }
 
@@ -846,8 +845,9 @@
 <div id="sb-panel" class="sb-panel" role="dialog" aria-modal="true" aria-label="Navigation">
 
   <!-- Header sidebar -->
-  <div style="display:flex; justify-content:space-between; align-items:center;
-              padding:28px 28px 24px; border-bottom:1px solid var(--line); flex-shrink:0;">
+  <div style="position:relative; display:flex; justify-content:space-between; align-items:center;
+              padding:28px 28px 28px; border-bottom-right-radius:40px;
+              background:var(--bg); flex-shrink:0;">
     <a href="index.html" class="display"
        style="font-style:italic; font-weight:800; font-size:30px;
               letter-spacing:-0.03em; color:var(--fg); text-decoration:none; line-height:1;">VEMMI</a>
@@ -859,6 +859,10 @@
             onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--fg-2)'">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
     </button>
+    <!-- S-curve concave fillet -->
+    <div aria-hidden style="position:absolute; right:-40px; bottom:0; width:40px; height:40px;
+                            pointer-events:none;
+                            background:radial-gradient(circle at top left, transparent 39.5px, var(--bg) 40px);"></div>
   </div>
 
   <!-- Navigation -->
