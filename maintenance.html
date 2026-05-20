@@ -98,10 +98,20 @@
     }
       /* ── Responsive nav ── */
     @media (max-width: 640px) {
-      .nav-logo { width: 150px !important; }
-      .nav-logo a { font-size: 32px !important; }
-      .nav-bar { margin-left: 150px !important; }
+      /* Navbar pleine largeur, S-curve masquée */
+      .nav-logo { width: 160px !important; height: 76px !important; }
+      .nav-logo a { font-size: 34px !important; }
+      .nav-bar { margin-left: 0 !important; height: 76px !important; }
+      .nav-scurve { display: none !important; }
+      .nav-topbar { padding: 0 20px !important; justify-content: flex-end !important; }
       .nav-hide { display: none !important; }
+      /* Paddings page intérieure */
+      .page-header-inner { padding: 28px 20px 8px !important; }
+      /* Footer 1 colonne */
+      .footer-grid { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
+      /* Paddings intérieurs réduits */
+      .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
+      .px-inner-t { padding-top: 32px !important; }
     }
 </style>
 </head>
@@ -121,10 +131,10 @@
   <div class="nav-bar" style="margin-left:220px; height:100px; background:var(--bg);
               border-top-left-radius:40px; border-top-right-radius:40px;
               position:relative; z-index:20; display:flex; align-items:center;">
-    <div aria-hidden style="position:absolute; left:-40px; bottom:0; width:40px; height:40px;
+    <div class="nav-scurve" aria-hidden style="position:absolute; left:-40px; bottom:0; width:40px; height:40px;
                             pointer-events:none;
                             background:radial-gradient(circle at top left, transparent 39.5px, var(--bg) 40px);"></div>
-    <div style="display:flex; align-items:center; justify-content:space-between;
+    <div class="nav-topbar" style="display:flex; align-items:center; justify-content:space-between;
                 width:100%; padding:0 28px; gap:16px; flex-wrap:wrap;">
       <div style="display:flex; gap:8px;">
         <button class="pill pill-filled" onclick="sbOpen()">
@@ -162,7 +172,7 @@
               padding:16px; position:relative; z-index:10;">
 
     <!-- Page header -->
-    <div style="padding:52px 52px 8px;">
+    <div class="page-header-inner" style="padding:52px 52px 8px;">
       <div class="section-badge">Maintenance</div>
       <h1 class="display page-h1"
           style="font-weight:800; line-height:0.94; margin:0 0 16px; font-size:clamp(48px,6vw,80px);">

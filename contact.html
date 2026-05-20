@@ -183,12 +183,24 @@
       .contact-2col { grid-template-columns: 1fr !important; }
       .contact-h1 { font-size: clamp(36px, 10vw, 60px) !important; }
     }
+    @media (max-width: 640px) {
+      .contact-subtitle { white-space: normal !important; font-size: 14px !important; }
+      .contact-inner { padding: 28px 20px 8px !important; }
+    }
       /* ── Responsive nav ── */
     @media (max-width: 640px) {
-      .nav-logo { width: 150px !important; }
-      .nav-logo a { font-size: 32px !important; }
-      .nav-bar { margin-left: 150px !important; }
+      /* Navbar pleine largeur, S-curve masquée */
+      .nav-logo { width: 160px !important; height: 76px !important; }
+      .nav-logo a { font-size: 34px !important; }
+      .nav-bar { margin-left: 0 !important; height: 76px !important; }
+      .nav-scurve { display: none !important; }
+      .nav-topbar { padding: 0 20px !important; justify-content: flex-end !important; }
       .nav-hide { display: none !important; }
+      /* Footer 1 colonne */
+      .footer-grid { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
+      /* Paddings intérieurs réduits */
+      .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
+      .px-inner-t { padding-top: 32px !important; }
     }
 </style>
 </head>
@@ -217,12 +229,12 @@
               position:relative; z-index:20; display:flex; align-items:center;">
 
     <!-- Concave fillet — the radial-gradient patch -->
-    <div aria-hidden style="position:absolute; left:-40px; bottom:0; width:40px; height:40px;
+    <div class="nav-scurve" aria-hidden style="position:absolute; left:-40px; bottom:0; width:40px; height:40px;
                             pointer-events:none;
                             background:radial-gradient(circle at top left, transparent 39.5px, var(--bg) 40px);"></div>
 
     <!-- TopBar -->
-    <div style="display:flex; align-items:center; justify-content:space-between;
+    <div class="nav-topbar" style="display:flex; align-items:center; justify-content:space-between;
                 width:100%; padding:0 28px; gap:16px; flex-wrap:wrap;">
       <div style="display:flex; gap:8px;">
         <button class="pill pill-filled" onclick="document.getElementById('menu-overlay').classList.add('open')">
@@ -268,7 +280,7 @@
           style="font-weight:800; line-height:0.94; margin:0 0 16px; font-size:clamp(48px,6vw,80px);">
         NOUS CONTACTER.
       </h1>
-      <p style="font-size:16px; color:var(--fg-2); line-height:1.6; margin:0; white-space:nowrap;">
+      <p class="contact-subtitle" style="font-size:16px; color:var(--fg-2); line-height:1.6; margin:0; white-space:nowrap;">
         Demande de devis, renseignement technique, partenariat. Notre équipe vous répond dans les meilleurs délais.
       </p>
     </div>
@@ -444,7 +456,7 @@
     </div>
 
     <!-- ─── Footer ─── -->
-    <footer style="margin:0 0 0; padding:40px 36px 32px;
+    <footer class="footer-grid" style="margin:0 0 0; padding:40px 36px 32px;
                    border-top:1px solid var(--line);
                    display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:32px 24px;
                    background:var(--bg);">
