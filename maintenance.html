@@ -102,8 +102,9 @@
       .nav-logo { width: 200px !important; height: 80px !important; padding: 0 20px !important; }
       .nav-logo a { font-size: 38px !important; color: #ffffff !important; }
       .nav-bar { margin-left: 200px !important; height: 80px !important; }
-      .nav-topbar { padding: 0 16px !important; justify-content: center !important; }
+      .nav-topbar { padding: 0 !important; justify-content: center !important; }
       .nav-hide { display: none !important; }
+      .nav-actions-group { display: none !important; }
       /* Paddings page intérieure */
       .page-header-inner { padding: 28px 20px 8px !important; }
       /* Footer 1 colonne */
@@ -146,7 +147,7 @@
           Accueil
         </a>
       </div>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <div class="nav-actions-group" style="display:flex; gap:8px; flex-wrap:wrap;">
         <button class="pill nav-hide" id="theme-btn" onclick="toggleTheme()">
           <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
             <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
