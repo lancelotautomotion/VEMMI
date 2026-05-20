@@ -100,7 +100,7 @@
     @media (max-width: 640px) {
       /* S-curve préservée — logo + Menu uniquement */
       .nav-logo { width: 200px !important; height: 80px !important; padding: 0 20px !important; }
-      .nav-logo a { font-size: 38px !important; color: #ffffff !important; }
+      .nav-logo .display { font-size: 38px !important; color: #ffffff !important; }
       .nav-bar { margin-left: 200px !important; height: 80px !important; }
       .nav-topbar { padding: 0 !important; justify-content: center !important; }
       .nav-hide { display: none !important; }
@@ -113,6 +113,9 @@
       /* Paddings intérieurs réduits */
       .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
       .px-inner-t { padding-top: 32px !important; }
+      .section-pad { padding-left: 16px !important; padding-right: 16px !important; }
+      .section-img { margin-left: 0 !important; margin-right: 0 !important; }
+      .section-cta { margin-left: 0 !important; margin-right: 0 !important; padding-left: 20px !important; padding-right: 20px !important; }
     }
 </style>
 </head>
@@ -185,10 +188,10 @@
     </div>
 
     <!-- Separator -->
-    <div style="margin:32px 36px 40px; height:1px; background:var(--line);"></div>
+    <div style="margin:32px 16px 40px; height:1px; background:var(--line);"></div>
 
     <!-- Hero image -->
-    <div style="margin:0 36px 48px; border-radius:var(--radius-lg); overflow:hidden; position:relative; height:340px;">
+    <div class="section-img" style="margin:0 36px 48px; border-radius:var(--radius-lg); overflow:hidden; position:relative; height:340px;">
       <img src="photos/Maintenance/20200806_141246.jpg" alt="Maintenance industrielle VEMMI"
            style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
            onload="this.style.opacity=1">
@@ -196,7 +199,7 @@
     </div>
 
     <!-- Prestations grid -->
-    <div style="padding:0 36px 48px;">
+    <div class="section-pad" style="padding:0 36px 48px;">
       <div class="section-badge">Prestations</div>
       <div class="presta-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
 
@@ -282,7 +285,7 @@
     </div>
 
     <!-- Photo gallery -->
-    <div style="padding:0 36px 48px;">
+    <div class="section-pad" style="padding:0 36px 48px;">
       <div class="section-badge">Galerie</div>
       <div class="gallery-2" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
         <div style="border-radius:var(--radius-md); overflow:hidden; height:260px;">
@@ -299,7 +302,7 @@
     </div>
 
     <!-- CTA block -->
-    <div style="margin:0 36px 52px; padding:40px 40px; border-radius:var(--radius-lg);
+    <div class="section-cta" style="margin:0 36px 52px; padding:40px 40px; border-radius:var(--radius-lg);
                 background:color-mix(in oklch, var(--accent) 8%, var(--surface));
                 border:1px solid color-mix(in oklch, var(--accent) 20%, var(--line));
                 display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
