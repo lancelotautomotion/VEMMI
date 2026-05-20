@@ -280,7 +280,7 @@
         <form
           action="https://formspree.io/f/xpwzgvyd"
           method="POST"
-          style="display:flex; flex-direction:column; gap:18px;"
+          style="display:flex; flex-direction:column; gap:18px; flex:1;"
           onsubmit="handleSubmit(event)">
 
           <!-- Ligne 1 : Nom + Société -->
@@ -322,9 +322,10 @@
           </div>
 
           <!-- Message -->
-          <div class="form-field">
+          <div class="form-field" style="flex:1; display:flex; flex-direction:column;">
             <label for="message">Message *</label>
             <textarea id="message" name="message" class="form-input"
+                      style="flex:1; resize:none;"
                       placeholder="Décrivez votre besoin, vos contraintes, les matériaux concernés…"
                       required></textarea>
           </div>
@@ -590,35 +591,36 @@
     else img.addEventListener('load', () => { img.style.opacity = '1'; });
   });
 
-  /* ── Map height sync ── */
-  function syncMapHeight() {
-    const grid    = document.querySelector('.contact-2col');
-    const mapWrap = document.getElementById('map-wrap');
-    if (!grid || !mapWrap || window.innerWidth < 860) {
-      if (mapWrap) mapWrap.style.height = '';
+  /* ── Textarea height sync : étend le champ message pour aligner le bouton avec le bas de la carte ── */
+  function syncTextarea() {
+    const grid     = document.querySelector('.contact-2col');
+    const textarea = document.getElementById('message');
+    if (!grid || !textarea || window.innerWidth < 860) {
+      if (textarea) textarea.style.minHeight = '';
       return;
     }
 
-    const leftCol  = grid.children[0];
-    const rightCol = grid.children[1];
-    const mapNote  = mapWrap.nextElementSibling;
+    // Reset textarea à sa hauteur min pour mesurer sans biais
+    textarea.style.minHeight = '140px';
 
-    // Reset to minimal height, force reflow, then measure
-    mapWrap.style.height = '1px';
-    void mapWrap.offsetHeight;
+    // Mesure les hauteurs naturelles des 2 colonnes sans align-items:stretch
+    grid.style.alignItems = 'start';
+    void grid.offsetHeight; // force reflow
 
-    // leftCol.offsetHeight = actual layout height of the form (scroll-independent)
-    const leftH   = leftCol.offsetHeight;
-    // Distance from right-col top to map top (difference cancels scroll offset)
-    const toMap   = mapWrap.getBoundingClientRect().top - rightCol.getBoundingClientRect().top;
-    const noteH   = mapNote ? mapNote.offsetHeight + 10 : 0;
+    const leftNatural  = grid.children[0].offsetHeight;
+    const rightNatural = grid.children[1].offsetHeight;
 
-    mapWrap.style.height = Math.max(220, leftH - toMap - noteH) + 'px';
+    grid.style.alignItems = ''; // restitue stretch
+
+    const diff = rightNatural - leftNatural;
+    if (diff > 0) {
+      textarea.style.minHeight = (140 + diff) + 'px';
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', () => setTimeout(syncMapHeight, 80));
-  window.addEventListener('load', syncMapHeight);
-  window.addEventListener('resize', syncMapHeight);
+  document.addEventListener('DOMContentLoaded', () => setTimeout(syncTextarea, 80));
+  window.addEventListener('load', syncTextarea);
+  window.addEventListener('resize', syncTextarea);
 </script>
 </body>
 </html>
