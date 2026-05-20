@@ -357,7 +357,7 @@
       </div>
 
       <!-- ══ Colonne droite : Infos + Carte ══ -->
-      <div style="display:flex; flex-direction:column; gap:28px; height:100%; min-height:0;">
+      <div style="display:flex; flex-direction:column; gap:28px;">
 
         <!-- Bloc coordonnées -->
         <div style="flex-shrink:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px 28px 8px;">
@@ -422,9 +422,9 @@
         </div>
 
         <!-- Google Map -->
-        <div style="flex:1; display:flex; flex-direction:column; min-height:0;">
-          <div class="mono" style="flex-shrink:0; font-size:10px; color:var(--fg-3); letter-spacing:.15em; text-transform:uppercase; margin-bottom:12px;">Localisation</div>
-          <div class="map-wrap" style="flex:1; min-height:200px;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.15em; text-transform:uppercase; margin-bottom:12px;">Localisation</div>
+          <div class="map-wrap" id="map-wrap">
             <iframe
               src="https://maps.google.com/maps?q=VEMMI+ZA+du+Solier+9+rue+de+la+Poissonni%C3%A8re+43220+Duni%C3%A8res&output=embed&z=15"
               title="VEMMI — ZA du Solier, 43220 Dunières"
@@ -595,6 +595,31 @@
     if (img.complete) img.style.opacity = '1';
     else img.addEventListener('load', () => { img.style.opacity = '1'; });
   });
+
+  /* ── Map height sync ── */
+  function syncMapHeight() {
+    if (window.innerWidth < 860) return;
+    const grid = document.querySelector('.contact-2col');
+    const mapWrap = document.getElementById('map-wrap');
+    if (!grid || !mapWrap) return;
+
+    const leftCol = grid.children[0];
+    const mapNote = mapWrap.nextElementSibling;
+
+    // Reset so measurements are fresh
+    mapWrap.style.height = '200px';
+    void mapWrap.offsetHeight; // force reflow
+
+    const leftBottom = leftCol.getBoundingClientRect().bottom;
+    const mapTop    = mapWrap.getBoundingClientRect().top;
+    const noteH     = mapNote ? mapNote.getBoundingClientRect().height + 10 : 0;
+
+    const h = Math.max(200, leftBottom - mapTop - noteH);
+    mapWrap.style.height = h + 'px';
+  }
+
+  window.addEventListener('load', syncMapHeight);
+  window.addEventListener('resize', syncMapHeight);
 </script>
 </body>
 </html>
