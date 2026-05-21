@@ -46,17 +46,34 @@
       --pill-border: #d8d4cb;
     }
     *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      overscroll-behavior: none;
+    }
     html, body {
       margin: 0; padding: 0;
-      background-color: var(--page-bg);
-      background-image: repeating-linear-gradient(135deg, var(--stripe) 0 1px, transparent 1px 14px);
-      background-attachment: fixed;
+      background-color: transparent;
       color: var(--fg);
       font-family: 'Manrope', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
-      transition: background-color .35s, color .35s;
+      transition: color .35s;
     }
-    body { min-height: 100vh; }
+    body {
+      min-height: 100vh;
+      background-color: var(--page-bg);
+      transition: background-color .35s;
+    }
+    /* Fixed composited stripe — GPU layer, zero repaint on scroll */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-color: var(--page-bg);
+      background-image: repeating-linear-gradient(135deg, var(--stripe) 0 1px, transparent 1px 14px);
+      transition: background-color .35s;
+      pointer-events: none;
+    }
     ::selection { background: var(--accent); color: #fff; }
     .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'ss01'; }
     .display { font-family: 'Archivo', 'Manrope', sans-serif; letter-spacing: -0.02em; }
@@ -128,7 +145,7 @@
 </head>
 <body>
 
-<div class="page-outer" style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:hidden;">
+<div class="page-outer" style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:clip;">
 <div class="page-inner" style="position:relative; width:96%; max-width:1800px; margin:0 auto;">
 
   <!-- LOGO -->
