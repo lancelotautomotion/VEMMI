@@ -87,7 +87,7 @@
       background: var(--pill-bg); color: var(--fg);
       border: 1px solid var(--pill-border);
       font-size: 13.5px; font-weight: 600; font-family: inherit;
-      transition: all .2s ease; white-space: nowrap; cursor: pointer;
+      transition: border-color .2s ease, background .2s ease; white-space: nowrap; cursor: pointer;
     }
     .pill:hover { border-color: var(--line-2); }
     .pill-filled { background: #fff; color: #0e0e0c; border-color: #fff; }
@@ -293,7 +293,7 @@
   <div class="main-card" style="width:100%; background:var(--bg);
               border-top-left-radius:40px;
               border-bottom-left-radius:40px; border-bottom-right-radius:40px;
-              padding:16px; position:relative; z-index:10;">
+              padding:16px; position:relative; z-index:10; contain:layout style;">
 
     <!-- ─── Page header ─── -->
     <div style="padding:52px 52px 8px;">
@@ -554,7 +554,7 @@
     display:block; padding:14px 16px; border-radius:var(--radius-md);
     color:var(--fg-2); font-size:17px; font-weight:600;
     font-family:'Archivo','Manrope',sans-serif; letter-spacing:-0.01em;
-    text-decoration:none; transition:all .2s ease;
+    text-decoration:none; transition:color .2s ease, background .2s ease;
   }
   .sb-link:hover { color:var(--fg); background:rgba(255,255,255,.05); transform:translateX(8px); }
   .sb-link-cta { color:var(--accent) !important; }
