@@ -107,10 +107,28 @@
       width: 24px; height: 1.5px; background: var(--accent);
     }
 
+    /* Section title (style usinage) */
+    .section-title {
+      display: flex; align-items: center; gap: 14px;
+      font-family: 'Archivo', sans-serif; letter-spacing: -0.02em;
+      font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; font-style: italic;
+      text-transform: uppercase; color: var(--fg); margin-bottom: 20px; line-height: 1;
+    }
+    .section-title::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 24px; height: 2px; background: var(--accent);
+    }
+    /* Carte hero unifiée */
+    .spec-unified-card { display: flex; flex-direction: column; justify-content: space-between; }
+
     /* Responsive */
     @media (max-width: 860px) {
+      .header-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .header-2col > div:last-child { padding-top: 0 !important; }
       .page-h1 { font-size: clamp(36px, 10vw, 60px) !important; }
-      .presta-grid { grid-template-columns: 1fr !important; }
+      .header-left-flex { height: auto !important; grid-template-rows: auto auto !important; }
+      .spec-unified-card { justify-content: flex-start !important; }
+      .presta-grid-maint { grid-template-columns: 1fr !important; }
       .gallery-2 { grid-template-columns: 1fr !important; }
     }
       /* ── Responsive nav ── */
@@ -195,20 +213,50 @@
               border-bottom-left-radius:40px; border-bottom-right-radius:40px;
               padding:16px; position:relative; z-index:10; contain:layout style;">
 
-    <!-- Page header -->
-    <div class="page-header-inner" style="padding:52px 52px 8px;">
-      <div class="section-badge">Maintenance</div>
-      <h1 class="display page-h1"
-          style="font-weight:800; line-height:0.94; margin:0 0 16px; font-size:clamp(48px,6vw,80px);">
-        MAINTENANCE.
-      </h1>
-      <p style="font-size:16px; color:var(--fg-2); line-height:1.6; margin:0;">
-        Interventions sur site client et en atelier, en maintenance préventive et curative.
-      </p>
+    <!-- Page header — 2 colonnes style Usinage -->
+    <div class="page-header-inner" style="padding:52px 52px 48px;">
+      <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;">
+
+        <!-- Colonne gauche : titre + carte unifiée -->
+        <div class="header-left-flex" style="display:grid; grid-template-rows:auto 1fr; gap:28px; height:100%;">
+          <h1 class="display page-h1"
+              style="font-weight:800; line-height:0.94; margin:0; font-size:clamp(48px,6vw,80px);">
+            MAINTENANCE<br>INDUSTRIELLE.
+          </h1>
+          <div class="spec-unified-card"
+               style="background:var(--accent); border-radius:20px; padding:22px 28px;">
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Interventions</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Sur site client · En atelier</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.2);"></div>
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Types de maintenance</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Préventive · Curative</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.2);"></div>
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Spécialité</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Automatisme · Robotique industrielle</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne droite : textes -->
+        <div style="padding-top:38px;">
+          <p style="font-size:15px; color:var(--fg-2); line-height:2; margin:0 0 36px;">
+            VEMMI intervient aussi bien sur site client que dans nos ateliers, en assurant des opérations de maintenance <strong style="color:var(--fg);">préventive</strong> et <strong style="color:var(--fg);">curative</strong> sur tous types d'équipements industriels.
+          </p>
+          <p style="font-size:15px; color:var(--fg-2); line-height:2; margin:0;">
+            Notre partenaire automaticien assure la maintenance, l'étude, la conception et la réalisation d'automatismes industriels, ainsi que tous vos projets de <strong style="color:var(--fg);">robotique industrielle</strong>.
+          </p>
+        </div>
+
+      </div>
     </div>
 
     <!-- Separator -->
-    <div style="margin:32px 16px 40px; height:1px; background:var(--line);"></div>
+    <div style="margin:0 16px 40px; height:1px; background:var(--line);"></div>
 
     <!-- Hero image -->
     <div class="section-img" style="margin:0 36px 48px; border-radius:var(--radius-lg); overflow:hidden; position:relative; height:340px;">
@@ -218,87 +266,39 @@
       <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 60%); border-radius:var(--radius-lg);"></div>
     </div>
 
-    <!-- Prestations grid -->
+    <!-- Prestations -->
     <div class="section-pad" style="padding:0 36px 48px;">
-      <div class="section-badge">Prestations</div>
-      <div class="presta-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <h2 class="section-title">Nos prestations</h2>
+      <div class="presta-grid-maint" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
 
-        <!-- Item 1 -->
-        <div style="display:flex; gap:16px; align-items:flex-start; padding:20px; border-radius:var(--radius-md); background:var(--surface); border:1px solid var(--line);">
-          <div style="flex-shrink:0; width:38px; height:38px; border-radius:10px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Pièces de remplacement</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Réalisation de pièces mécaniques sur mesure pour remplacement rapide.</p>
-          </div>
+        <div style="background:var(--surface); border:1px solid var(--line);
+                    border-left:3px solid var(--accent); border-radius:var(--radius-md);
+                    padding:16px 18px;">
+          <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.5;">Réalisation de pièces mécaniques de remplacement</div>
         </div>
 
-        <!-- Item 2 -->
-        <div style="display:flex; gap:16px; align-items:flex-start; padding:20px; border-radius:var(--radius-md); background:var(--surface); border:1px solid var(--line);">
-          <div style="flex-shrink:0; width:38px; height:38px; border-radius:10px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
-          </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Démontage &amp; remontage</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Démontage et remontage complet d'équipements industriels.</p>
-          </div>
+        <div style="background:var(--surface); border:1px solid var(--line);
+                    border-left:3px solid var(--accent); border-radius:var(--radius-md);
+                    padding:16px 18px;">
+          <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.5;">Démontage et remontage d'équipements</div>
         </div>
 
-        <!-- Item 3 -->
-        <div style="display:flex; gap:16px; align-items:flex-start; padding:20px; border-radius:var(--radius-md); background:var(--surface); border:1px solid var(--line);">
-          <div style="flex-shrink:0; width:38px; height:38px; border-radius:10px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
-          </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Vérins pneumatiques &amp; hydrauliques</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Réparation et reconditionnement de tous types de vérins.</p>
-          </div>
+        <div style="background:var(--surface); border:1px solid var(--line);
+                    border-left:3px solid var(--accent); border-radius:var(--radius-md);
+                    padding:16px 18px;">
+          <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.5;">Réparation de vérins pneumatiques et hydrauliques</div>
         </div>
 
-        <!-- Item 4 -->
-        <div style="display:flex; gap:16px; align-items:flex-start; padding:20px; border-radius:var(--radius-md); background:var(--surface); border:1px solid var(--line);">
-          <div style="flex-shrink:0; width:38px; height:38px; border-radius:10px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-          </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Analyse de process</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Diagnostic de l'état des équipements et recommandations d'amélioration.</p>
-          </div>
+        <div style="background:var(--surface); border:1px solid var(--line);
+                    border-left:3px solid var(--accent); border-radius:var(--radius-md);
+                    padding:16px 18px;">
+          <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.5;">Analyse de l'état des équipements et recommandations d'amélioration de process</div>
         </div>
 
-        <!-- Item 5 -->
-        <div style="display:flex; gap:16px; align-items:flex-start; padding:20px; border-radius:var(--radius-md); background:var(--surface); border:1px solid var(--line);">
-          <div style="flex-shrink:0; width:38px; height:38px; border-radius:10px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="m16 8 6-3v11l-6-3"/><path d="M1 17v4"/><path d="M5 17v4"/><path d="M9 17v4"/><path d="M13 17v4"/></svg>
-          </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Déplacements de matériels</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Transport et déménagement de machines et équipements industriels.</p>
-          </div>
-        </div>
-
-        <!-- Item 6 -->
-        <div style="display:flex; gap:16px; align-items:flex-start; padding:20px; border-radius:var(--radius-md); background:var(--surface); border:1px solid var(--line);">
-          <div style="flex-shrink:0; width:38px; height:38px; border-radius:10px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Automatisme &amp; robotique</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Via notre partenaire automaticien : étude, conception, maintenance d'automatismes et projets robotique.</p>
-          </div>
+        <div style="background:var(--surface); border:1px solid var(--line);
+                    border-left:3px solid var(--accent); border-radius:var(--radius-md);
+                    padding:16px 18px;">
+          <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.5;">Déplacements et déménagements de matériels industriels</div>
         </div>
 
       </div>
@@ -306,7 +306,7 @@
 
     <!-- Photo gallery -->
     <div class="section-pad" style="padding:0 36px 48px;">
-      <div class="section-badge">Galerie</div>
+      <h2 class="section-title">Galerie</h2>
       <div class="gallery-2" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
         <div style="border-radius:var(--radius-md); overflow:hidden; height:260px;">
           <img src="photos/Maintenance/20200924_131330.jpg" alt="Maintenance VEMMI"
@@ -322,22 +322,22 @@
     </div>
 
     <!-- CTA block -->
-    <div class="section-cta" style="margin:0 36px 52px; padding:40px 40px; border-radius:var(--radius-lg);
-                background:color-mix(in oklch, var(--accent) 8%, var(--surface));
-                border:1px solid color-mix(in oklch, var(--accent) 20%, var(--line));
-                display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
-      <div>
-        <div style="font-family:'Archivo',sans-serif; font-size:22px; font-weight:800; letter-spacing:-0.02em; color:var(--fg); margin-bottom:8px;">Besoin d'un devis ?</div>
-        <p style="font-size:14px; color:var(--fg-2); margin:0; line-height:1.6;">Nous répondons à vos demandes sous 24 h en jours ouvrés.</p>
-      </div>
+    <div class="contact-band" style="margin:0 16px 52px; border-radius:var(--radius-lg); overflow:hidden;
+                background:var(--accent); padding:52px 40px;
+                display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px;">
+      <h2 class="display" style="font-weight:800; font-size:clamp(24px,3vw,40px); line-height:1.1; color:#1a1a18; margin:0;">
+        Un projet, une question ?
+      </h2>
+      <p style="font-size:15px; color:rgba(26,26,24,0.72); margin:0; max-width:380px; line-height:1.6;">
+        Notre équipe répond à toutes vos demandes de devis, d'information ou de partenariat.
+      </p>
       <a href="contact.html"
-         style="display:inline-flex; align-items:center; gap:9px; padding:13px 28px;
-                border-radius:999px; background:var(--accent); color:#fff;
+         style="display:inline-flex; align-items:center; gap:9px; padding:14px 32px;
+                border-radius:999px; background:#1a1a18; color:var(--fg);
                 font-size:14px; font-weight:700; font-family:'Archivo',sans-serif;
-                border:none; white-space:nowrap; transition:opacity .15s; flex-shrink:0;"
-         onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-        Nous contacter
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+                border:none; white-space:nowrap; transition:opacity .15s;"
+         onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">
+        Contactez-nous →
       </a>
     </div>
 
