@@ -119,7 +119,7 @@
     }
 
     /* Capsules spec desktop/mobile */
-    .spec-cap-wrapper { display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
+    .spec-cap-wrapper { display: flex; flex-direction: column; gap: 14px; }
     .spec-cap-mobile { display: none; }
 
     /* Responsive */
@@ -249,13 +249,13 @@
 
     <!-- Page header — 2 colonnes -->
     <div class="page-header-inner" style="padding:52px 52px 48px;">
-      <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;">
+      <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
 
         <!-- Colonne gauche : titre + capsules -->
-        <div class="header-left-flex" style="display:flex; flex-direction:column; height:100%;">
+        <div class="header-left-flex" style="display:flex; flex-direction:column; gap:32px;">
 
           <h1 class="display page-h1"
-              style="font-weight:800; line-height:0.94; margin:0 0 40px; font-size:clamp(48px,6vw,80px);">
+              style="font-weight:800; line-height:0.94; margin:0; font-size:clamp(48px,6vw,80px);">
             USINAGE.
           </h1>
 
