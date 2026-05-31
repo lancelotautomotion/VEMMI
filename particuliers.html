@@ -63,7 +63,6 @@
       background-color: var(--page-bg);
       transition: background-color .35s;
     }
-    /* Fixed composited stripe — GPU layer, zero repaint on scroll */
     body::before {
       content: '';
       position: fixed;
@@ -80,7 +79,6 @@
     a { color: inherit; text-decoration: none; }
     button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; padding: 0; }
 
-    /* Pill */
     .pill {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 11px 18px; border-radius: 999px;
@@ -95,52 +93,63 @@
     .pill-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
     .pill-accent:hover { opacity: .9; }
 
-    /* Section badge */
-    .section-badge {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--fg-3); margin-bottom: 18px;
+    /* Section title */
+    .section-title {
+      display: flex; align-items: center; gap: 14px;
+      font-family: 'Archivo', sans-serif; letter-spacing: -0.02em;
+      font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; font-style: italic;
+      text-transform: uppercase; color: var(--fg); margin-bottom: 20px; line-height: 1;
     }
-    .section-badge::before {
-      content: ''; display: block;
-      width: 24px; height: 1.5px; background: var(--accent);
+    .section-title::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 24px; height: 2px; background: var(--accent);
+    }
+
+    /* Carte hero unifiée */
+    .spec-unified-card { display: flex; flex-direction: column; justify-content: space-between; }
+
+    /* Cartes prestations */
+    .presta-card {
+      display: flex; gap: 20px; align-items: center;
+      padding: 24px; border-radius: var(--radius-md);
+      background: var(--surface); border: 1px solid var(--line);
+      transition: border-color .3s ease, background .3s ease;
+    }
+    .presta-card:hover {
+      border-color: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.04);
     }
 
     /* Responsive */
     @media (max-width: 860px) {
+      .header-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .header-2col > div:last-child { padding-top: 0 !important; }
       .page-h1 { font-size: clamp(36px, 10vw, 60px) !important; }
-      .service-3col { grid-template-columns: 1fr !important; }
-      .stock-grid { grid-template-columns: 1fr 1fr !important; }
+      .header-left-flex { height: auto !important; grid-template-rows: auto auto !important; }
+      .spec-unified-card { justify-content: flex-start !important; }
+      .presta-grid { grid-template-columns: 1fr !important; }
+      .gallery-part { grid-template-columns: 1fr 1fr !important; }
     }
-    @media (max-width: 480px) {
-      .stock-grid { grid-template-columns: 1fr !important; }
+    @media (max-width: 540px) {
+      .gallery-part { grid-template-columns: 1fr !important; }
     }
-      /* ── Responsive nav ── */
     @media (max-width: 640px) {
-      /* S-curve préservée — logo + Menu uniquement */
       .nav-logo { width: 200px !important; height: 80px !important; padding: 0 20px !important; }
       .nav-logo .display { font-size: 38px !important; color: #ffffff !important; }
       .nav-bar { margin-left: 200px !important; height: 80px !important; }
       .nav-topbar { padding: 0 !important; justify-content: center !important; }
       .nav-hide { display: none !important; }
       .nav-actions-group { display: none !important; }
-      /* Paddings page intérieure */
       .page-header-inner { padding: 28px 20px 8px !important; }
-      /* Footer 1 colonne */
       .footer-grid { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
-      /* Paddings intérieurs réduits */
       .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
-      .px-inner-t { padding-top: 32px !important; }
       .section-pad { padding-left: 16px !important; padding-right: 16px !important; }
       .section-img { margin-left: 0 !important; margin-right: 0 !important; }
-      .section-cta { margin-left: 0 !important; margin-right: 0 !important; padding-left: 20px !important; padding-right: 20px !important; }
-      /* Outer wrapper compressed on mobile */
       .page-outer { padding: 8px !important; }
       .page-inner { width: 100% !important; }
       .main-card { padding: 8px !important; border-top-left-radius: 40px !important; }
     }
-</style>
+  </style>
 </head>
 <body>
 
@@ -198,224 +207,147 @@
               border-bottom-left-radius:40px; border-bottom-right-radius:40px;
               padding:16px; position:relative; z-index:10; contain:layout style;">
 
-    <!-- Page header -->
-    <div class="page-header-inner" style="padding:52px 52px 8px;">
-      <div class="section-badge">Particuliers</div>
-      <h1 class="display page-h1"
-          style="font-weight:800; line-height:0.94; margin:0 0 16px; font-size:clamp(48px,6vw,80px);">
-        PARTICULIERS.
-      </h1>
-      <p style="font-size:16px; color:var(--fg-2); line-height:1.6; margin:0;">
-        Vente de matières, serrurerie sur mesure, maintenance de matériels hydrauliques et agricoles.
-      </p>
+    <!-- Page header — 2 colonnes style Usinage/Maintenance/Mécano-soudure -->
+    <div class="page-header-inner" style="padding:52px 52px 48px;">
+      <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;">
+
+        <!-- Colonne gauche : titre + carte orange unifiée -->
+        <div class="header-left-flex" style="display:grid; grid-template-rows:auto 1fr; gap:28px; height:100%;">
+          <h1 class="display page-h1"
+              style="font-weight:800; line-height:0.94; margin:0; font-size:clamp(48px,6vw,80px);">
+            SERVICES AUX<br>PARTICULIERS.
+          </h1>
+          <div class="spec-unified-card"
+               style="background:var(--accent); border-radius:20px; padding:22px 28px;">
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Matières</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Acier · Inox · Alu · Plastiques</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.2);"></div>
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Réalisations</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Serrurerie &amp; Métallerie sur mesure</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.2);"></div>
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Maintenance</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Hydraulique · Pneumatique · TP</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne droite : 3 paragraphes alignés space-between -->
+        <div style="padding-top:38px; display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+          <p style="font-size:15px; color:var(--fg-2); line-height:2; margin:0;">
+            VEMMI met son expertise industrielle au service des particuliers avec une gamme complète de <strong style="color:var(--fg);">matières disponibles sur stock</strong> — aciers, inox, aluminiums, métaux jaunes, plastiques et composites techniques — livrables rapidement sur commande.
+          </p>
+          <p style="font-size:15px; color:var(--fg-2); line-height:2; margin:0;">
+            Notre atelier conçoit et réalise sur mesure tous vos ouvrages de <strong style="color:var(--fg);">serrurerie et métallerie</strong> : barrières, garde-corps, portails, escaliers, pergolas, tonnelles et mobilier métallique — de l'étude jusqu'à la pose.
+          </p>
+          <p style="font-size:15px; color:var(--fg-2); line-height:2; margin:0;">
+            Nous intervenons également pour la <strong style="color:var(--fg);">maintenance et réparation</strong> de matériels hydrauliques, pneumatiques, de travaux publics, agricoles, forestiers et machines spéciales.
+          </p>
+        </div>
+
+      </div>
     </div>
 
     <!-- Separator -->
-    <div style="margin:32px 16px 40px; height:1px; background:var(--line);"></div>
+    <div style="margin:0 16px 40px; height:1px; background:var(--line);"></div>
 
     <!-- Hero image -->
     <div class="section-img" style="margin:0 36px 48px; border-radius:var(--radius-lg); overflow:hidden; position:relative; height:340px;">
-      <img src="photos/Particuliers/20190712_185743.jpg" alt="Services particuliers VEMMI"
+      <img src="photos/Particuliers/20190712_185743.jpg" alt="Services aux particuliers VEMMI"
            style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
            onload="this.style.opacity=1">
       <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 60%); border-radius:var(--radius-lg);"></div>
     </div>
 
-    <!-- 3-col service cards -->
+    <!-- Nos prestations -->
     <div class="section-pad" style="padding:0 36px 48px;">
-      <div class="section-badge">Nos services</div>
-      <div class="service-3col" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+      <h2 class="section-title">Nos prestations</h2>
+      <div class="presta-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
 
-        <!-- Card 1: Vente de matières -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px; display:flex; flex-direction:column; gap:16px;">
-          <div style="width:44px; height:44px; border-radius:12px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
+        <!-- 1. Vente de matières -->
+        <div class="presta-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9m0-9 9-5.25m-9 14.25 9-5.25m0-9v9"/>
+          </svg>
           <div>
-            <div style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:8px;">Vente de matières</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0 0 14px; line-height:1.6;">Aciers, inox, aluminiums, métaux jaunes, plastiques et composites techniques.</p>
-            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;">
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                <span class="mono">S235, S355, C35, C45</span>
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                <span class="mono">2017, 5083, 7075</span>
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                <span class="mono">PEHD, POM, PA6, PTFE</span>
-              </li>
-            </ul>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Vente de matières</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Aciers, inox, aluminiums, métaux jaunes, plastiques et composites techniques disponibles sur stock ou sur commande. Approvisionnement rapide grâce à notre réseau fournisseurs.</p>
           </div>
         </div>
 
-        <!-- Card 2: Serrurerie & Métallerie -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px; display:flex; flex-direction:column; gap:16px;">
-          <div style="width:44px; height:44px; border-radius:12px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
+        <!-- 2. Serrurerie & Métallerie -->
+        <div class="presta-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 0 1 21.75 8.25Z"/>
+          </svg>
           <div>
-            <div style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:8px;">Serrurerie &amp; Métallerie</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0 0 14px; line-height:1.6;">Étude, fabrication et pose sur mesure.</p>
-            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;">
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Barrières &amp; portails
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Garde-corps &amp; brise-vues
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Escaliers &amp; pergolas
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Mobilier métallique
-              </li>
-            </ul>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Serrurerie &amp; Métallerie sur mesure</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Étude, fabrication et pose d'ouvrages métalliques sur mesure : barrières, garde-corps, brise-vues, escaliers, portails, pergolas, tonnelles et mobilier métallique.</p>
           </div>
         </div>
 
-        <!-- Card 3: Maintenance & Réparation -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px; display:flex; flex-direction:column; gap:16px;">
-          <div style="width:44px; height:44px; border-radius:12px;
-                      background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
+        <!-- 3. Maintenance & Réparation — full width -->
+        <div class="presta-card" style="grid-column: 1 / -1;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="M11.42 15.17L17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"/>
+          </svg>
           <div>
-            <div style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:8px;">Maintenance &amp; Réparation</div>
-            <p style="font-size:13px; color:var(--fg-2); margin:0 0 14px; line-height:1.6;">Hydraulique, pneumatique, TP, agricole, forestier, machines spéciales.</p>
-            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;">
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Vérins hydrauliques &amp; pneumatiques
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Matériels TP &amp; agricoles
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Machines forestières
-              </li>
-              <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-3);">
-                <span style="width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-                Machines spéciales
-              </li>
-            </ul>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">Maintenance &amp; Réparation de matériels</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Entretien et remise en état de matériels hydrauliques, pneumatiques, de travaux publics, agricoles, forestiers et machines spéciales. Fabrication de pièces de rechange sur mesure grâce à notre parc machine CN.</p>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Stock matières -->
+    <!-- Galerie photos -->
     <div class="section-pad" style="padding:0 36px 48px;">
-      <div class="section-badge">Stock matières</div>
-      <div class="stock-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px;">
-
-        <!-- Aciers -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px;">
-          <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-            <span style="width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-            Aciers
-          </div>
-          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:5px;">
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">S235, S355, C35, C45</li>
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">40CMD8T, 16NC6...</li>
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">Tôles 0,5 à 300 mm</li>
-          </ul>
+      <h2 class="section-title">Galerie</h2>
+      <div class="gallery-part" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Particuliers/20190712_185743.jpg" alt="Services particuliers VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
         </div>
-
-        <!-- Aluminiums -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px;">
-          <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-            <span style="width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-            Aluminiums
-          </div>
-          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:5px;">
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">2017, 5083, 7075</li>
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">Tôles 1-15 mm laser</li>
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">Au-delà jet d'eau</li>
-          </ul>
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Particuliers/20200703_140948.jpg" alt="Métallerie VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
         </div>
-
-        <!-- Inox -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px;">
-          <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-            <span style="width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-            Inox
-          </div>
-          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:5px;">
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">Tôles jusqu'à 120 mm</li>
-          </ul>
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Particuliers/20190307_171456.jpg" alt="Réalisation sur mesure VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
         </div>
-
-        <!-- Plastiques -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px;">
-          <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-            <span style="width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-            Plastiques
-          </div>
-          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:5px;">
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">PEHD, POM, PA6, PTFE</li>
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">Tôles jusqu'à 100 mm</li>
-          </ul>
-        </div>
-
-        <!-- Composants hydrauliques -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px;">
-          <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-            <span style="width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-            Composants hydrauliques
-          </div>
-          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:5px;">
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">Barres chromées Ø18-80 mm</li>
-            <li class="mono" style="font-size:11px; color:var(--fg-3);">Tubes rodés</li>
-          </ul>
-        </div>
-
       </div>
-    </div>
-
-    <!-- Banner photo -->
-    <div class="section-img" style="margin:0 36px 48px; border-radius:var(--radius-lg); overflow:hidden; height:240px;">
-      <img src="photos/Particuliers/20200703_140948.jpg" alt="Stock matières VEMMI"
-           style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
-           onload="this.style.opacity=1">
     </div>
 
     <!-- CTA block -->
-    <div class="section-cta" style="margin:0 36px 52px; padding:40px 40px; border-radius:var(--radius-lg);
-                background:color-mix(in oklch, var(--accent) 8%, var(--surface));
-                border:1px solid color-mix(in oklch, var(--accent) 20%, var(--line));
-                display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
-      <div>
-        <div style="font-family:'Archivo',sans-serif; font-size:22px; font-weight:800; letter-spacing:-0.02em; color:var(--fg); margin-bottom:8px;">Besoin d'un devis ?</div>
-        <p style="font-size:14px; color:var(--fg-2); margin:0; line-height:1.6;">Nous répondons à vos demandes sous 24 h en jours ouvrés.</p>
-      </div>
+    <div class="contact-band" style="margin:0 16px 52px; border-radius:var(--radius-lg); overflow:hidden;
+                background:var(--accent); padding:52px 40px;
+                display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px;">
+      <h2 class="display" style="font-weight:800; font-size:clamp(24px,3vw,40px); line-height:1.1; color:#1a1a18; margin:0;">
+        Un projet, une question ?
+      </h2>
+      <p style="font-size:15px; color:rgba(26,26,24,0.72); margin:0; max-width:380px; line-height:1.6;">
+        Notre équipe répond à toutes vos demandes de devis, d'information ou de renseignement.
+      </p>
       <a href="contact.html"
-         style="display:inline-flex; align-items:center; gap:9px; padding:13px 28px;
-                border-radius:999px; background:var(--accent); color:#fff;
+         style="display:inline-flex; align-items:center; gap:9px; padding:14px 32px;
+                border-radius:999px; background:#1a1a18; color:var(--fg);
                 font-size:14px; font-weight:700; font-family:'Archivo',sans-serif;
-                border:none; white-space:nowrap; transition:opacity .15s; flex-shrink:0;"
-         onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-        Nous contacter
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+                border:none; white-space:nowrap; transition:opacity .15s;"
+         onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">
+        Contactez-nous →
       </a>
     </div>
 
     <!-- Footer -->
-    <footer style="margin:0; padding:40px 36px 32px;
+    <footer class="footer-grid" style="margin:0; padding:40px 36px 32px;
                    border-top:1px solid var(--line);
                    display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:32px 24px;
                    background:var(--bg);">
