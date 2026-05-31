@@ -128,6 +128,10 @@
       .header-left-flex { height: auto !important; grid-template-rows: auto auto !important; }
       .spec-unified-card { justify-content: flex-start !important; }
       .fab-grid { grid-template-columns: 1fr !important; }
+      .gallery-ms { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 540px) {
+      .gallery-ms { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 640px) {
       .nav-logo { width: 200px !important; height: 80px !important; padding: 0 20px !important; }
@@ -253,7 +257,7 @@
 
     <!-- Hero image -->
     <div class="section-img" style="margin:0 36px 48px; border-radius:var(--radius-lg); overflow:hidden; position:relative; height:340px;">
-      <img src="photos/Mécano-soudure/20200121_130415.jpg" alt="Mécano-soudure VEMMI"
+      <img src="photos/Mécano-soudure/20190307_171456.jpg" alt="Mécano-soudure VEMMI"
            style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
            onload="this.style.opacity=1">
       <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 60%); border-radius:var(--radius-lg);"></div>
@@ -320,6 +324,43 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- Galerie photos -->
+    <div class="section-pad" style="padding:0 36px 48px;">
+      <h2 class="section-title">Galerie</h2>
+      <div class="gallery-ms" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Mécano-soudure/20181212_065351.jpg" alt="Mécano-soudure VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
+        </div>
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Mécano-soudure/20190222_133052.jpg" alt="Soudure TIG VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
+        </div>
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Mécano-soudure/20190628_080319.jpg" alt="Ensemble soudé VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
+        </div>
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Mécano-soudure/20190723_195531.jpg" alt="Mécano-soudure VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
+        </div>
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Mécano-soudure/20191122_074935.jpg" alt="Soudure MIG VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
+        </div>
+        <div style="border-radius:var(--radius-md); overflow:hidden; height:220px;">
+          <img src="photos/Mécano-soudure/20191211_153320.jpg" alt="Fabrication VEMMI"
+               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
+               onload="this.style.opacity=1">
+        </div>
       </div>
     </div>
 
