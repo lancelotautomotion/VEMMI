@@ -316,6 +316,9 @@
     @media (max-width: 900px) {
       .grid-2x2 { grid-template-columns: 1fr !important; }
       .stock-band { grid-template-columns: 1fr !important; }
+      /* Tablet nav : hide everything except theme switch + Menu */
+      .nav-hide { display: none !important; }
+      #theme-btn { display: inline-flex !important; }
     }
     @media (max-width: 720px) {
       .hero-h1 { font-size: clamp(36px, 10vw, 70px) !important; }
@@ -539,7 +542,7 @@
     </div>
 
     <!-- ─── Séparateur Plan de Coupe ─── -->
-    <div style="padding:56px 16px 40px;">
+    <div id="sec-services" style="padding:56px 16px 40px;">
       <div style="display:flex; align-items:center; gap:20px;">
         <div style="flex:1; height:1px; background:var(--line);"></div>
         <h2 class="display" style="font-size:clamp(16px,2vw,24px); font-weight:800; color:var(--fg);
@@ -554,7 +557,7 @@
     </div>
 
     <!-- ─── Grille services 2×2 ─── -->
-    <div id="sec-services" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 16px 12px;" class="grid-2x2">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 16px 12px;" class="grid-2x2">
 
       <!-- USINAGE -->
       <a href="usinage.html" class="svc-card-lg">
@@ -856,7 +859,7 @@
     font-family:'Archivo','Manrope',sans-serif; letter-spacing:-0.01em;
     text-decoration:none; transition:color .2s ease, background .2s ease;
   }
-  .sb-link:hover { color:var(--fg); background:rgba(255,255,255,.05); transform:translateX(8px); }
+  .sb-link:hover { color:var(--fg); background:var(--surface-2); transform:translateX(8px); }
   .sb-link-cta { color:var(--accent) !important; }
   .sb-link-cta:hover { background:color-mix(in oklch,var(--accent) 10%,transparent) !important; color:var(--accent) !important; }
 </style>

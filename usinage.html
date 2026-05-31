@@ -135,6 +135,12 @@
     @media (max-width: 540px) {
       .gallery-3 { grid-template-columns: 1fr !important; }
     }
+
+    @media (max-width: 900px) {
+      /* Tablet nav : masquer tout sauf switch thème */
+      .nav-hide { display: none !important; }
+      #theme-btn { display: inline-flex !important; }
+    }
       /* ── Responsive nav ── */
     @media (max-width: 640px) {
       /* S-curve préservée — logo + Menu uniquement */
@@ -168,7 +174,7 @@
     .mach-table thead th { background: var(--surface-2); padding: 11px 20px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-3); border-bottom: 1px solid var(--line); text-align: left; }
     .mach-table tbody td { padding: 14px 20px; color: var(--fg-2); border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
     .mach-table tbody tr:last-child td { border-bottom: none; }
-    .mach-table tbody tr:hover td { background: rgba(255,255,255,.025); transition: background .15s; }
+    .mach-table tbody tr:hover td { background: var(--surface-2); transition: background .15s; }
     .mach-table .td-name { color: var(--fg); font-weight: 600; }
     .mach-table .td-spec { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
     .mach-table .td-note { color: var(--fg-3); font-size: 12px; }
@@ -574,7 +580,7 @@
     font-family:'Archivo','Manrope',sans-serif; letter-spacing:-0.01em;
     text-decoration:none; transition:color .2s ease, background .2s ease;
   }
-  .sb-link:hover { color:var(--fg); background:rgba(255,255,255,.05); transform:translateX(8px); }
+  .sb-link:hover { color:var(--fg); background:var(--surface-2); transform:translateX(8px); }
   .sb-link-cta { color:var(--accent) !important; }
   .sb-link-cta:hover { background:color-mix(in oklch,var(--accent) 10%,transparent) !important; color:var(--accent) !important; }
 </style>
