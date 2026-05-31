@@ -120,10 +120,9 @@
 
     /* Responsive */
     @media (max-width: 860px) {
-      .header-2col { grid-template-columns: 1fr !important; gap: 24px !important; }
+      .header-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
       .header-2col > div:last-child { padding-top: 0 !important; }
-      .header-cards { grid-template-columns: 1fr !important; }
-      .page-h1 { font-size: clamp(36px, 10vw, 60px) !important; }
+      .page-h1 { font-size: clamp(36px, 10vw, 60px) !important; margin-bottom: 28px !important; }
       .mach-grid { grid-template-columns: 1fr !important; }
       .gallery-3 { grid-template-columns: 1fr 1fr !important; }
       .gallery-2 { grid-template-columns: 1fr !important; }
@@ -240,74 +239,55 @@
     <div class="page-header-inner" style="padding:52px 52px 48px;">
       <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
 
-        <!-- Colonne gauche : badge + titre -->
+        <!-- Colonne gauche : badge + titre + liste 3 points -->
         <div>
           <div class="section-badge">Usinage CN</div>
           <h1 class="display page-h1"
-              style="font-weight:800; line-height:0.94; margin:0; font-size:clamp(48px,6vw,80px);">
+              style="font-weight:800; line-height:0.94; margin:0 0 36px; font-size:clamp(48px,6vw,80px);">
             USINAGE.
           </h1>
+
+          <!-- Liste 3 points clés -->
+          <div style="display:flex; flex-direction:column; gap:22px;">
+
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="flex-shrink:0; width:3px; border-radius:2px; height:38px; background:var(--accent); margin-top:3px;"></div>
+              <div>
+                <div style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Parc machine</div>
+                <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.4;">8 centres CN · 3 conventionnelles</div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="flex-shrink:0; width:3px; border-radius:2px; height:38px; background:var(--accent); margin-top:3px;"></div>
+              <div>
+                <div style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Capacités</div>
+                <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.4;">Tournage <span style="color:var(--accent);">Ø 1000 mm</span> · Fraisage <span style="color:var(--accent);">2000 × 800 × 800 mm</span></div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="flex-shrink:0; width:3px; border-radius:2px; height:38px; background:var(--accent); margin-top:3px;"></div>
+              <div>
+                <div style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Matières</div>
+                <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.4;">Aciers · Inox · Alu · Plastiques techniques</div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        <!-- Colonne droite : texte d'expertise, aligné sur le H1 -->
+        <!-- Colonne droite : texte d'expertise -->
         <div style="padding-top:38px;">
-          <p style="font-size:15px; color:var(--fg-2); line-height:1.75; margin:0 0 16px;">
+          <p style="font-size:15px; color:var(--fg-2); line-height:1.8; margin:0 0 28px;">
             Avec 8 centres CN et 3 machines conventionnelles, VEMMI réalise toutes vos pièces mécaniques — du prototype à la moyenne série — avec une précision à l'ordre du centième. Tournage jusqu'à <strong style="color:var(--fg);">Ø&nbsp;1000&nbsp;mm</strong>, fraisage jusqu'à <strong style="color:var(--fg);">2000 × 800 × 800&nbsp;mm</strong> avec 4<sup>e</sup> axe continu.
           </p>
-          <p style="font-size:15px; color:var(--fg-2); line-height:1.75; margin:0;">
+          <p style="font-size:15px; color:var(--fg-2); line-height:1.8; margin:0;">
             Nous travaillons tous matériaux depuis notre stock permanent : aciers doux et alliés (S235, C45, 35NCD16…), inox jusqu'à 120&nbsp;mm, aluminium (2017, 5083, 7075) découpé laser ou jet d'eau, plastiques techniques (PEHD, POM, PA6, PTFE) et composants hydrauliques. Approvisionnement rapide pour des délais maîtrisés.
           </p>
         </div>
 
       </div>
-
-      <!-- Rangée 3 cartes — pleine largeur sous le header 2-col -->
-      <div class="header-cards" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:40px;">
-
-        <!-- Parc machine -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
-                    padding:20px; display:flex; align-items:center; gap:16px;">
-          <div style="flex-shrink:0; width:44px; height:44px; border-radius:12px;
-                      background:color-mix(in oklch, var(--accent) 10%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
-          </div>
-          <div>
-            <div style="font-size:12px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Parc machine</div>
-            <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.3;">8 centres CN<br>3 conventionnelles</div>
-          </div>
-        </div>
-
-        <!-- Capacités -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
-                    padding:20px; display:flex; align-items:center; gap:16px;">
-          <div style="flex-shrink:0; width:44px; height:44px; border-radius:12px;
-                      background:color-mix(in oklch, var(--accent) 10%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-          </div>
-          <div>
-            <div style="font-size:12px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Capacités</div>
-            <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.3;">Tournage <span style="color:var(--accent);">Ø 1000 mm</span><br>Fraisage <span style="color:var(--accent);">2000 mm</span></div>
-          </div>
-        </div>
-
-        <!-- Matières -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
-                    padding:20px; display:flex; align-items:center; gap:16px;">
-          <div style="flex-shrink:0; width:44px; height:44px; border-radius:12px;
-                      background:color-mix(in oklch, var(--accent) 10%, var(--surface-2));
-                      display:grid; place-items:center; color:var(--accent);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <div>
-            <div style="font-size:12px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Matières</div>
-            <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.3;">Aciers · Inox · Alu<br>Plastiques techniques</div>
-          </div>
-        </div>
-
-      </div>
-
     </div>
 
     <!-- Separator -->
