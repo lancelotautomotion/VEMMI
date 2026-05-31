@@ -358,7 +358,8 @@
       .valeurs-grid > div:last-child { border-bottom: none !important; }
       /* Stock / Contact bands */
       .stock-band > div:first-child { padding: 24px 20px !important; }
-      .stock-overlay { background: linear-gradient(to bottom, var(--bg) 0%, transparent 35%) !important; }
+      .stock-overlay { background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 18%, transparent 68%) !important; }
+      .appro-row { flex-direction: column !important; align-items: flex-start !important; gap: 10px !important; }
       /* Outer wrapper compressed on mobile */
       .page-outer { padding: 8px !important; }
       .page-inner { width: 100% !important; }
@@ -739,7 +740,7 @@
 
         </div>
         <!-- Appro rapide -->
-        <div style="flex:1; display:flex; align-items:center; gap:14px; padding:18px 0 0;">
+        <div class="appro-row" style="flex:1; display:flex; align-items:center; gap:14px; padding:18px 0 0;">
           <span style="flex-shrink:0; padding:4px 11px; border-radius:999px;
                        background:var(--accent); color:#0e0e0c;
                        font-family:'JetBrains Mono',monospace; font-size:10px;
@@ -768,8 +769,8 @@
                 background:var(--accent); padding:52px 40px;
                 display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px;">
       <h2 class="display" style="font-weight:800; font-size:clamp(24px,3vw,40px);
-                                  line-height:1.1; color:#1a1a18; margin:0;">
-        Un projet, une question ?
+                                  line-height:1.1; color:#1a1a18; margin:0; text-wrap:balance;">
+        Un projet, une question&nbsp;?
       </h2>
       <p style="font-size:15px; color:rgba(26,26,24,0.72); margin:0; max-width:380px; line-height:1.6;">
         Notre équipe répond à toutes vos demandes de devis, d'information ou de partenariat.
