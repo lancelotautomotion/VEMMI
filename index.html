@@ -368,6 +368,7 @@
       .contact-band { margin-left: 0 !important; margin-right: 0 !important; border-radius: var(--radius-lg) !important; }
     }
 </style>
+<script>(function(){var t=localStorage.getItem("vemmi-theme");if(t)document.documentElement.setAttribute("data-theme",t);}());</script>
 </head>
 <body>
 
@@ -951,9 +952,18 @@
   function toggleTheme() {
     const html = document.documentElement;
     const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    const newTheme = isDark ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('vemmi-theme', newTheme);
     document.getElementById('theme-icon').innerHTML = isDark ? moonSVG : sunSVG;
     document.getElementById('theme-label').textContent = isDark ? 'Sombre' : 'Clair';
+  }
+  (function syncBtn() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const icon = document.getElementById('theme-icon');
+    const lbl = document.getElementById('theme-label');
+    if (icon && isLight) { icon.innerHTML = moonSVG; lbl.textContent = 'Sombre'; }
+  })();
   }
 
   /* ── Smooth scroll for anchors ── */
