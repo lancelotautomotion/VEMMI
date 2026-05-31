@@ -121,7 +121,10 @@
     }
 
     /* Responsive */
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
+      .nav-topbar a[href^="mailto:"] { display: none !important; }
+    }
+     (max-width: 900px) {
       .nav-hide { display: none !important; }
       #theme-btn { display: inline-flex !important; }
     }
@@ -175,7 +178,7 @@
                             pointer-events:none;
                             background:radial-gradient(circle at top left, transparent 39.5px, var(--bg) 40px);"></div>
     <div class="nav-topbar" style="display:flex; align-items:center; justify-content:space-between;
-                width:100%; padding:0 28px; gap:16px; flex-wrap:wrap;">
+                width:100%; padding:0 28px; gap:16px; flex-wrap:nowrap; overflow:hidden;">
       <div style="display:flex; gap:8px;">
         <button class="pill pill-filled" onclick="sbOpen()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -186,7 +189,7 @@
           Accueil
         </a>
       </div>
-      <div class="nav-actions-group" style="display:flex; gap:8px; flex-wrap:wrap;">
+      <div class="nav-actions-group" style="display:flex; gap:8px; flex-wrap:nowrap;">
         <button class="pill nav-hide" id="theme-btn" onclick="toggleTheme()">
           <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
             <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
