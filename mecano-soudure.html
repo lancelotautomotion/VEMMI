@@ -63,7 +63,6 @@
       background-color: var(--page-bg);
       transition: background-color .35s;
     }
-    /* Fixed composited stripe — GPU layer, zero repaint on scroll */
     body::before {
       content: '';
       position: fixed;
@@ -80,7 +79,6 @@
     a { color: inherit; text-decoration: none; }
     button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; padding: 0; }
 
-    /* Pill */
     .pill {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 11px 18px; border-radius: 999px;
@@ -95,53 +93,59 @@
     .pill-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
     .pill-accent:hover { opacity: .9; }
 
-    /* Section badge */
-    .section-badge {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--fg-3); margin-bottom: 18px;
+    /* Section title */
+    .section-title {
+      display: flex; align-items: center; gap: 14px;
+      font-family: 'Archivo', sans-serif; letter-spacing: -0.02em;
+      font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; font-style: italic;
+      text-transform: uppercase; color: var(--fg); margin-bottom: 20px; line-height: 1;
     }
-    .section-badge::before {
-      content: ''; display: block;
-      width: 24px; height: 1.5px; background: var(--accent);
+    .section-title::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 24px; height: 2px; background: var(--accent);
+    }
+
+    /* Carte hero unifiée */
+    .spec-unified-card { display: flex; flex-direction: column; justify-content: space-between; }
+
+    /* Cartes chaîne de fabrication */
+    .fab-card {
+      display: flex; gap: 20px; align-items: center;
+      padding: 24px; border-radius: var(--radius-md);
+      background: var(--surface); border: 1px solid var(--line);
+      transition: border-color .3s ease, background .3s ease;
+    }
+    .fab-card:hover {
+      border-color: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.04);
     }
 
     /* Responsive */
     @media (max-width: 860px) {
+      .header-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .header-2col > div:last-child { padding-top: 0 !important; }
       .page-h1 { font-size: clamp(36px, 10vw, 60px) !important; }
-      .mat-grid { grid-template-columns: 1fr !important; }
-      .gallery-3 { grid-template-columns: 1fr 1fr !important; }
-      .process-chain { flex-wrap: wrap !important; }
+      .header-left-flex { height: auto !important; grid-template-rows: auto auto !important; }
+      .spec-unified-card { justify-content: flex-start !important; }
+      .fab-grid { grid-template-columns: 1fr !important; }
     }
-    @media (max-width: 540px) {
-      .gallery-3 { grid-template-columns: 1fr !important; }
-    }
-      /* ── Responsive nav ── */
     @media (max-width: 640px) {
-      /* S-curve préservée — logo + Menu uniquement */
       .nav-logo { width: 200px !important; height: 80px !important; padding: 0 20px !important; }
       .nav-logo .display { font-size: 38px !important; color: #ffffff !important; }
       .nav-bar { margin-left: 200px !important; height: 80px !important; }
       .nav-topbar { padding: 0 !important; justify-content: center !important; }
       .nav-hide { display: none !important; }
       .nav-actions-group { display: none !important; }
-      /* Paddings page intérieure */
       .page-header-inner { padding: 28px 20px 8px !important; }
-      /* Footer 1 colonne */
       .footer-grid { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
-      /* Paddings intérieurs réduits */
       .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
-      .px-inner-t { padding-top: 32px !important; }
       .section-pad { padding-left: 16px !important; padding-right: 16px !important; }
       .section-img { margin-left: 0 !important; margin-right: 0 !important; }
-      .section-cta { margin-left: 0 !important; margin-right: 0 !important; padding-left: 20px !important; padding-right: 20px !important; }
-      /* Outer wrapper compressed on mobile */
       .page-outer { padding: 8px !important; }
       .page-inner { width: 100% !important; }
       .main-card { padding: 8px !important; border-top-left-radius: 40px !important; }
     }
-</style>
+  </style>
 </head>
 <body>
 
@@ -199,20 +203,53 @@
               border-bottom-left-radius:40px; border-bottom-right-radius:40px;
               padding:16px; position:relative; z-index:10; contain:layout style;">
 
-    <!-- Page header -->
-    <div class="page-header-inner" style="padding:52px 52px 8px;">
-      <div class="section-badge">Mécano-soudure</div>
-      <h1 class="display page-h1"
-          style="font-weight:800; line-height:0.94; margin:0 0 16px; font-size:clamp(48px,6vw,80px);">
-        MÉCANO-SOUDURE.
-      </h1>
-      <p style="font-size:16px; color:var(--fg-2); line-height:1.6; margin:0;">
-        Fabrication d'ensembles mécano-soudés de A à Z, de l'approvisionnement au traitement de surface.
-      </p>
+    <!-- Page header — 2 colonnes style Usinage/Maintenance -->
+    <div class="page-header-inner" style="padding:52px 52px 48px;">
+      <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;">
+
+        <!-- Colonne gauche : titre + carte orange unifiée -->
+        <div class="header-left-flex" style="display:grid; grid-template-rows:auto 1fr; gap:28px; height:100%;">
+          <h1 class="display page-h1"
+              style="font-weight:800; line-height:0.94; margin:0; font-size:clamp(48px,6vw,80px);">
+            MÉCANO-<br>SOUDURE.
+          </h1>
+          <div class="spec-unified-card"
+               style="background:var(--accent); border-radius:20px; padding:22px 28px;">
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Procédés</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Soudure TIG et MIG</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.2);"></div>
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Matériaux</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Acier · Inox · Aluminium</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.2);"></div>
+            <div style="padding:8px 0;">
+              <div style="font-size:9.5px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.72); margin-bottom:5px;">Prestation</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.4;">Fabrication complète de A à Z</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne droite : 3 paragraphes alignés space-between -->
+        <div style="padding-top:38px; display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+          <p style="font-size:15px; color:var(--fg-2); line-height:1.8; margin:0;">
+            Spécialiste de la fabrication d'<strong style="color:var(--fg);">ensembles mécano-soudés</strong>, VEMMI vous accompagne dans la réalisation de vos structures métalliques complexes, de la pièce unitaire à la petite ou moyenne série.
+          </p>
+          <p style="font-size:15px; color:var(--fg-2); line-height:1.8; margin:0;">
+            Nous maîtrisons les procédés de <strong style="color:var(--fg);">soudure TIG et MIG</strong> sur tous types de matériaux — acier, inox, aluminium — garantissant des assemblages robustes, esthétiques et répondant aux exigences industrielles les plus strictes.
+          </p>
+          <p style="font-size:15px; color:var(--fg-2); line-height:1.8; margin:0;">
+            Grâce à nos machines et notre expertise globale, nous pilotons votre projet de <strong style="color:var(--fg);">A à Z</strong> : depuis l'approvisionnement matière jusqu'aux contrôles finaux, la <strong style="color:var(--fg);">reprise d'usinage</strong> et les traitements de surface.
+          </p>
+        </div>
+
+      </div>
     </div>
 
     <!-- Separator -->
-    <div style="margin:32px 16px 40px; height:1px; background:var(--line);"></div>
+    <div style="margin:0 16px 40px; height:1px; background:var(--line);"></div>
 
     <!-- Hero image -->
     <div class="section-img" style="margin:0 36px 48px; border-radius:var(--radius-lg); overflow:hidden; position:relative; height:340px;">
@@ -222,166 +259,92 @@
       <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 60%); border-radius:var(--radius-lg);"></div>
     </div>
 
-    <!-- Matériaux & Procédés grid -->
+    <!-- Chaîne de fabrication -->
     <div class="section-pad" style="padding:0 36px 48px;">
-      <div class="section-badge">Matériaux &amp; Procédés</div>
-      <div class="mat-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <h2 class="section-title">Chaîne de fabrication de A à Z</h2>
+      <div class="fab-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
 
-        <!-- Card Matériaux -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px;">
-          <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:20px;">Matériaux</div>
-
-          <!-- Acier -->
-          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:18px; border-bottom:1px solid var(--line); margin-bottom:18px;">
-            <div style="flex-shrink:0; width:36px; height:36px; border-radius:9px;
-                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                        display:grid; place-items:center; color:var(--accent);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:4px;">Acier</div>
-              <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Construction mécanique, outillage, pièces de résistance.</p>
-            </div>
-          </div>
-
-          <!-- Inox -->
-          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:18px; border-bottom:1px solid var(--line); margin-bottom:18px;">
-            <div style="flex-shrink:0; width:36px; height:36px; border-radius:9px;
-                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                        display:grid; place-items:center; color:var(--accent);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:4px;">Inox</div>
-              <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Agroalimentaire, pharmaceutique, milieux corrosifs.</p>
-            </div>
-          </div>
-
-          <!-- Aluminium -->
-          <div style="display:flex; gap:14px; align-items:flex-start;">
-            <div style="flex-shrink:0; width:36px; height:36px; border-radius:9px;
-                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                        display:grid; place-items:center; color:var(--accent);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3z"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:4px;">Aluminium</div>
-              <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Pièces légères, aéronautique, construction.</p>
-            </div>
+        <!-- 1. Approvisionnement & Matériaux -->
+        <div class="fab-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/>
+          </svg>
+          <div>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">1. Approvisionnement &amp; Matériaux</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Sélection rigoureuse de nos aciers (construction mécanique, pièces de résistance), inox (agroalimentaire, milieux corrosifs) et aluminiums depuis notre stock permanent.</p>
           </div>
         </div>
 
-        <!-- Card Procédés -->
-        <div style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px;">
-          <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:20px;">Procédés</div>
-
-          <!-- TIG -->
-          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:18px; border-bottom:1px solid var(--line); margin-bottom:18px;">
-            <div style="flex-shrink:0; width:36px; height:36px; border-radius:9px;
-                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                        display:grid; place-items:center; color:var(--accent);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:4px;">Soudure TIG</div>
-              <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Soudage orbital de précision, acier inox et aluminium faibles épaisseurs.</p>
-            </div>
-          </div>
-
-          <!-- MIG -->
-          <div style="display:flex; gap:14px; align-items:flex-start;">
-            <div style="flex-shrink:0; width:36px; height:36px; border-radius:9px;
-                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
-                        display:grid; place-items:center; color:var(--accent);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" opacity=".85"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:4px;">Soudure MIG</div>
-              <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Soudage semi-automatique, fort dépôt, acier et aluminium.</p>
-            </div>
+        <!-- 2. Découpe & Assemblage -->
+        <div class="fab-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z"/>
+          </svg>
+          <div>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">2. Découpe &amp; Assemblage</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Préparation minutieuse et découpe des profils et tôles. Pointage et ajustement rigoureux en atelier pour garantir une géométrie parfaite de vos ensembles avant soudure.</p>
           </div>
         </div>
 
-      </div>
-    </div>
+        <!-- 3. Soudure Haute Précision -->
+        <div class="fab-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>
+          </svg>
+          <div>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">3. Soudure Haute Précision (TIG / MIG)</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Soudure orbitale TIG de précision pour les aciers, inox et alu de faibles épaisseurs, et soudure semi-automatique MIG à fort dépôt pour les structures lourdes.</p>
+          </div>
+        </div>
 
-    <!-- Process chain -->
-    <div class="section-pad" style="padding:0 36px 48px;">
-      <div class="section-badge">Chaîne de fabrication</div>
-      <div class="process-chain" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-        <div style="display:inline-flex; align-items:center; padding:10px 20px; border-radius:999px;
-                    background:var(--surface); border:1px solid var(--line); font-size:13px; font-weight:600; color:var(--fg);">
-          Approvisionnement
+        <!-- 4. Reprise d'Usinage intégrée -->
+        <div class="fab-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/>
+            <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+          </svg>
+          <div>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">4. Reprise d'Usinage intégrée</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Unique sur le secteur : notre parc complet de fraisage et tournage CN permet la reprise d'usinage en interne après soudure, garantissant le respect strict de vos tolérances géométriques.</p>
+          </div>
         </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--fg-3)" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-        <div style="display:inline-flex; align-items:center; padding:10px 20px; border-radius:999px;
-                    background:var(--surface); border:1px solid var(--line); font-size:13px; font-weight:600; color:var(--fg);">
-          Assemblage
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--fg-3)" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-        <div style="display:inline-flex; align-items:center; padding:10px 20px; border-radius:999px;
-                    background:var(--surface); border:1px solid var(--line); font-size:13px; font-weight:600; color:var(--fg);">
-          Soudure
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--fg-3)" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-        <div style="display:inline-flex; align-items:center; padding:10px 20px; border-radius:999px;
-                    background:var(--surface); border:1px solid var(--line); font-size:13px; font-weight:600; color:var(--fg);">
-          Usinage
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--fg-3)" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-        <div style="display:inline-flex; align-items:center; padding:10px 20px; border-radius:999px;
-                    background:color-mix(in oklch, var(--accent) 10%, var(--surface));
-                    border:1px solid color-mix(in oklch, var(--accent) 30%, var(--line));
-                    font-size:13px; font-weight:600; color:var(--accent);">
-          Traitements de surface
-        </div>
-      </div>
-    </div>
 
-    <!-- Photo gallery -->
-    <div class="section-pad" style="padding:0 36px 48px;">
-      <div class="section-badge">Galerie</div>
-      <div class="gallery-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
-        <div style="border-radius:var(--radius-md); overflow:hidden; height:200px;">
-          <img src="photos/Mécano-soudure/20191211_153320.jpg" alt="Mécano-soudure VEMMI"
-               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
-               onload="this.style.opacity=1">
+        <!-- 5. Traitements de surface & Finitions -->
+        <div class="fab-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent);">
+            <path d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/>
+          </svg>
+          <div>
+            <div style="font-size:14px; font-weight:700; color:var(--fg); margin-bottom:6px;">5. Traitements de surface &amp; Finitions</div>
+            <p style="font-size:13px; color:var(--fg-2); margin:0; line-height:1.6;">Pilotage et suivi complet des finitions de A à Z : peinture, galvanisation, anodisation ou traitements thermiques via notre réseau de partenaires qualifiés.</p>
+          </div>
         </div>
-        <div style="border-radius:var(--radius-md); overflow:hidden; height:200px;">
-          <img src="photos/Mécano-soudure/20191122_074935.jpg" alt="Soudure TIG VEMMI"
-               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
-               onload="this.style.opacity=1">
-        </div>
-        <div style="border-radius:var(--radius-md); overflow:hidden; height:200px;">
-          <img src="photos/Mécano-soudure/20190628_080319.jpg" alt="Ensemble soudé VEMMI"
-               style="width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease;"
-               onload="this.style.opacity=1">
-        </div>
+
       </div>
     </div>
 
     <!-- CTA block -->
-    <div class="section-cta" style="margin:0 36px 52px; padding:40px 40px; border-radius:var(--radius-lg);
-                background:color-mix(in oklch, var(--accent) 8%, var(--surface));
-                border:1px solid color-mix(in oklch, var(--accent) 20%, var(--line));
-                display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
-      <div>
-        <div style="font-family:'Archivo',sans-serif; font-size:22px; font-weight:800; letter-spacing:-0.02em; color:var(--fg); margin-bottom:8px;">Besoin d'un devis ?</div>
-        <p style="font-size:14px; color:var(--fg-2); margin:0; line-height:1.6;">Nous répondons à vos demandes sous 24 h en jours ouvrés.</p>
-      </div>
+    <div class="contact-band" style="margin:0 16px 52px; border-radius:var(--radius-lg); overflow:hidden;
+                background:var(--accent); padding:52px 40px;
+                display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px;">
+      <h2 class="display" style="font-weight:800; font-size:clamp(24px,3vw,40px); line-height:1.1; color:#1a1a18; margin:0;">
+        Un projet, une question ?
+      </h2>
+      <p style="font-size:15px; color:rgba(26,26,24,0.72); margin:0; max-width:380px; line-height:1.6;">
+        Notre équipe répond à toutes vos demandes de devis, d'information ou de partenariat.
+      </p>
       <a href="contact.html"
-         style="display:inline-flex; align-items:center; gap:9px; padding:13px 28px;
-                border-radius:999px; background:var(--accent); color:#fff;
+         style="display:inline-flex; align-items:center; gap:9px; padding:14px 32px;
+                border-radius:999px; background:#1a1a18; color:var(--fg);
                 font-size:14px; font-weight:700; font-family:'Archivo',sans-serif;
-                border:none; white-space:nowrap; transition:opacity .15s; flex-shrink:0;"
-         onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-        Nous contacter
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+                border:none; white-space:nowrap; transition:opacity .15s;"
+         onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">
+        Contactez-nous →
       </a>
     </div>
 
     <!-- Footer -->
-    <footer style="margin:0; padding:40px 36px 32px;
+    <footer class="footer-grid" style="margin:0; padding:40px 36px 32px;
                    border-top:1px solid var(--line);
                    display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:32px 24px;
                    background:var(--bg);">
