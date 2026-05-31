@@ -358,6 +358,7 @@
       .valeurs-grid > div:last-child { border-bottom: none !important; }
       /* Stock / Contact bands */
       .stock-band > div:first-child { padding: 24px 20px !important; }
+      .stock-overlay { background: linear-gradient(to bottom, var(--bg) 0%, transparent 35%) !important; }
       /* Outer wrapper compressed on mobile */
       .page-outer { padding: 8px !important; }
       .page-inner { width: 100% !important; }
@@ -740,7 +741,7 @@
         <!-- Appro rapide -->
         <div style="flex:1; display:flex; align-items:center; gap:14px; padding:18px 0 0;">
           <span style="flex-shrink:0; padding:4px 11px; border-radius:999px;
-                       background:var(--accent); color:#fff;
+                       background:var(--accent); color:#0e0e0c;
                        font-family:'JetBrains Mono',monospace; font-size:10px;
                        font-weight:700; letter-spacing:.1em; text-transform:uppercase;">
             Approvisionnement rapide
@@ -757,7 +758,7 @@
              alt="Stock de matières premières VEMMI"
              style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
                      opacity:0; transition:opacity .5s;">
-        <div style="position:absolute; inset:0; pointer-events:none;
+        <div class="stock-overlay" style="position:absolute; inset:0; pointer-events:none;
                     background:linear-gradient(90deg, var(--surface) 0%, transparent 30%);"></div>
       </div>
     </div>
