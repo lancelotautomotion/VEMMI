@@ -118,14 +118,20 @@
       width: 24px; height: 2px; background: var(--accent);
     }
 
+    /* Capsules spec desktop/mobile */
+    .spec-cap-mobile { display: none; }
+
     /* Responsive */
     @media (max-width: 860px) {
       .header-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
       .header-2col > div:last-child { padding-top: 0 !important; }
-      .page-h1 { font-size: clamp(36px, 10vw, 60px) !important; margin-bottom: 28px !important; }
+      .page-h1 { font-size: clamp(36px, 10vw, 60px) !important; margin-bottom: 24px !important; }
       .mach-grid { grid-template-columns: 1fr !important; }
       .gallery-3 { grid-template-columns: 1fr 1fr !important; }
       .gallery-2 { grid-template-columns: 1fr !important; }
+      .spec-cap-desktop { display: none !important; }
+      .spec-cap-mobile { display: block; }
+      .header-left-flex { justify-content: flex-start !important; gap: 24px !important; }
     }
     @media (max-width: 540px) {
       .gallery-3 { grid-template-columns: 1fr !important; }
@@ -242,44 +248,52 @@
 
     <!-- Page header — 2 colonnes -->
     <div class="page-header-inner" style="padding:52px 52px 48px;">
-      <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
+      <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;">
 
-        <!-- Colonne gauche : badge + titre + liste 3 points -->
-        <div>
-          <div class="section-badge">Usinage CN</div>
+        <!-- Colonne gauche : titre + capsules -->
+        <div class="header-left-flex" style="display:flex; flex-direction:column; justify-content:space-between;">
+
           <h1 class="display page-h1"
-              style="font-weight:800; line-height:0.94; margin:0 0 36px; font-size:clamp(48px,6vw,80px);">
+              style="font-weight:800; line-height:0.94; margin:0; font-size:clamp(48px,6vw,80px);">
             USINAGE.
           </h1>
 
-          <!-- Liste 3 points clés -->
-          <div style="display:flex; flex-direction:column; gap:22px;">
-
-            <div style="display:flex; gap:16px; align-items:flex-start;">
-              <div style="flex-shrink:0; width:3px; border-radius:2px; height:38px; background:var(--accent); margin-top:3px;"></div>
-              <div>
-                <div style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Parc machine</div>
-                <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.4;">8 centres CN · 3 conventionnelles</div>
-              </div>
-            </div>
-
-            <div style="display:flex; gap:16px; align-items:flex-start;">
-              <div style="flex-shrink:0; width:3px; border-radius:2px; height:38px; background:var(--accent); margin-top:3px;"></div>
-              <div>
-                <div style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Capacités</div>
-                <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.4;">Tournage <span style="color:var(--accent);">Ø 1000 mm</span> · Fraisage <span style="color:var(--accent);">2000 × 800 × 800 mm</span></div>
-              </div>
-            </div>
-
-            <div style="display:flex; gap:16px; align-items:flex-start;">
-              <div style="flex-shrink:0; width:3px; border-radius:2px; height:38px; background:var(--accent); margin-top:3px;"></div>
-              <div>
-                <div style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:5px;">Matières</div>
-                <div style="font-size:14px; font-weight:600; color:var(--fg); line-height:1.4;">Aciers · Inox · Alu · Plastiques techniques</div>
-              </div>
-            </div>
-
+          <!-- Capsule 1 — desktop -->
+          <div class="spec-cap-desktop" style="background:var(--accent); border-radius:18px; padding:14px 22px;">
+            <div style="font-size:10px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.6); margin-bottom:5px;">Parc machine</div>
+            <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.3;">8 centres CN · 3 conventionnelles</div>
           </div>
+
+          <!-- Capsule 2 — desktop -->
+          <div class="spec-cap-desktop" style="background:var(--accent); border-radius:18px; padding:14px 22px;">
+            <div style="font-size:10px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.6); margin-bottom:5px;">Capacités</div>
+            <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.3;">Tournage Ø&nbsp;1000&nbsp;mm · Fraisage 2000 × 800 × 800&nbsp;mm</div>
+          </div>
+
+          <!-- Capsule 3 — desktop -->
+          <div class="spec-cap-desktop" style="background:var(--accent); border-radius:18px; padding:14px 22px;">
+            <div style="font-size:10px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.6); margin-bottom:5px;">Matières</div>
+            <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.3;">Aciers · Inox · Alu · Plastiques techniques</div>
+          </div>
+
+          <!-- Carte unifiée — mobile uniquement -->
+          <div class="spec-cap-mobile" style="background:var(--accent); border-radius:20px; padding:22px 24px;">
+            <div style="margin-bottom:14px;">
+              <div style="font-size:10px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.6); margin-bottom:5px;">Parc machine</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.3;">8 centres CN · 3 conventionnelles</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.15); margin-bottom:14px;"></div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:10px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.6); margin-bottom:5px;">Capacités</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.3;">Tournage Ø&nbsp;1000&nbsp;mm · Fraisage 2000 × 800 × 800&nbsp;mm</div>
+            </div>
+            <div style="height:1px; background:rgba(26,26,24,.15); margin-bottom:14px;"></div>
+            <div>
+              <div style="font-size:10px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:rgba(26,26,24,.6); margin-bottom:5px;">Matières</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a18; line-height:1.3;">Aciers · Inox · Alu · Plastiques techniques</div>
+            </div>
+          </div>
+
         </div>
 
         <!-- Colonne droite : texte d'expertise -->
