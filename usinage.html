@@ -119,7 +119,7 @@
     }
 
     /* Carte unifiée hero */
-    .spec-unified-card { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .spec-unified-card { display: flex; flex-direction: column; justify-content: space-between; }
 
     /* Responsive */
     @media (max-width: 860px) {
@@ -129,8 +129,8 @@
       .mach-grid { grid-template-columns: 1fr !important; }
       .gallery-3 { grid-template-columns: 1fr 1fr !important; }
       .gallery-2 { grid-template-columns: 1fr !important; }
-      .header-left-flex { height: auto !important; }
-      .spec-unified-card { justify-content: flex-start !important; gap: 0 !important; }
+      .header-left-flex { height: auto !important; grid-template-rows: auto auto !important; }
+      .spec-unified-card { justify-content: flex-start !important; }
     }
     @media (max-width: 540px) {
       .gallery-3 { grid-template-columns: 1fr !important; }
@@ -250,7 +250,7 @@
       <div class="header-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;">
 
         <!-- Colonne gauche : titre + carte unifiée -->
-        <div class="header-left-flex" style="display:flex; flex-direction:column; gap:28px; height:100%;">
+        <div class="header-left-flex" style="display:grid; grid-template-rows:auto 1fr; gap:28px; height:100%;">
 
           <h1 class="display page-h1"
               style="font-weight:800; line-height:0.94; margin:0; font-size:clamp(48px,6vw,80px);">
@@ -286,10 +286,10 @@
 
         <!-- Colonne droite : texte d'expertise -->
         <div style="padding-top:38px;">
-          <p style="font-size:15px; color:var(--fg-2); line-height:1.8; margin:0 0 28px;">
+          <p style="font-size:15px; color:var(--fg-2); line-height:2; margin:0 0 36px;">
             Avec 8 centres CN et 3 machines conventionnelles, VEMMI réalise toutes vos pièces mécaniques — du prototype à la moyenne série — avec une précision à l'ordre du centième. Tournage jusqu'à <strong style="color:var(--fg);">Ø&nbsp;1000&nbsp;mm</strong>, fraisage jusqu'à <strong style="color:var(--fg);">2000 × 800 × 800&nbsp;mm</strong> avec 4<sup>e</sup> axe continu.
           </p>
-          <p style="font-size:15px; color:var(--fg-2); line-height:1.8; margin:0;">
+          <p style="font-size:15px; color:var(--fg-2); line-height:2; margin:0;">
             Nous travaillons tous matériaux depuis notre stock permanent : aciers doux et alliés (S235, C45, 35NCD16…), inox jusqu'à 120&nbsp;mm, aluminium (2017, 5083, 7075) découpé laser ou jet d'eau, plastiques techniques (PEHD, POM, PA6, PTFE) et composants hydrauliques. Approvisionnement rapide pour des délais maîtrisés.
           </p>
         </div>
