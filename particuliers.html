@@ -150,8 +150,10 @@
       .nav-hide { display: none !important; }
       .nav-actions-group { display: none !important; }
       .page-header-inner { padding: 28px 20px 8px !important; }
-      .footer-grid { padding: 28px 16px !important; gap: 20px 10px !important; grid-template-columns: 1fr 1fr !important; }
-      .footer-grid > div:first-child { grid-column: 1 / -1; }
+      .footer-grid { padding: 24px 16px !important; gap: 24px 12px !important; grid-template-columns: 1fr 1fr !important; }
+      .footer-grid > div:first-child { grid-column: 1 / -1 !important; }
+      .footer-grid > div:first-child { flex-direction: column !important; gap: 10px !important; }
+      .footer-grid > div:first-child [role="img"] { width: 56px !important; height: 56px !important; }
       .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
       .section-pad { padding-left: 16px !important; padding-right: 16px !important; }
       .section-img { margin-left: 0 !important; margin-right: 0 !important; }
