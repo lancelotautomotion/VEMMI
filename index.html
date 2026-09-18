@@ -1,559 +1,1020 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>VEMMI — Mécanique générale, maintenance & mécano-soudure</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Archivo+Black&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1E2A18;            /* deep forest near-black */
-    --ink-2:#2A3A20;          /* dark forest */
-    --steel:#9CA29D;          /* gear grey */
-    --paper:#F4F2EC;          /* warm off-white */
-    --paper-2:#E8E5DB;        /* darker paper */
-    --line:#1E2A18;
-    --mute:#6E7468;
-    --accent:#8DBF3F;         /* apple green (logo) */
-    --accent-2:#C7DA9C;       /* pale leaf — dark-section highlight */
-    --font-display:'Space Grotesk', ui-sans-serif, system-ui;
-    --font-display-tracking:-0.025em;
-    --font-display-weight:500;
-    --hl-h:14px; /* block height behind 'précision' */
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VEMMI — Mécanique de précision · Maintenance · Mécano-soudure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  /* ===== Palette variants (logo green is default) ===== */
-  body[data-palette="steel"]{
-    --ink:#0B1A2B; --ink-2:#142A40; --steel:#2A4866;
-    --paper:#F1ECE2; --paper-2:#E1DACA;
-    --mute:#6B7B8C;
-    --accent:#3B7BB0; --accent-2:#B6D0E5;
-  }
-  body[data-palette="heritage"]{
-    --ink:#2A2017; --ink-2:#3A2E20; --steel:#9C8C75;
-    --paper:#F1EAD9; --paper-2:#E3D9C1;
-    --mute:#7A6A55;
-    --accent:#C4612A; --accent-2:#EFC68E;
-  }
-  body[data-palette="mono"]{
-    --ink:#0F0F0F; --ink-2:#1C1C1C; --steel:#8A8A86;
-    --paper:#F2F0EA; --paper-2:#E3E1DA;
-    --mute:#777570;
-    --accent:#0F0F0F; --accent-2:#BEBCB5;
-  }
+  <style>
+    :root {
+      --page-bg: #3a3a3a;
+      --stripe: rgba(255,255,255,.05);
+      --bg: #1a1a18;
+      --bg-2: #1e1e1c;
+      --surface: #232220;
+      --surface-2: #2a2926;
+      --line: #34322e;
+      --line-2: #45423c;
+      --fg: #f4f0ea;
+      --fg-2: #b8b1a5;
+      --fg-3: #807a70;
+      --accent: #98c01f;
+      --accent-soft: #2e3d08;
+      --pill-bg: #1c1c1a;
+      --pill-border: #3a3a3a;
+      --radius-xl: 32px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+    [data-theme="light"] {
+      --page-bg: #f0f0f0;
+      --stripe: rgba(0,0,0,.055);
+      --bg: #ffffff;
+      --bg-2: #fafaf8;
+      --surface: #ffffff;
+      --surface-2: #f5f3ee;
+      --line: #e4e1da;
+      --line-2: #cfcabe;
+      --fg: #1a1916;
+      --fg-2: #4d4a43;
+      --fg-3: #8a8478;
+      --accent-soft: #e8f5bd;
+      --pill-bg: #ffffff;
+      --pill-border: #d8d4cb;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      overscroll-behavior: none;
+    }
+    html, body {
+      margin: 0; padding: 0;
+      background-color: transparent;
+      color: var(--fg);
+      font-family: 'Manrope', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: color .35s;
+    }
+    body {
+      min-height: 100vh;
+      background-color: var(--page-bg);
+      transition: background-color .35s;
+    }
+    /* Fixed composited stripe — GPU layer, zero repaint on scroll */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-color: var(--page-bg);
+      background-image: repeating-linear-gradient(135deg, var(--stripe) 0 1px, transparent 1px 14px);
+      transition: background-color .35s;
+      pointer-events: none;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'ss01'; }
+    .display { font-family: 'Archivo', 'Manrope', sans-serif; letter-spacing: -0.02em; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; padding: 0; }
 
-  /* ===== Typographic character ===== */
-  body[data-typo="editorial"]{
-    --font-display:'Fraunces', Georgia, serif;
-    --font-display-tracking:-0.02em;
-    --font-display-weight:500;
-  }
-  body[data-typo="brutalist"]{
-    --font-display:'Archivo Black','Arial Narrow',sans-serif;
-    --font-display-tracking:-0.045em;
-    --font-display-weight:900;
-  }
-  html,body{background:var(--paper); color:var(--ink); font-family:'Space Grotesk', ui-sans-serif, system-ui;}
-  .font-display{font-family:var(--font-display); letter-spacing:var(--font-display-tracking); font-weight:var(--font-display-weight);}
-  .font-serif{font-family:'Fraunces', serif; font-style:italic;}
-  .font-mono{font-family:'JetBrains Mono', monospace;}
-  .text-ink{color:var(--ink);} .bg-ink{background:var(--ink);}
-  .bg-ink-2{background:var(--ink-2);}
-  .text-paper{color:var(--paper);} .bg-paper{background:var(--paper);}
-  .bg-paper-2{background:var(--paper-2);}
-  .text-accent{color:var(--accent);} .bg-accent{background:var(--accent);}
-  .text-accent-2{color:var(--accent-2);} .bg-accent-2{background:var(--accent-2);}
-  .text-mute{color:var(--mute);}
-  .border-line{border-color:rgba(30,42,24,0.14);}
-  .border-line-dark{border-color:rgba(255,255,255,0.12);}
+    /* ── Pill ── */
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 999px;
+      background: var(--pill-bg); color: var(--fg);
+      border: 1px solid var(--pill-border);
+      font-size: 13.5px; font-weight: 600; font-family: inherit;
+      transition: border-color .2s ease, background .2s ease; white-space: nowrap; cursor: pointer;
+    }
+    .pill:hover { border-color: var(--line-2); }
+    .pill-filled { background: #fff; color: #0e0e0c; border-color: #fff; }
+    .pill-filled:hover { background: #f0ede8; border-color: #f0ede8; }
+    .pill-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .pill-accent:hover { opacity: .9; }
 
-  /* Subtle paper grain */
-  .grain{position:relative;}
-  .grain::after{
-    content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  }
+    /* ── Stripe fallback bg ── */
+    .stripe-bg {
+      background-image: repeating-linear-gradient(135deg, var(--surface) 0 14px, var(--surface-2) 14px 28px);
+    }
 
-  /* Technical crosshair frame */
-  .crosshair{position:relative;}
-  .crosshair::before, .crosshair::after{content:"+"; position:absolute; font-family:'JetBrains Mono', monospace; color:var(--accent); font-size:14px; line-height:1;}
-  .crosshair::before{top:-7px; left:-7px;}
-  .crosshair::after{bottom:-7px; right:-7px;}
+    /* ── Section badge ── */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--fg-3); margin-bottom: 18px;
+    }
+    .section-badge::before {
+      content: ''; display: block;
+      width: 24px; height: 1.5px; background: var(--accent);
+    }
 
-  /* Marquee */
-  @keyframes scroll-x { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-  .marquee{display:flex; width:max-content; animation: scroll-x 40s linear infinite;}
+    /* ── Service card ── */
+    .svc-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 22px;
+      display: flex; flex-direction: column;
+      transition: border-color .25s ease, background .25s ease; position: relative; overflow: hidden;
+      min-height: 200px; cursor: pointer;
+    }
+    .svc-card:hover { border-color: var(--line-2); }
+    .svc-card.active { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 8%, var(--surface)); }
+    .svc-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--surface-2); color: var(--fg-2);
+      display: grid; place-items: center; margin-bottom: 18px;
+      transition: background .25s, color .25s;
+    }
+    .svc-card.active .svc-icon { background: var(--accent); color: #fff; }
 
-  /* Underline-on-hover for links */
-  .link-u{position:relative;}
-  .link-u::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .35s ease;}
-  .link-u:hover::after{transform:scaleX(1);}
+    /* ── Machine ref card ── */
+    .ref-card {
+      border-radius: var(--radius-lg);
+      background: var(--surface); border: 1px solid var(--line);
+      padding: 22px; display: flex; gap: 22px;
+      align-items: stretch; min-height: 200px;
+    }
+    .ref-thumb {
+      flex: 0 0 220px; border-radius: 14px; overflow: hidden;
+      background: var(--surface-2); position: relative;
+    }
 
-  /* Diagonal stripe pattern */
-  .stripes{
-    background-image: repeating-linear-gradient(135deg, var(--accent) 0 8px, transparent 8px 16px);
-  }
+    /* ── Section separator ── */
+    .sep {
+      height: 1px; background: var(--line);
+      margin: 32px 16px;
+    }
 
-  /* Section number tag */
-  .tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase;}
+    /* ── Full section ── */
+    .full-section {
+      padding: 64px 32px 72px;
+    }
+    .full-section + .full-section {
+      border-top: 1px solid var(--line);
+    }
 
-  /* Card hover lift */
-  .card{transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s;}
-  .card:hover{transform:translateY(-4px);}
-  .card .arrow{transition:transform .3s ease;}
-  .card:hover .arrow{transform:translate(4px,-4px);}
+    /* ── 2-col section grid ── */
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap: 48px;
+      align-items: center;
+    }
 
-  /* Reveal */
-  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
-  .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;}
-  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+    /* ── Spec table ── */
+    .spec-table { width: 100%; border-collapse: collapse; }
+    .spec-table th, .spec-table td {
+      padding: 10px 14px; text-align: left;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .spec-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--fg-3); font-weight: 500;
+    }
+    .spec-table td { color: var(--fg-2); }
+    .spec-table td:first-child { color: var(--fg); font-weight: 600; }
+    .spec-table tr:last-child td { border-bottom: none; }
+    .spec-table td.accent { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
 
-  /* Number ticker */
-  .ticker{font-variant-numeric: tabular-nums;}
+    /* ── Service list ── */
+    .svc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .svc-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 14.5px; color: var(--fg-2); line-height: 1.5;
+      padding: 16px 18px; background: var(--surface);
+      border: 1px solid var(--line); border-radius: var(--radius-md);
+    }
+    .svc-list li .bullet {
+      flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); margin-top: 7px;
+      box-shadow: 0 0 8px var(--accent);
+    }
 
-  /* Hover overlay for cards */
-  .img-zoom{overflow:hidden;}
-  .img-zoom img{transition: transform 1.2s cubic-bezier(.2,.7,.2,1);}
-  .img-zoom:hover img{transform:scale(1.06);}
+    /* ── Particuliers cards ── */
+    .parti-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 32px;
+    }
+    .parti-card {
+      border-radius: var(--radius-lg);
+      background: var(--surface); border: 1px solid var(--line);
+      padding: 28px 24px;
+    }
 
-  /* Dot grid */
-  .dotgrid{
-    background-image: radial-gradient(rgba(30,42,24,.18) 1px, transparent 1px);
-    background-size: 16px 16px;
-  }
+    /* ── Material grid ── */
+    .mat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 24px;
+    }
+    .mat-chip {
+      background: var(--surface-2); border: 1px solid var(--line);
+      border-radius: var(--radius-md); padding: 14px 16px;
+    }
 
-  /* Mark / accent block */
-  .corner-mark{
-    position:absolute; width:14px; height:14px;
-  }
-  .corner-mark.tl{top:0; left:0; border-top:1px solid var(--accent); border-left:1px solid var(--accent);}
-  .corner-mark.tr{top:0; right:0; border-top:1px solid var(--accent); border-right:1px solid var(--accent);}
-  .corner-mark.bl{bottom:0; left:0; border-bottom:1px solid var(--accent); border-left:1px solid var(--accent);}
-  .corner-mark.br{bottom:0; right:0; border-bottom:1px solid var(--accent); border-right:1px solid var(--accent);}
+    /* ── Footer ── */
+    .footer-band {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 32px; border-top: 1px solid var(--line);
+      color: var(--fg-3); font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+      flex-wrap: wrap; gap: 12px;
+    }
 
-  .btn-primary{
-    display:inline-flex; align-items:center; gap:14px; padding:14px 20px;
-    background:var(--ink); color:var(--paper); border-radius:999px; font-weight:500;
-    transition:all .25s ease; border:1px solid var(--ink);
-  }
-  .btn-primary:hover{background:var(--accent); border-color:var(--accent); color:var(--ink);}
-  .btn-primary .dot{width:8px; height:8px; border-radius:999px; background:var(--accent); transition:background .25s;}
-  .btn-primary:hover .dot{background:var(--ink);}
+    /* ── Contact section ── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line); border-radius: var(--radius-lg);
+      overflow: hidden; margin-top: 40px;
+    }
+    .contact-cell {
+      background: var(--surface); padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
 
-  .btn-ghost{
-    display:inline-flex; align-items:center; gap:10px; padding:12px 18px;
-    border:1px solid rgba(30,42,24,.22); border-radius:999px; transition:.2s; font-weight:500;
-  }
-  .btn-ghost:hover{border-color:var(--ink); background:var(--ink); color:var(--paper);}
+    /* ── Overlay ── */
+    .overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: color-mix(in oklch, var(--bg) 70%, black 30%);
+      backdrop-filter: blur(14px);
+      align-items: center; justify-content: center;
+      animation: fade .2s ease;
+    }
+    .overlay.open { display: flex; }
+    .overlay-box {
+      width: min(720px, 92vw); background: var(--surface);
+      border: 1px solid var(--line); border-radius: 22px; padding: 28px;
+    }
+    @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+    @keyframes progress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
 
-  .hairline{height:1px; background:linear-gradient(90deg, transparent, rgba(30,42,24,.28), transparent);}
+    /* ── Responsive ── */
+    /* ── 2×2 service cards ── */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 16px 12px;
+    }
+    .svc-card-lg {
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      text-decoration: none; color: var(--fg);
+      transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+      min-height: 260px; overflow: hidden;
+    }
+    .svc-card-lg:hover {
+      border-color: var(--line-2);
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    }
+    .svc-content {
+      padding: 32px 28px;
+      display: flex; flex-direction: column;
+    }
+    .svc-img {
+      position: relative; overflow: hidden;
+    }
+    .svc-img img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; 
+      opacity: 0; transition: opacity .5s;
+    }
+    .svc-img .svc-fade {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to right, var(--surface) 0%, transparent 55%);
+    }
+    .svc-card-lg:hover {
+      border-color: var(--accent);
+      background: color-mix(in oklch, var(--accent) 4%, var(--surface));
+    }
+    .cta-card {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 999px;
+      border: 1px solid var(--accent);
+      color: var(--accent); font-size: 13.5px; font-weight: 600;
+      align-self: flex-start;
+      transition: background .15s;
+    }
+    .svc-card-lg:hover .cta-card {
+      background: color-mix(in oklch, var(--accent) 12%, transparent);
+    }
 
-  /* ===== Editorial tone variants ===== */
-  /* Sober: strip the editorial flourishes */
-  body[data-tone="sober"] .font-serif{font-family:inherit; font-style:normal;}
-  body[data-tone="sober"] .marquee-wrap{display:none;}
-  body[data-tone="sober"] .deco-svg{display:none;}
-  body[data-tone="sober"] .corner-mark{display:none;}
-  body[data-tone="sober"] .hl-block{height:2px; bottom:-2px !important; background:var(--accent) !important;}
-  body[data-tone="sober"] .big-mark{font-size:9vw !important;}
-  body[data-tone="sober"] .grain::after{display:none;}
-  body[data-tone="sober"] .crosshair::before,
-  body[data-tone="sober"] .crosshair::after{display:none;}
-
-  /* Maximal: push the editorial dial up */
-  body[data-tone="maximal"] .marquee{animation-duration:22s;}
-  body[data-tone="maximal"] .hl-block{height:22px !important; bottom:6px !important;}
-  body[data-tone="maximal"] .big-mark{font-size:22vw !important; letter-spacing:-0.08em !important;}
-  body[data-tone="maximal"] .deco-svg{opacity:.55 !important;}
-  body[data-tone="maximal"] .corner-mark{width:22px; height:22px;}
-  body[data-tone="maximal"] .grain::after{opacity:.1;}
-
+    @media (max-width: 1100px) {
+      .grid-main { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 1100px) {
+      .nav-topbar a[href^="mailto:"] { display: none !important; }
+    }
+    @media (max-width: 900px) {
+      .grid-2x2 { grid-template-columns: 1fr !important; }
+      .stock-band { grid-template-columns: 1fr !important; }
+      /* Valeurs : 2 colonnes dès la tablette */
+      .valeurs-grid { grid-template-columns: 1fr 1fr !important; }
+      .valeurs-grid > div { border-right: none !important; border-bottom: 1px solid var(--line); }
+      .valeurs-grid > div:nth-last-child(-n+2) { border-bottom: none; }
+      /* Tablet nav : hide everything except theme switch + Menu */
+      .nav-hide { display: none !important; }
+      #theme-btn { display: inline-flex !important; }
+    }
+    @media (max-width: 720px) {
+      .hero-h1 { font-size: clamp(36px, 10vw, 70px) !important; }
+      .svc-card-lg { grid-template-columns: 1fr !important; }
+      .svc-img { display: none !important; }
+    }
+      /* ── Responsive nav ── */
+    @media (max-width: 640px) {
+      /* S-curve préservée — logo + Menu uniquement */
+      .nav-logo { width: 110px !important; height: 100px !important; padding:  10px 0 !important; justify-content: center !important; }
+      .nav-logo .display { font-size: 38px !important; color: #ffffff !important; }
+      .nav-bar { margin-left: 110px !important; height: 100px !important; }
+      .nav-topbar { padding: 0 !important; justify-content: flex-end !important; padding-right: 24px !important; }
+      .nav-hide { display: none !important; }
+      .nav-actions-group { display: none !important; }
+      /* Footer 1 colonne */
+      .footer-grid { padding: 24px 16px !important; gap: 24px 12px !important; grid-template-columns: 1fr 1fr !important; }
+      .footer-grid > div:first-child { grid-column: 1 / -1 !important; }
+      .footer-grid > div:first-child { flex-direction: column !important; gap: 10px !important; }
+      .footer-grid > div:first-child [role="img"] { width: 56px !important; height: 56px !important; }
+      /* Paddings intérieurs réduits */
+      .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
+      .px-inner-t { padding-top: 32px !important; }
+      /* Hero collapse to 1 col */
+      .grid-main { grid-template-columns: 1fr !important; }
+      .hero-visual { display: none !important; }
+      .hero-left { padding: 20px 16px 20px !important; }
+      .hero-h1 { font-size: clamp(28px, 8vw, 44px) !important; margin: 0 0 16px !important; }
+      .hero-para { font-size: 15px !important; margin: 0 0 20px !important; }
+      /* Valeurs 1-col on mobile */
+      .valeurs-grid { grid-template-columns: 1fr !important; }
+      .valeurs-grid > div:nth-last-child(-n+2) { border-bottom: 1px solid var(--line) !important; }
+      .valeurs-grid > div:last-child { border-bottom: none !important; }
+      /* Stock / Contact bands */
+      .stock-band > div:first-child { padding: 24px 20px !important; }
+      .stock-overlay { background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 18%, transparent 68%) !important; }
+      .appro-row { flex-direction: column !important; align-items: flex-start !important; gap: 10px !important; }
+      /* Outer wrapper compressed on mobile */
+      .page-outer { padding: 8px !important; }
+      .page-inner { width: 100% !important; }
+      .main-card { padding: 8px !important; border-top-left-radius: 40px !important; }
+      /* Remove inner section margins so full card width is used */
+      .valeurs-grid { margin-left: 0 !important; margin-right: 0 !important; border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+      .stock-band { margin-left: 0 !important; margin-right: 0 !important; margin-bottom: 24px !important; border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+      .contact-band { margin-left: 0 !important; margin-right: 0 !important; border-radius: var(--radius-lg) !important; }
+    }
 </style>
+<script>(function(){var t=localStorage.getItem("vemmi-theme");if(t)document.documentElement.setAttribute("data-theme",t);}());</script>
 </head>
-<body class="antialiased" data-palette="verdant" data-typo="industriel" data-tone="editorial">
+<body>
 
-<!-- ============== HEADER ============== -->
-<header class="sticky top-0 z-40 bg-paper border-b border-line">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3">
-      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0">
-      <div class="leading-none hidden sm:block">
-        <div class="font-mono text-[9px] tracking-[0.22em] text-mute">VELAY ÉTUDES MÉCANIQUES</div>
-        <div class="font-mono text-[9px] tracking-[0.22em] text-mute mt-0.5">MAINTENANCE · INDUSTRIE</div>
+<!-- ═══════════════════════════════════════════════════════════
+     OUTER WRAPPER
+═══════════════════════════════════════════════════════════ -->
+<div class="page-outer" style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:clip;">
+<div class="page-inner" style="position:relative; width:96%; max-width:1800px; margin:0 auto;">
+
+  <!-- ══════════════════════════════════════════════════════
+       LOGO — absolute transparent bay · DO NOT MODIFY
+  ══════════════════════════════════════════════════════ -->
+  <div class="nav-logo" style="position:absolute; top:0; left:0; width:130px; height:100px; z-index:30;
+              display:flex; align-items:center; justify-content:center; padding:0; background:transparent;">
+    <img src="photos/logo VEMMI/logo-color.png" alt="Logo VEMMI" style="width:82px;height:82px;object-fit:contain;flex-shrink:0;">
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAV BAR — S-curve via radial-gradient · DO NOT MODIFY
+  ══════════════════════════════════════════════════════ -->
+  <div class="nav-bar" style="margin-left:130px; height:100px; background:var(--bg);
+              border-top-left-radius:40px; border-top-right-radius:40px;
+              position:relative; z-index:20; display:flex; align-items:center;">
+
+    <!-- Concave fillet — the radial-gradient patch -->
+    <div class="nav-scurve" aria-hidden style="position:absolute; left:-40px; bottom:0; width:40px; height:40px;
+                            pointer-events:none;
+                            background:radial-gradient(circle at top left, transparent 39.5px, var(--bg) 40px);"></div>
+
+    <!-- TopBar -->
+    <div class="nav-topbar" style="display:flex; align-items:center; justify-content:space-between;
+                width:100%; padding:0 28px; gap:16px; flex-wrap:nowrap; overflow:hidden;">
+      <div style="display:flex; gap:8px;">
+        <button class="pill pill-filled" onclick="document.getElementById('menu-overlay').classList.add('open')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          Menu
+        </button>
+        <button class="pill nav-hide" onclick="document.getElementById('sec-services').scrollIntoView({behavior:'smooth'})">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          Nos services
+        </button>
       </div>
-    </a>
-
-    <nav class="hidden lg:flex items-center gap-7 text-[13.5px]">
-      <a href="index.html" class="link-u">Accueil</a>
-      <a href="usinage.html" class="link-u">Usinage</a>
-      <a href="mecano-soudure.html" class="link-u">Mécano-soudure</a>
-      <a href="maintenance.html" class="link-u">Maintenance</a>
-      <a href="particuliers.html" class="link-u">Particuliers</a>
-      <a href="contact.html" class="link-u">Contact</a>
-    </nav>
-
-    <div class="flex items-center gap-5">
-      <a href="tel:+33471619328" class="hidden md:inline-flex items-center gap-2 font-mono text-[13px] tracking-wider link-u">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 3.5a1.5 1.5 0 0 1 1.5-1.5h1.6a1.5 1.5 0 0 1 1.49 1.32l.26 2.1a1.5 1.5 0 0 1-.81 1.51l-1.05.52a9 9 0 0 0 4.55 4.55l.52-1.05a1.5 1.5 0 0 1 1.51-.81l2.1.26A1.5 1.5 0 0 1 14 11.4V13a1.5 1.5 0 0 1-1.5 1.5C7.25 14.5 2.5 9.75 2.5 4.5 2.5 3.95 2.7 3.5 3 3.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
-        04 71 61 93 28
-      </a>
+      <div class="nav-actions-group" style="display:flex; gap:8px; flex-wrap:nowrap;">
+        <button class="pill nav-hide" id="theme-btn" onclick="toggleTheme()">
+          <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <span id="theme-label">Clair</span>
+        </button>
+        <a href="tel:0471619328" class="pill nav-hide">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z"/></svg>
+          <span class="mono" style="font-size:12.5px;">04 71 61 93 28</span>
+        </a>
+      </div>
     </div>
   </div>
-</header>
 
-<!-- ============== HERO ============== -->
-<section class="relative overflow-hidden">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-10 lg:pt-14 pb-0">
+  <!-- ══════════════════════════════════════════════════════
+       MAIN BLOCK — the dark rounded card · DO NOT MODIFY HERO
+  ══════════════════════════════════════════════════════ -->
+  <div class="main-card" style="width:100%; background:var(--bg);
+              border-top-left-radius:40px;
+              border-bottom-left-radius:40px; border-bottom-right-radius:40px;
+              padding:16px; position:relative; z-index:10; contain:layout style;">
 
-    <div class="grid grid-cols-12 gap-6 lg:gap-8 pt-2">
-      <!-- LEFT — typographic hero -->
-      <div class="col-span-12 lg:col-span-7 relative">
-        <div class="tag text-mute mb-6 rise">[ Atelier d'usinage de précision ]</div>
+    <!-- ─── Hero two-col (LOCKED) ─── -->
+    <div class="grid-main" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:20px; padding:12px 16px 0; align-items:start; padding-bottom:clamp(24px,3vw,48px);">
 
-        <h1 class="font-display font-medium text-[58px] sm:text-[84px] lg:text-[112px] leading-[0.92] tracking-[-0.04em] rise delay-1">
-          La mécanique<br>
-          <span class="relative inline-block">
-            <span class="relative z-10">à la précision</span>
-            <span class="absolute hl-block left-0 right-0 bottom-[10px] h-[14px] bg-accent/90 -z-0"></span>
-          </span><br>
-          <span class="font-serif font-normal">du centième.</span>
-        </h1>
+      <!-- HeroLeft -->
+      <div class="hero-left" style="padding:28px 36px 0 36px; display:flex; flex-direction:column;">
 
-        <div class="mt-10 grid grid-cols-12 gap-6 rise delay-2">
-          <p class="col-span-12 md:col-span-8 text-[17px] leading-[1.55] text-ink/80 max-w-[560px]">
-            VEMMI conçoit, usine, soude et entretient. Pièces unitaires, prototypes et petites séries — pour l'industrie, l'agricole, le TP, et les particuliers exigeants. Velay Études Mécaniques Maintenance Industrie, depuis Dunières (43).
-          </p>
-          <div class="col-span-12 md:col-span-4 flex md:justify-end items-start">
-            <a href="#savoir-faire" class="btn-ghost">
-              Voir nos savoir-faire
-              <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          <!-- Eyebrow -->
+          <div class="section-badge" style="margin-bottom:16px;">À votre service depuis 2020</div>
+
+          <!-- H1 -->
+          <h1 class="display hero-h1" style="font-weight:800; line-height:0.94; margin:0 0 24px; font-size:clamp(48px,4.5vw,70px); overflow-wrap:break-word;">
+            MÉCANIQUE GÉNÉRALE ET MAINTENANCE
+          </h1>
+
+          <div class="hero-para" style="color:var(--fg-2); font-size:18px; font-weight:300; line-height:1.625;
+                      max-width:560px; margin:0 0 28px; display:flex; flex-direction:column; gap:16px;">
+            <p style="margin:0;">Partenaire de vos performances industrielles, VEMMI intervient en mécanique générale, maintenance et mécano-soudure depuis Dunières (Haute-Loire).</p>
+            <p style="margin:0;">Grâce à notre parc de 8&nbsp;machines à commande numérique (CN), nous garantissons réactivité et précision d'usinage. De la pièce unitaire à la moyenne série, nous concevons des solutions fiables pour assurer la continuité de votre production.</p>
+          </div>
+
+          <!-- CTAs hero -->
+          <div style="margin-top:auto; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#sec-services"
+               style="display:inline-flex; align-items:center; gap:8px; padding:12px 22px;
+                      border-radius:999px; border:1.5px solid var(--accent);
+                      color:var(--accent); font-size:14px; font-weight:600;
+                      font-family:'Archivo',sans-serif; text-decoration:none; transition:background .15s;"
+               onmouseover="this.style.background='color-mix(in oklch,var(--accent) 10%,transparent)'"
+               onmouseout="this.style.background='transparent'">
+              Savoir-faire
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            </a>
+            <a href="contact.html"
+               style="display:inline-flex; align-items:center; gap:8px; padding:12px 22px;
+                      border-radius:999px; background:var(--accent);
+                      color:#fff; font-size:14px; font-weight:600;
+                      font-family:'Archivo',sans-serif; text-decoration:none; transition:opacity .15s;"
+               onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+              Nous contacter
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
             </a>
           </div>
-        </div>
-
-        <!-- Stat strip — basique -->
-        <div class="mt-14 lg:mt-20 grid grid-cols-1 md:grid-cols-3 border-t border-line rise delay-3">
-          <div class="py-6 pr-6 md:border-r border-line">
-            <div class="font-mono text-[10px] tracking-[0.2em] text-mute mb-2">L'ÉQUIPE</div>
-            <div class="font-display text-[42px] leading-none ticker">11<span class="text-mute text-[20px] align-top ml-2">collaborateurs</span></div>
-          </div>
-          <div class="py-6 md:px-6 md:border-r border-line">
-            <div class="font-mono text-[10px] tracking-[0.2em] text-mute mb-2">CRÉÉE EN</div>
-            <div class="font-display text-[42px] leading-none ticker">2002</div>
-          </div>
-          <div class="py-6 md:pl-6">
-            <div class="font-mono text-[10px] tracking-[0.2em] text-mute mb-2">LOCALISATION</div>
-            <div class="font-display text-[42px] leading-none ticker">30<span class="text-mute text-[20px] align-top ml-2">min de St-Étienne</span></div>
-          </div>
-        </div>
       </div>
 
-      <!-- RIGHT — image stack -->
-      <div class="col-span-12 lg:col-span-5 relative rise delay-2">
-        <div class="relative img-zoom">
-          <img src="assets/cnc-hartford.jpg" alt="Centre d'usinage Hartford avec robot de chargement" class="w-full h-[520px] lg:h-[680px] object-cover">
-          <div class="corner-mark tl"></div>
-          <div class="corner-mark tr"></div>
-          <div class="corner-mark bl"></div>
-          <div class="corner-mark br"></div>
-          <!-- Spec overlay -->
-          <div class="absolute top-5 left-5 bg-paper px-3 py-2 font-mono text-[11px] tracking-wider flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
-            ATELIER · 43220
-          </div>
-          <div class="absolute bottom-5 right-5 bg-ink text-paper px-4 py-3 max-w-[260px]">
-            <div class="font-mono text-[10px] tracking-[0.2em] text-accent-2 mb-1">REF / HCMC-1682</div>
-            <div class="text-[14px] leading-snug">Centre d'usinage Hartford 4 axes — chargement robotisé jusqu'à 60 kg.</div>
-          </div>
-        </div>
-
+      <!-- HeroVisual -->
+      <div class="hero-visual" style="position:relative; border-radius:var(--radius-xl); overflow:hidden;
+                  background:var(--surface); align-self:stretch;">
+        <!-- Stripe fallback -->
+        <div aria-hidden class="stripe-bg" style="position:absolute; inset:0;"></div>
+        <img src="photos/1674141549502.jpeg"
+             alt="Atelier VEMMI"
+             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;"
+             onload="this.style.opacity=1">
       </div>
     </div>
-  </div>
 
-</section>
+    <!-- ─── Bandeau valeurs ─── -->
+    <div style="margin:0 16px; border:1px solid var(--line); border-radius:var(--radius-lg);
+                display:grid; grid-template-columns:repeat(4,1fr); background:var(--surface);" class="valeurs-grid">
 
-<!-- ============== SAVOIR-FAIRE ============== -->
-<section id="savoir-faire" class="relative py-24 lg:py-32">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+      <div style="display:flex; align-items:center; gap:16px; padding:24px 22px; border-right:1px solid var(--line);">
+        <div style="flex-shrink:0; width:52px; height:52px; border-radius:14px;
+                    background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                    display:grid; place-items:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:17px; font-weight:800; color:var(--fg); letter-spacing:.04em; text-transform:uppercase; margin-bottom:8px;">Réactivité</div>
+          <p style="font-size:14px; color:var(--fg-2); line-height:1.6; margin:0;">Délais courts et intervention rapide pour minimiser vos arrêts de production.</p>
+        </div>
+      </div>
 
-    <div class="grid grid-cols-12 gap-8 mb-16">
-      <div class="col-span-12 lg:col-span-4">
-        <div class="tag text-accent mb-4">— Nos savoir-faire / 02</div>
-        <h2 class="font-display text-[44px] lg:text-[64px] leading-[0.95] tracking-[-0.03em]">
-          Quatre métiers, <br>
-          <span class="font-serif">un seul</span> atelier.
+      <div style="display:flex; align-items:center; gap:16px; padding:24px 22px; border-right:1px solid var(--line);">
+        <div style="flex-shrink:0; width:52px; height:52px; border-radius:14px;
+                    background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                    display:grid; place-items:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:17px; font-weight:800; color:var(--fg); letter-spacing:.04em; text-transform:uppercase; margin-bottom:8px;">Précision</div>
+          <p style="font-size:14px; color:var(--fg-2); line-height:1.6; margin:0;">Usinage de haute précision grâce à notre parc CN dernière génération.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:16px; padding:24px 22px; border-right:1px solid var(--line);">
+        <div style="flex-shrink:0; width:52px; height:52px; border-radius:14px;
+                    background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                    display:grid; place-items:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:17px; font-weight:800; color:var(--fg); letter-spacing:.04em; text-transform:uppercase; margin-bottom:8px;">Fiabilité</div>
+          <p style="font-size:14px; color:var(--fg-2); line-height:1.6; margin:0;">Des solutions robustes et durables pour des performances garanties.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:16px; padding:24px 22px;">
+        <div style="flex-shrink:0; width:52px; height:52px; border-radius:14px;
+                    background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                    display:grid; place-items:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:17px; font-weight:800; color:var(--fg); letter-spacing:.04em; text-transform:uppercase; margin-bottom:8px;">Proximité</div>
+          <p style="font-size:14px; color:var(--fg-2); line-height:1.6; margin:0;">Une équipe à taille humaine proche de vos besoins, basée en Haute-Loire.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── Séparateur Plan de Coupe ─── -->
+    <div id="sec-services" style="padding:56px 16px 40px;">
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="flex:1 0 24px; height:1px; background:var(--line);"></div>
+        <h2 class="display" style="flex:0 1 auto; max-width:50%; font-size:clamp(16px,2vw,24px); font-weight:800; color:var(--fg);
+                                    text-align:center; margin:0; letter-spacing:.01em;">
+          NOS SAVOIR-FAIRE
         </h2>
+        <div style="flex:1 0 24px; height:1px; background:var(--line);"></div>
       </div>
-      <div class="col-span-12 lg:col-span-5 lg:col-start-7 self-end">
-        <p class="text-[17px] leading-[1.6] text-ink/80">
-          De la pièce de remplacement à l'ensemble mécano-soudé livré clé en main, nous intervenons sur l'ensemble de la chaîne — études, approvisionnement, usinage, soudure, assemblage et maintenance sur site.
-        </p>
-      </div>
+      <p style="text-align:center; font-size:14px; color:var(--fg-2); margin:16px 0 0; line-height:1.6;">
+        De la réparation d'urgence sur site client à la fabrication de moyennes séries dans nos ateliers.
+      </p>
     </div>
 
-    <!-- Cards grid: 2 rows: one wide + one regular, then two regular -->
-    <div class="grid grid-cols-12 gap-5">
+    <!-- ─── Grille services 2×2 ─── -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 16px 12px;" class="grid-2x2">
 
-      <!-- Card 01 — Usinage (featured) -->
-      <a href="usinage.html" class="card group col-span-12 lg:col-span-7 bg-ink text-paper relative overflow-hidden block no-underline">
-        <div class="grid grid-cols-12 h-full">
-          <div class="col-span-12 md:col-span-6 p-7 lg:p-9 flex flex-col">
-            <div class="flex items-center justify-between mb-10">
-              <span class="font-mono text-[11px] tracking-[0.2em] text-accent-2">01 / USINAGE</span>
-              <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
+      <!-- USINAGE -->
+      <a href="usinage.html" class="svc-card-lg">
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
             </div>
-            <h3 class="font-display text-[36px] lg:text-[44px] leading-[0.95] tracking-tight mb-4">Tournage &amp; fraisage CN<span class="text-accent">.</span></h3>
-            <p class="text-[14.5px] leading-[1.55] text-paper/70 mb-6">8 machines à commande numérique pour vos pièces unitaires, prototypes et petites séries. Capacité jusqu'à Ø 1000 × L 1000 mm en tournage, 2000 × 800 × 800 en fraisage 4 axes.</p>
-            <div class="mt-auto grid grid-cols-2 gap-x-4 gap-y-2 font-mono text-[11px] pt-6 border-t border-line-dark">
-              <div class="text-paper/50">→ Tournage CN 4 axes</div>
-              <div class="text-paper/50">→ Fraisage grande vitesse</div>
-              <div class="text-paper/50">→ Rectification plane</div>
-              <div class="text-paper/50">→ Mortaisage col de cygne</div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">01 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">USINAGE</div>
             </div>
           </div>
-          <div class="col-span-12 md:col-span-6 relative img-zoom min-h-[260px]">
-            <img src="assets/lathe-shaft.jpg" alt="Tournage CN" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute top-4 right-4 bg-accent text-ink font-mono text-[10px] tracking-wider px-2 py-1">FEATURED</div>
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Tournage et fraisage CN jusqu'à Ø&nbsp;1000&nbsp;mm. 8&nbsp;machines CN et 6&nbsp;conventionnelles pour tous volumes, de la pièce unique à la petite série.
+          </p>
+          <div class="cta-card">
+            Découvrir nos capacités
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </div>
+        </div>
+        <div class="svc-img">
+          <img src="photos/Usinage/20200317_132018.jpg" alt="Usinage CN VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
         </div>
       </a>
 
-      <!-- Card 02 — Mécano-soudure -->
-      <a href="mecano-soudure.html" class="card group col-span-12 lg:col-span-5 bg-paper-2 relative overflow-hidden border border-line block no-underline">
-        <div class="img-zoom h-[240px]">
-          <img src="assets/mecanosoudure-green.jpg" alt="Mécano-soudure" class="w-full h-full object-cover">
-        </div>
-        <div class="p-7 lg:p-9">
-          <div class="flex items-center justify-between mb-4">
-            <span class="font-mono text-[11px] tracking-[0.2em] text-accent">02 / MÉCANO-SOUDURE</span>
-            <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
-          </div>
-          <h3 class="font-display text-[28px] lg:text-[34px] leading-[1] tracking-tight mb-3">De A à Z<span class="font-serif italic font-normal text-ink/60">, soudé.</span></h3>
-          <p class="text-[14.5px] leading-[1.55] text-ink/75">Ensembles soudés sur plan : approvisionnement, débit, assemblage, soudure TIG / MIG, usinage de reprise et traitements de surface via partenaires.</p>
-          <div class="mt-5 flex flex-wrap gap-2 font-mono text-[10px]">
-            <span class="px-2 py-1 border border-line">ACIER</span>
-            <span class="px-2 py-1 border border-line">INOX</span>
-            <span class="px-2 py-1 border border-line">ALUMINIUM</span>
-            <span class="px-2 py-1 bg-ink text-paper">TIG · MIG</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 03 — Maintenance -->
-      <a href="maintenance.html" class="card group col-span-12 lg:col-span-5 bg-paper border border-line relative overflow-hidden block no-underline">
-        <div class="grid grid-cols-12">
-          <div class="col-span-7 p-7 lg:p-9">
-            <div class="flex items-center justify-between mb-4">
-              <span class="font-mono text-[11px] tracking-[0.2em] text-accent">03 / MAINTENANCE</span>
-              <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
+      <!-- MAINTENANCE -->
+      <a href="maintenance.html" class="svc-card-lg">
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"/></svg>
             </div>
-            <h3 class="font-display text-[28px] lg:text-[34px] leading-[1] tracking-tight mb-3">Préventive<br><span class="font-serif italic font-normal text-ink/60">&amp;</span> curative.</h3>
-            <p class="text-[14.5px] leading-[1.55] text-ink/75 mb-5">Interventions sur site ou en atelier : pièces de remplacement, démontage/remontage, réparation de vérins, diagnostic et déménagement d'équipements.</p>
-            <div class="font-mono text-[10px] text-mute space-y-1">
-              <div>→ Sur site client</div>
-              <div>→ Vérins pneumatiques · hydrauliques</div>
-              <div>→ Partenaire automaticien &amp; robotique</div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">02 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">MAINTENANCE</div>
             </div>
           </div>
-          <div class="col-span-5 relative img-zoom">
-            <img src="assets/assembly-line.jpg" alt="Maintenance industrielle" class="absolute inset-0 w-full h-full object-cover">
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Interventions préventives et curatives sur site ou en atelier. Vérins pneumatiques et hydrauliques, démontage, remontage et analyse de process.
+          </p>
+          <div class="cta-card">
+            En savoir plus
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </div>
+        </div>
+        <div class="svc-img">
+          <img src="photos/Maintenance/20200806_141246.jpg" alt="Maintenance industrielle VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
         </div>
       </a>
 
-      <!-- Card 04 — Particuliers -->
-      <a href="particuliers.html" class="card group col-span-12 lg:col-span-7 bg-accent text-ink relative overflow-hidden block no-underline">
-        <div class="grid grid-cols-12 h-full">
-          <div class="col-span-12 md:col-span-7 p-7 lg:p-9 flex flex-col">
-            <div class="flex items-center justify-between mb-10">
-              <span class="font-mono text-[11px] tracking-[0.2em]">04 / PARTICULIERS</span>
-              <svg class="arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
+      <!-- MÉCANO-SOUDURE -->
+      <a href="mecano-soudure.html" class="svc-card-lg">
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/></svg>
             </div>
-            <h3 class="font-display text-[36px] lg:text-[44px] leading-[0.95] tracking-tight mb-4">Aussi pour <span class="font-serif italic font-normal">les particuliers</span>.</h3>
-            <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-6">Serrurerie, métallerie sur mesure, vente de matière à l'unité, réparation de matériels TP, agricoles ou forestiers. L'atelier vous est ouvert.</p>
-            <div class="mt-auto grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[11px] pt-6 border-t border-ink/20">
-              <div>→ Garde-corps · barrières</div>
-              <div>→ Escaliers · pergolas</div>
-              <div>→ Portails · mobilier</div>
-              <div>→ Vente matière à l'unité</div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">03 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">MÉCANO-SOUDURE</div>
             </div>
           </div>
-          <div class="col-span-12 md:col-span-5 relative img-zoom min-h-[260px]">
-            <img src="assets/yellow-roller.jpg" alt="Travaux particuliers" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply">
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Fabrication d'ensembles soudés de A à Z : acier, inox, aluminium. Procédés TIG et MIG, traitements de surface via partenaires.
+          </p>
+          <div class="cta-card">
+            Voir nos réalisations
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </div>
+        </div>
+        <div class="svc-img">
+          <img src="photos/Mécano-soudure/20190723_195531.jpg" alt="Mécano-soudure VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
         </div>
       </a>
 
+      <!-- PARTICULIERS -->
+      <a href="particuliers.html" class="svc-card-lg">
+        <div class="svc-content">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div style="flex-shrink:0; width:48px; height:48px; border-radius:14px;
+                        background:color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+                        display:grid; place-items:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+            </div>
+            <div>
+              <div class="mono" style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); margin-bottom:3px;">04 / 04</div>
+              <div class="display" style="font-size:26px; font-weight:800; font-style:italic; line-height:1;">PARTICULIERS</div>
+            </div>
+          </div>
+          <p style="color:var(--fg-2); font-size:14px; line-height:1.6; margin:0 0 24px; flex:1;">
+            Serrurerie et métallerie sur mesure, garde-corps, portails, escaliers. Réparation de matériels agricoles, hydrauliques et pneumatiques.
+          </p>
+          <div class="cta-card">
+            Voir les services
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+          </div>
+        </div>
+        <div class="svc-img">
+          <img src="photos/Particuliers/20190712_185743.jpg" alt="Services particuliers VEMMI"
+               onload="this.style.opacity=1">
+          <div class="svc-fade"></div>
+        </div>
+      </a>
     </div>
-  </div>
-</section>
 
-<!-- ============== STOCK MATIÈRE ============== -->
-<section id="stock" class="relative bg-ink text-paper py-24 lg:py-32 overflow-hidden grain">
-
-  <!-- Decorative crosshair grid -->
-  <svg class="deco-svg absolute top-10 right-10 opacity-30" width="120" height="120" viewBox="0 0 120 120" fill="none" aria-hidden="true">
-    <path d="M60 0v120M0 60h120" stroke="#C7DA9C" stroke-dasharray="2 4"/>
-    <circle cx="60" cy="60" r="40" stroke="#C7DA9C" stroke-dasharray="2 4"/>
-    <circle cx="60" cy="60" r="20" stroke="#C7DA9C"/>
-    <circle cx="60" cy="60" r="2" fill="#8DBF3F"/>
-  </svg>
-
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 relative">
-
-    <div class="grid grid-cols-12 gap-8 mb-16">
-      <div class="col-span-12 lg:col-span-7">
-        <div class="tag text-accent-2 mb-4">— Stock matière / 03</div>
-        <h2 class="font-display text-[44px] lg:text-[72px] leading-[0.95] tracking-[-0.03em]">
-          Le stock qui dit <span class="font-serif italic font-normal">«&nbsp;oui&nbsp;»</span><br>
-          quand les autres attendent.
+    <!-- ─── Séparateur Stock Matières ─── -->
+    <div style="padding:56px 16px 40px;">
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="flex:1; height:1px; background:var(--line);"></div>
+        <h2 class="display" style="font-size:clamp(16px,2vw,24px); font-weight:800; color:var(--fg);
+                                    text-align:center; margin:0; letter-spacing:.01em;">
+          STOCK MATIÈRES
         </h2>
+        <div style="flex:1; height:1px; background:var(--line);"></div>
       </div>
-      <div class="col-span-12 lg:col-span-4 lg:col-start-9 self-end">
-        <p class="text-[16px] leading-[1.6] text-paper/70">
-          Aciers, inox, aluminiums, plastiques techniques, composants hydrauliques&nbsp;: nous tenons des stocks pour démarrer vos productions sans délai. Bruts, découpés (2 &amp; 5 axes) ou préusinés.
-        </p>
-      </div>
+      <p style="text-align:center; font-size:14px; color:var(--fg-2); margin:16px 0 0; line-height:1.6;">
+        Aciers, inox, aluminiums, plastiques techniques et composants hydrauliques disponibles en délais courts.
+      </p>
     </div>
 
-    <!-- Material rows -->
-    <div class="border-t border-line-dark">
+    <!-- ─── Bandeau Stock Matières ─── -->
+    <div id="sec-stock" style="margin:0 16px 16px; border-radius:var(--radius-lg);
+                                overflow:hidden; display:grid; grid-template-columns:1fr 1fr;
+                                background:var(--surface); border:1px solid var(--line);"
+         class="stock-band">
+      <!-- Texte -->
+      <div style="padding:40px 36px 28px; display:flex; flex-direction:column; justify-content:flex-start; gap:0;">
+        <div class="section-badge" style="margin-bottom:14px;">Stock permanent</div>
+        <h2 class="display" style="font-style:italic; font-weight:800; font-size:clamp(28px,3vw,42px);
+                                    line-height:0.96; margin:0 0 24px;">MATIÈRES EN STOCK.</h2>
+        <!-- Grille matières 2 par ligne -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line);">
 
-      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
-        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·01</div>
-        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Aciers</div>
-        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
-          Doux et mi-durs <span class="font-mono text-paper/50">S235 · S355 · C35 · C45</span>. Alliés d'outillage <span class="font-mono text-paper/50">40CMD8T · 16NC6 · 35NCD16 · 55NCDV7</span>.
-        </div>
-        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
-          <span class="text-accent-2">Tôles</span> · ép. 0,5 → 300 mm
-        </div>
-      </div>
-
-      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
-        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·02</div>
-        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Aluminiums</div>
-        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
-          Nuances <span class="font-mono text-paper/50">2017 · 5083 · 7075</span>. Tôles avec découpe laser jusqu'à 15 mm, jet d'eau au-delà.
-        </div>
-        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
-          <span class="text-accent-2">Découpe</span> · laser + jet d'eau
-        </div>
-      </div>
-
-      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
-        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·03</div>
-        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Inox</div>
-        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
-          Tôles d'épaisseur jusqu'à 120 mm. Compatible procédés TIG &amp; MIG en interne.
-        </div>
-        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
-          <span class="text-accent-2">Tôles</span> · ép. ≤ 120 mm
-        </div>
-      </div>
-
-      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
-        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·04</div>
-        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Plastiques tech.</div>
-        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
-          <span class="font-mono text-paper/50">PEHD · POM · PA6 · PTFE</span>. Tôles jusqu'à 100 mm d'épaisseur.
-        </div>
-        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
-          <span class="text-accent-2">Tôles</span> · ép. ≤ 100 mm
-        </div>
-      </div>
-
-      <div class="grid grid-cols-12 gap-6 py-7 border-b border-line-dark group hover:bg-white/[0.02] transition">
-        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·05</div>
-        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Hydraulique</div>
-        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
-          Barres chromées pour tiges de vérins. Tubes rodés pour fûts. Composants standards.
-        </div>
-        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
-          <span class="text-accent-2">Barres</span> · Ø 18 → 80 mm
-        </div>
-      </div>
-
-      <div class="grid grid-cols-12 gap-6 py-7 group hover:bg-white/[0.02] transition">
-        <div class="col-span-12 md:col-span-1 font-mono text-[12px] text-accent-2 self-start">M·06</div>
-        <div class="col-span-12 md:col-span-3 font-display text-[28px] lg:text-[32px] leading-none">Métaux jaunes</div>
-        <div class="col-span-12 md:col-span-5 text-[14.5px] text-paper/70">
-          Ronds bronze, laiton, fonte. Finitions laminé, étiré, corroyé ou rectifié — selon application.
-        </div>
-        <div class="col-span-12 md:col-span-3 font-mono text-[12px] text-right text-paper/80">
-          <span class="text-accent-2">Ronds</span> · multi-finitions
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- ============== FOOTER ============== -->
-<footer class="bg-paper border-t border-line">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-20 pb-10">
-
-    <div class="grid grid-cols-12 gap-8 mb-20">
-      <div class="col-span-12 lg:col-span-5">
-        <div class="flex items-center gap-4 mb-6">
-          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0">
-          <div>
-            <div class="font-mono text-[10px] tracking-[0.22em] text-mute leading-relaxed">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div>
+          <div style="padding:12px 20px 12px 0; border-bottom:1px solid var(--line); border-right:1px solid var(--line);">
+            <div class="mono" style="font-size:11.5px; font-weight:700; color:var(--accent); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px;">Aluminium</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.6; margin:0;">Nuances 2017, 5083, 7075<br>Découpe laser 1–15&nbsp;mm · jet d'eau au-delà</p>
           </div>
+          <div style="padding:12px 0 12px 20px; border-bottom:1px solid var(--line);">
+            <div class="mono" style="font-size:11.5px; font-weight:700; color:var(--accent); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px;">Plastiques techniques</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.6; margin:0;">PEHD, POM, PA6, PTFE<br>Tôles jusqu'à 100&nbsp;mm</p>
+          </div>
+
+          <div style="padding:12px 20px 12px 0; border-bottom:1px solid var(--line); border-right:1px solid var(--line);">
+            <div class="mono" style="font-size:11.5px; font-weight:700; color:var(--accent); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px;">Hydraulique</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.6; margin:0;">Barres chromées Ø&nbsp;18 à Ø&nbsp;80&nbsp;mm<br>Tubes rodés pour fûts de vérins</p>
+          </div>
+          <div style="padding:12px 0 12px 20px; border-bottom:1px solid var(--line);">
+            <div class="mono" style="font-size:11.5px; font-weight:700; color:var(--accent); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px;">Inox</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.6; margin:0;">Tôles jusqu'à 120&nbsp;mm d'épaisseur</p>
+          </div>
+
+          <div style="padding:12px 20px 12px 0; border-bottom:1px solid var(--line); border-right:1px solid var(--line);">
+            <div class="mono" style="font-size:11.5px; font-weight:700; color:var(--accent); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px;">Acier</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.6; margin:0;">S235, S355, C35, C45 (doux &amp; mi-durs)<br>40CMD8T, 16NC6, 35NCD16, 55NCDV7 (alliés)<br>Tôles : 0,5 à 300&nbsp;mm</p>
+          </div>
+          <div style="padding:12px 0 12px 20px; border-bottom:1px solid var(--line);">
+            <div class="mono" style="font-size:11.5px; font-weight:700; color:var(--accent); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px;">Formes disponibles</div>
+            <p style="font-size:12.5px; color:var(--fg-2); line-height:1.6; margin:0;">Ronds laminé, étiré, corroyé, rectifié<br>Acier, inox, alu, bronze, laiton, fonte, plastique<br>Composants mécaniques standard</p>
+          </div>
+
         </div>
-        <p class="font-display text-[28px] lg:text-[36px] leading-[1.05] tracking-tight max-w-[440px]">
-          Précision, robustesse, <span class="font-serif italic">parole tenue</span> — depuis l'Yssingelais.
-        </p>
-      </div>
-
-      <div class="col-span-6 lg:col-span-3">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">CONTACT</div>
-        <div class="space-y-4 text-[15px]">
-          <a href="tel:+33471619328" class="block link-u">04 71 61 93 28</a>
-          <a href="tel:+33682923007" class="block link-u text-ink/60">06 82 92 30 07</a>
-          <a href="mailto:vemmisas@gmail.com" class="block link-u text-accent">vemmisas@gmail.com</a>
+        <!-- Appro rapide -->
+        <div class="appro-row" style="flex:1; display:flex; align-items:center; gap:14px; padding:18px 0 0;">
+          <span style="flex-shrink:0; padding:4px 11px; border-radius:999px;
+                       background:var(--accent); color:#0e0e0c;
+                       font-family:'JetBrains Mono',monospace; font-size:10px;
+                       font-weight:700; letter-spacing:.1em; text-transform:uppercase;">
+            Approvisionnement rapide
+          </span>
+          <span style="font-size:12.5px; color:var(--fg); font-weight:500; line-height:1.55;">
+            Matières brutes, découpées ou préusinées disponibles en délais courts grâce à nos partenaires.
+          </span>
         </div>
       </div>
-
-      <div class="col-span-6 lg:col-span-2">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">ATELIER</div>
-        <address class="not-italic text-[15px] leading-[1.6] text-ink/70">
-          ZA du Solier<br>
-          9 rue de la Poissonnière<br>
-          43220 Dunières<br>
-          France
-        </address>
+      <!-- Image -->
+      <div style="position:relative; min-height:260px;">
+        <div aria-hidden class="stripe-bg" style="position:absolute; inset:0;"></div>
+        <img src="photos/Matière/matieres vemmi.jpg"
+             alt="Stock de matières premières VEMMI"
+             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+                     opacity:0; transition:opacity .5s;">
+        <div class="stock-overlay" style="position:absolute; inset:0; pointer-events:none;
+                    background:linear-gradient(90deg, var(--surface) 0%, transparent 30%);"></div>
       </div>
+    </div>
 
-      <div class="col-span-12 lg:col-span-2">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">PAGES</div>
-        <ul class="space-y-2 text-[14px]">
-          <li><a href="index.html" class="link-u">Accueil</a></li>
-          <li><a href="usinage.html" class="link-u text-ink/70">Usinage</a></li>
-          <li><a href="mecano-soudure.html" class="link-u text-ink/70">Mécano-soudure</a></li>
-          <li><a href="maintenance.html" class="link-u text-ink/70">Maintenance</a></li>
-          <li><a href="particuliers.html" class="link-u text-ink/70">Particuliers</a></li>
-          <li><a href="contact.html" class="link-u text-ink/70">Contact</a></li>
+    <!-- ─── Bandeau Contact ─── -->
+    <div class="contact-band" style="margin:0 16px 16px; border-radius:var(--radius-lg); overflow:hidden;
+                background:var(--accent); padding:52px 40px;
+                display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px;">
+      <h2 class="display" style="font-weight:800; font-size:clamp(24px,3vw,40px);
+                                  line-height:1.1; color:#1a1a18; margin:0; text-wrap:balance;">
+        Un projet, une question&nbsp;?
+      </h2>
+      <p style="font-size:15px; color:rgba(26,26,24,0.72); margin:0; max-width:380px; line-height:1.6;">
+        Notre équipe répond à toutes vos demandes de devis, d'information ou de partenariat.
+      </p>
+      <a href="contact.html"
+         style="display:inline-flex; align-items:center; gap:8px; padding:13px 26px;
+                border-radius:999px; background:#1a1a18; color:#f4f0ea;
+                font-size:14px; font-weight:600; font-family:'Archivo',sans-serif;
+                text-decoration:none; transition:opacity .2s;"
+         onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+        Contactez-nous
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+      </a>
+    </div>
+
+    <!-- ─── Footer ─── -->
+    <footer class="footer-grid" style="margin:0 0 0; padding:40px 36px 32px;
+                   border-top:1px solid var(--line);
+                   display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:32px 24px;
+                   background:var(--bg);">
+      <!-- Col 1 : Identité -->
+      <div style="display:flex; flex-direction:row; gap:16px; align-items:flex-start;">
+        <img src="photos/logo VEMMI/logo-color.png" alt="Logo VEMMI" style="width:120px;height:120px;object-fit:contain;flex-shrink:0;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <p class="mono" style="font-size:11.5px; color:var(--fg-3); line-height:1.9; margin:0;">
+            ZA du Solier<br>
+            9 rue de la Poissonnière<br>
+            43220 Dunières
+          </p>
+          <p class="mono" style="font-size:11.5px; color:var(--fg-3); line-height:1.9; margin:0;">
+            04&nbsp;71&nbsp;61&nbsp;93&nbsp;28<br>
+            06&nbsp;82&nbsp;92&nbsp;30&nbsp;07
+          </p>
+        </div>
+      </div>
+      <!-- Col 2 : Services -->
+      <div>
+        <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:12px;">Services</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;">
+          <li><a href="usinage.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Usinage CN</a></li>
+          <li><a href="mecano-soudure.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Mécano-soudure</a></li>
+          <li><a href="maintenance.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Maintenance industrielle</a></li>
+          <li><a href="particuliers.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Particuliers</a></li>
         </ul>
       </div>
-    </div>
-
-    <div class="hairline mb-12"></div>
-
-    <div class="flex flex-col md:flex-row justify-between gap-4 font-mono text-[11px] tracking-[0.18em] text-ink/40">
-      <div>© 2008 — 2026 VEMMI SAS · TOUS DROITS RÉSERVÉS</div>
-      <div class="flex items-center gap-6">
-        <span>SIRET — XXX XXX XXX 00000</span>
-        <span class="hidden md:inline">MENTIONS LÉGALES</span>
-        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>ATELIER OUVERT · LUN–VEN</span>
+      <!-- Col 3 : Légal -->
+      <div>
+        <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:12px;">Légal</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;">
+          <li><a href="contact.html" style="font-size:13px; color:var(--accent); text-decoration:none; font-weight:600;">Formulaire de contact</a></li>
+          <li><a href="mentions-legales.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Mentions légales</a></li>
+          <li><a href="confidentialite.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Politique de confidentialité</a></li>
+          <li><a href="cgv.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">CGV</a></li>
+        </ul>
       </div>
+    </footer>
+    <div class="mono" style="padding:14px 36px; border-top:1px solid var(--line);
+                              display:flex; justify-content:center; align-items:center;
+                              font-size:11px; color:var(--fg-3); background:var(--bg);">
+      <span>© 2026 VEMMI SAS · Velay Etudes Mécaniques Maintenance Industrie · Tous droits protégés</span>
     </div>
+
+  </div><!-- /main block -->
+
+</div><!-- /inner -->
+</div><!-- /outer -->
+
+<!-- ═══════════════════════════════════════════════════════
+     SIDEBAR OFFCANVAS
+═══════════════════════════════════════════════════════ -->
+<style>
+  .sb-overlay {
+    position:fixed; inset:0; z-index:40;
+    background:rgba(0,0,0,.65); backdrop-filter:blur(4px);
+    opacity:0; pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .sb-overlay.sb-open { opacity:1; pointer-events:auto; }
+
+  .sb-panel {
+    position:fixed; top:0; left:0; height:100%; z-index:50;
+    width:100%; max-width:400px;
+    background:var(--bg);
+    display:flex; flex-direction:column;
+    transform:translateX(-100%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .sb-panel.sb-open { transform:translateX(0); }
+
+  .sb-link {
+    display:block; padding:14px 16px; border-radius:var(--radius-md);
+    color:var(--fg-2); font-size:17px; font-weight:600;
+    font-family:'Archivo','Manrope',sans-serif; letter-spacing:-0.01em;
+    text-decoration:none; transition:color .2s ease, background .2s ease;
+  }
+  .sb-link:hover { color:var(--fg); background:var(--surface-2); transform:translateX(8px); }
+  .sb-link-cta { color:var(--accent) !important; }
+  .sb-link-cta:hover { background:color-mix(in oklch,var(--accent) 10%,transparent) !important; color:var(--accent) !important; }
+</style>
+
+<div id="sb-overlay" class="sb-overlay" onclick="sbClose()"></div>
+
+<div id="sb-panel" class="sb-panel" role="dialog" aria-modal="true" aria-label="Navigation">
+
+  <!-- ── Bloc 1 : Header pleine largeur ── -->
+  <div style="position:relative; width:100%; height:120px; background:var(--bg);
+              display:flex; align-items:center; justify-content:space-between;
+              padding:0 32px; z-index:20; flex-shrink:0;">
+    <a href="index.html" style="display:block;line-height:0;text-decoration:none;" aria-label="VEMMI — Accueil"><img src="photos/logo VEMMI/logo-color.png" alt="Logo VEMMI" style="width:72px;height:72px;object-fit:contain;flex-shrink:0;"></a>
+    <button onclick="sbClose()"
+            style="width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+                   background:transparent; color:var(--fg-2); display:grid; place-items:center;
+                   cursor:pointer; transition:border-color .2s, color .2s; flex-shrink:0;"
+            onmouseover="this.style.borderColor='var(--line-2)';this.style.color='var(--fg)'"
+            onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--fg-2)'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
   </div>
-</footer>
+
+  <!-- ── Bloc 2 : Nav + footer, 40px moins large ── -->
+  <div style="position:relative; width:calc(100% - 40px); flex:1; background:var(--bg);
+              display:flex; flex-direction:column; z-index:10;">
+
+    <!-- Patch S-curve : remplit l'écart de 40px à la jonction header/nav -->
+    <div aria-hidden style="position:absolute; right:-40px; top:0; width:40px; height:40px;
+                            pointer-events:none;
+                            background:radial-gradient(circle at bottom right, transparent 39.5px, var(--bg) 40px);"></div>
+
+    <!-- Navigation -->
+    <nav style="flex:1; overflow-y:auto; padding:28px 24px 0;">
+      <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.14em;
+                               text-transform:uppercase; padding:0 12px; margin-bottom:12px;">Services</div>
+      <ul style="list-style:none; padding:0; margin:0 0 20px; display:flex; flex-direction:column; gap:2px;">
+        <li><a href="usinage.html"        class="sb-link">Usinage</a></li>
+        <li><a href="maintenance.html"    class="sb-link">Maintenance industrielle</a></li>
+        <li><a href="mecano-soudure.html" class="sb-link">Mécano-soudure</a></li>
+        <li><a href="particuliers.html"   class="sb-link">Services aux particuliers</a></li>
+      </ul>
+      <div style="height:1px; background:var(--line); margin:0 12px 20px;"></div>
+      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:2px;">
+        <li><a href="index.html" class="sb-link">Accueil</a></li>
+        <li>
+          <a href="contact.html" class="sb-link sb-link-cta"
+             style="display:flex; align-items:center; justify-content:space-between;">
+            <span>Contact &amp; devis</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Footer coordonnées -->
+    <div style="margin-top:auto; padding:22px 24px 28px; border-top:1px solid var(--line);
+                flex-shrink:0; display:flex; flex-direction:column; gap:12px;">
+      <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.12em; text-transform:uppercase; margin-bottom:2px;">Contact rapide</div>
+      <a href="tel:0471619328"
+         style="display:flex; align-items:center; gap:11px; color:var(--fg-2); text-decoration:none; font-size:13px; font-weight:500; transition:color .15s;"
+         onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--fg-2)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z"/></svg>
+        <span class="mono">04 71 61 93 28</span>
+      </a>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  /* ── Theme toggle ── */
+  const sunSVG = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+  const moonSVG = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('vemmi-theme', newTheme);
+    document.getElementById('theme-icon').innerHTML = isDark ? moonSVG : sunSVG;
+    document.getElementById('theme-label').textContent = isDark ? 'Sombre' : 'Clair';
+  }
+  (function syncBtn() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const icon = document.getElementById('theme-icon');
+    const lbl = document.getElementById('theme-label');
+    if (icon && isLight) { icon.innerHTML = moonSVG; lbl.textContent = 'Sombre'; }
+  })();
+
+  /* ── Smooth scroll for anchors ── */
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /* ── Sidebar ── */
+  function sbOpen() {
+    document.getElementById('sb-overlay').classList.add('sb-open');
+    document.getElementById('sb-panel').classList.add('sb-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function sbClose() {
+    document.getElementById('sb-overlay').classList.remove('sb-open');
+    document.getElementById('sb-panel').classList.remove('sb-open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') sbClose(); });
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.querySelector('button.pill-filled');
+    if (menuBtn) menuBtn.onclick = sbOpen;
+  });
+
+
+  /* ── Hero image fade-in ── */
+  document.querySelectorAll('img').forEach(img => {
+    img.style.opacity = '0';
+    img.style.transition = 'opacity .5s ease';
+    if (img.complete) img.style.opacity = '1';
+    else img.addEventListener('load', () => img.style.opacity = '1');
+  });
+
+</script>
+
+<!-- Back to top -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut"
+  style="position:fixed; bottom:28px; right:28px; z-index:200;
+         width:44px; height:44px; border-radius:999px;
+         background:var(--fg); border:1px solid var(--fg); color:var(--bg);
+         display:flex; align-items:center; justify-content:center;
+         opacity:0; pointer-events:none;
+         transition:opacity .25s, border-color .2s, background .2s;
+         box-shadow:0 4px 16px rgba(0,0,0,.25); cursor:pointer;">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+<script>
+  (function(){
+    var btn=document.getElementById("back-top");
+    window.addEventListener("scroll",function(){
+      var show=window.scrollY>350;
+      btn.style.opacity=show?"1":"0";
+      btn.style.pointerEvents=show?"auto":"none";
+    });
+    btn.addEventListener("mouseover",function(){this.style.borderColor="var(--accent)";this.style.color="var(--accent)";});
+    btn.addEventListener("mouseout",function(){this.style.borderColor="var(--line-2)";this.style.color="var(--fg-2)";});
+  })();
+</script>
 </body>
 </html>

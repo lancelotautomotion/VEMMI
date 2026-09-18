@@ -1,357 +1,770 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Contact — VEMMI Mécanique générale & maintenance industrielle</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1E2A18;
-    --paper:#F4F2EC;
-    --paper-2:#E8E5DB;
-    --mute:#6E7468;
-    --accent:#8DBF3F;
-    --accent-2:#C7DA9C;
-    --font-display:'Space Grotesk', ui-sans-serif, system-ui;
-  }
-  html,body{background:var(--paper); color:var(--ink); font-family:'Space Grotesk', ui-sans-serif, system-ui;}
-  .font-display{font-family:var(--font-display); letter-spacing:-0.025em; font-weight:500;}
-  .font-serif{font-family:'Fraunces', serif; font-style:italic;}
-  .font-mono{font-family:'JetBrains Mono', monospace;}
-  .text-ink{color:var(--ink);}
-  .bg-ink{background:var(--ink);}
-  .text-paper{color:var(--paper);}
-  .bg-paper{background:var(--paper);}
-  .bg-paper-2{background:var(--paper-2);}
-  .text-accent{color:var(--accent);}
-  .bg-accent{background:var(--accent);}
-  .text-accent-2{color:var(--accent-2);}
-  .text-mute{color:var(--mute);}
-  .border-line{border-color:rgba(30,42,24,0.14);}
-  .border-line-dark{border-color:rgba(255,255,255,0.12);}
-  .link-u{position:relative;}
-  .link-u::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .35s ease;}
-  .link-u:hover::after{transform:scaleX(1);}
-  .tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase;}
-  .hairline{height:1px; background:linear-gradient(90deg, transparent, rgba(30,42,24,.28), transparent);}
-  .grain{position:relative;}
-  .grain::after{content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");}
-  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
-  .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;}
-  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — VEMMI · Mécanique générale & Maintenance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  /* Form */
-  .field{display:flex; flex-direction:column; gap:6px;}
-  .field label{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--mute);}
-  .field input,
-  .field textarea,
-  .field select{
-    width:100%; background:transparent;
-    border:1px solid rgba(30,42,24,.2); border-radius:0;
-    padding:12px 14px; font-size:15px; font-family:'Space Grotesk', sans-serif;
-    color:var(--ink); outline:none; transition:border-color .2s;
-    resize:none;
-  }
-  .field input:focus,
-  .field textarea:focus,
-  .field select:focus{border-color:var(--accent);}
-  .field input::placeholder,
-  .field textarea::placeholder{color:rgba(30,42,24,.35);}
+  <style>
+    :root {
+      --page-bg: #3a3a3a;
+      --stripe: rgba(255,255,255,.05);
+      --bg: #1a1a18;
+      --bg-2: #1e1e1c;
+      --surface: #232220;
+      --surface-2: #2a2926;
+      --line: #34322e;
+      --line-2: #45423c;
+      --fg: #f4f0ea;
+      --fg-2: #b8b1a5;
+      --fg-3: #807a70;
+      --accent: #98c01f;
+      --accent-soft: #2e3d08;
+      --pill-bg: #1c1c1a;
+      --pill-border: #3a3a3a;
+      --radius-xl: 32px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+    [data-theme="light"] {
+      --page-bg: #f0f0f0;
+      --stripe: rgba(0,0,0,.055);
+      --bg: #ffffff;
+      --bg-2: #fafaf8;
+      --surface: #ffffff;
+      --surface-2: #f5f3ee;
+      --line: #e4e1da;
+      --line-2: #cfcabe;
+      --fg: #1a1916;
+      --fg-2: #4d4a43;
+      --fg-3: #8a8478;
+      --accent-soft: #e8f5bd;
+      --pill-bg: #ffffff;
+      --pill-border: #d8d4cb;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      overscroll-behavior: none;
+    }
+    html, body {
+      margin: 0; padding: 0;
+      background-color: transparent;
+      color: var(--fg);
+      font-family: 'Manrope', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: color .35s;
+    }
+    body {
+      min-height: 100vh;
+      background-color: var(--page-bg);
+      transition: background-color .35s;
+    }
+    /* Fixed composited stripe — GPU layer, zero repaint on scroll */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-color: var(--page-bg);
+      background-image: repeating-linear-gradient(135deg, var(--stripe) 0 1px, transparent 1px 14px);
+      transition: background-color .35s;
+      pointer-events: none;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'ss01'; }
+    .display { font-family: 'Archivo', 'Manrope', sans-serif; letter-spacing: -0.02em; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; padding: 0; }
 
-  .btn-send{
-    display:inline-flex; align-items:center; gap:12px;
-    padding:14px 28px; background:var(--ink); color:var(--paper);
-    font-weight:600; font-size:15px; border:1px solid var(--ink);
-    cursor:pointer; transition:all .22s; width:100%; justify-content:center;
-  }
-  .btn-send:hover{background:var(--accent); border-color:var(--accent); color:var(--ink);}
-  .btn-send svg{transition:transform .2s;}
-  .btn-send:hover svg{transform:translate(3px,-3px);}
+    /* ── Pill ── */
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 999px;
+      background: var(--pill-bg); color: var(--fg);
+      border: 1px solid var(--pill-border);
+      font-size: 13.5px; font-weight: 600; font-family: inherit;
+      transition: border-color .2s ease, background .2s ease; white-space: nowrap; cursor: pointer;
+    }
+    .pill:hover { border-color: var(--line-2); }
+    .pill-filled { background: #fff; color: #0e0e0c; border-color: #fff; }
+    .pill-filled:hover { background: #f0ede8; border-color: #f0ede8; }
+    .pill-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .pill-accent:hover { opacity: .9; }
 
-  /* Info blocks */
-  .info-block{border-top:1px solid rgba(30,42,24,.14); padding-top:20px; margin-bottom:28px;}
-  .info-block .lbl{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--mute); margin-bottom:10px;}
-  .info-block a{color:var(--ink); text-decoration:none;}
-  .info-block a:hover{color:var(--accent);}
+    /* ── Section badge ── */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--fg-3); margin-bottom: 18px;
+    }
+    .section-badge::before {
+      content: ''; display: block;
+      width: 24px; height: 1.5px; background: var(--accent);
+    }
+
+    /* ── Overlay ── */
+    .overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: color-mix(in oklch, var(--bg) 70%, black 30%);
+      backdrop-filter: blur(14px);
+      align-items: center; justify-content: center;
+      animation: fade .2s ease;
+    }
+    .overlay.open { display: flex; }
+    .overlay-box {
+      width: min(720px, 92vw); background: var(--surface);
+      border: 1px solid var(--line); border-radius: 22px; padding: 28px;
+    }
+    @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+
+    /* ── Form inputs ── */
+    .form-field {
+      display: flex; flex-direction: column; gap: 7px;
+    }
+    .form-field label {
+      font-size: 12px; font-weight: 600; color: var(--fg-3);
+      letter-spacing: .08em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 13px 16px;
+      color: var(--fg);
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      transition: border-color .2s, background .2s;
+      -webkit-font-smoothing: antialiased;
+    }
+    .form-input::placeholder { color: var(--fg-3); }
+    .form-input:focus {
+      border-color: var(--accent);
+      background: color-mix(in oklch, var(--accent) 5%, var(--surface-2));
+    }
+    textarea.form-input {
+      resize: vertical; min-height: 140px; line-height: 1.6;
+    }
+    select.form-input {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23807a70' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+    select.form-input option { background: var(--surface); }
+
+    /* ── Contact info rows ── */
+    .info-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .info-row:last-of-type { border-bottom: none; }
+    .info-icon {
+      flex-shrink: 0; width: 38px; height: 38px;
+      border-radius: 10px;
+      background: color-mix(in oklch, var(--accent) 12%, var(--surface-2));
+      display: grid; place-items: center; color: var(--accent);
+    }
+
+    /* ── Google map wrapper ── */
+    .map-wrap {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      position: relative;
+      min-height: 200px;
+    }
+    .map-wrap:hover { opacity: .9; }
+    .map-wrap iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: block;
+    }
+
+    /* ── Stripe fallback bg ── */
+    .stripe-bg {
+      background-image: repeating-linear-gradient(135deg, var(--surface) 0 14px, var(--surface-2) 14px 28px);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .contact-2col { grid-template-columns: 1fr !important; }
+      .contact-h1 { font-size: clamp(36px, 10vw, 60px) !important; }
+    }
+    @media (max-width: 640px) {
+      .contact-subtitle { white-space: normal !important; font-size: 14px !important; }
+      .contact-inner { padding: 28px 20px 8px !important; }
+    }
+
+    @media (max-width: 1100px) {
+      .nav-topbar a[href^="mailto:"] { display: none !important; }
+    }
+    @media (max-width: 900px) {
+      /* Tablet nav : masquer tout sauf switch thème */
+      .nav-hide { display: none !important; }
+      #theme-btn { display: inline-flex !important; }
+    }
+      /* ── Responsive nav ── */
+    @media (max-width: 640px) {
+      /* S-curve préservée — logo + Menu uniquement */
+      .nav-logo { width: 110px !important; height: 100px !important; padding:  10px 0 !important; justify-content: center !important; }
+      .nav-logo .display { font-size: 38px !important; color: #ffffff !important; }
+      .nav-bar { margin-left: 110px !important; height: 100px !important; }
+      .nav-topbar { padding: 0 !important; justify-content: flex-end !important; padding-right: 24px !important; }
+      .nav-hide { display: none !important; }
+      .nav-actions-group { display: none !important; }
+      /* Footer 1 colonne */
+      .footer-grid { padding: 24px 16px !important; gap: 24px 12px !important; grid-template-columns: 1fr 1fr !important; }
+      .footer-grid > div:first-child { grid-column: 1 / -1 !important; }
+      .footer-grid > div:first-child { flex-direction: column !important; gap: 10px !important; }
+      .footer-grid > div:first-child [role="img"] { width: 56px !important; height: 56px !important; }
+      /* Paddings intérieurs réduits */
+      .px-inner { padding-left: 20px !important; padding-right: 20px !important; }
+      .px-inner-t { padding-top: 32px !important; }
+      .contact-2col { padding-left: 16px !important; padding-right: 16px !important; }
+      /* Outer wrapper compressed on mobile */
+      .page-outer { padding: 8px !important; }
+      .page-inner { width: 100% !important; }
+      .main-card { padding: 8px !important; border-top-left-radius: 40px !important; }
+    }
 </style>
+<script>(function(){var t=localStorage.getItem("vemmi-theme");if(t)document.documentElement.setAttribute("data-theme",t);}());</script>
 </head>
-<body class="antialiased">
+<body>
 
-<!-- HEADER -->
-<header class="sticky top-0 z-40 bg-paper border-b border-line">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3">
-      <img src="assets/vemmi-logo.png" alt="VEMMI" width="48" height="48" class="shrink-0">
-      <div class="leading-none hidden sm:block">
-        <div class="font-mono text-[9px] tracking-[0.22em] text-mute">VELAY ÉTUDES MÉCANIQUES</div>
-        <div class="font-mono text-[9px] tracking-[0.22em] text-mute mt-0.5">MAINTENANCE · INDUSTRIE</div>
-      </div>
-    </a>
+<!-- ═══════════════════════════════════════════════════════════
+     OUTER WRAPPER
+═══════════════════════════════════════════════════════════ -->
+<div class="page-outer" style="min-height:100vh; width:100%; padding:clamp(16px,1vw,32px); overflow-x:clip;">
+<div class="page-inner" style="position:relative; width:96%; max-width:1800px; margin:0 auto;">
 
-    <nav class="hidden lg:flex items-center gap-7 text-[13.5px]">
-      <a href="index.html" class="link-u">Accueil</a>
-      <a href="usinage.html" class="link-u">Usinage</a>
-      <a href="mecano-soudure.html" class="link-u">Mécano-soudure</a>
-      <a href="maintenance.html" class="link-u">Maintenance</a>
-      <a href="particuliers.html" class="link-u">Particuliers</a>
-      <a href="contact.html" class="link-u font-semibold text-accent">Contact</a>
-    </nav>
-
-    <div class="flex items-center gap-5">
-      <a href="tel:+33471619328" class="hidden md:inline-flex items-center gap-2 font-mono text-[13px] tracking-wider link-u">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 3.5a1.5 1.5 0 0 1 1.5-1.5h1.6a1.5 1.5 0 0 1 1.49 1.32l.26 2.1a1.5 1.5 0 0 1-.81 1.51l-1.05.52a9 9 0 0 0 4.55 4.55l.52-1.05a1.5 1.5 0 0 1 1.51-.81l2.1.26A1.5 1.5 0 0 1 14 11.4V13a1.5 1.5 0 0 1-1.5 1.5C7.25 14.5 2.5 9.75 2.5 4.5 2.5 3.95 2.7 3.5 3 3.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
-        04 71 61 93 28
-      </a>
-    </div>
+  <!-- ══════════════════════════════════════════════════════
+       LOGO — absolute transparent bay · DO NOT MODIFY
+  ══════════════════════════════════════════════════════ -->
+  <div class="nav-logo" style="position:absolute; top:0; left:0; width:130px; height:100px; z-index:30;
+              display:flex; align-items:center; justify-content:center; padding:0; background:transparent;">
+    <a href="index.html" style="display:block;line-height:0;text-decoration:none;" aria-label="VEMMI — Accueil"><img src="photos/logo VEMMI/logo-color.png" alt="Logo VEMMI" style="width:82px;height:82px;object-fit:contain;flex-shrink:0;"></a>
   </div>
-</header>
 
-<!-- PAGE HERO -->
-<section class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-16 pb-12">
-  <div class="tag text-mute mb-5 rise">[ Nous contacter / 05 ]</div>
-  <h1 class="font-display font-medium text-[52px] sm:text-[80px] lg:text-[100px] leading-[0.92] tracking-[-0.04em] rise delay-1">
-    Parlons de<br>
-    <span class="font-serif font-normal">votre projet.</span>
-  </h1>
-  <p class="mt-8 text-[17px] leading-[1.6] text-ink/75 max-w-[560px] rise delay-2">
-    Demande de devis, question technique, réparation urgente — notre équipe vous répond dans les meilleurs délais.
-  </p>
-</section>
+  <!-- ══════════════════════════════════════════════════════
+       NAV BAR — S-curve via radial-gradient · DO NOT MODIFY
+  ══════════════════════════════════════════════════════ -->
+  <div class="nav-bar" style="margin-left:130px; height:100px; background:var(--bg);
+              border-top-left-radius:40px; border-top-right-radius:40px;
+              position:relative; z-index:20; display:flex; align-items:center;">
 
-<div class="hairline max-w-[1440px] mx-auto px-6 lg:px-10"></div>
+    <!-- Concave fillet — the radial-gradient patch -->
+    <div class="nav-scurve" aria-hidden style="position:absolute; left:-40px; bottom:0; width:40px; height:40px;
+                            pointer-events:none;
+                            background:radial-gradient(circle at top left, transparent 39.5px, var(--bg) 40px);"></div>
 
-<!-- CONTACT GRID -->
-<section class="max-w-[1440px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
-  <div class="grid grid-cols-12 gap-10 lg:gap-16">
-
-    <!-- LEFT — infos -->
-    <div class="col-span-12 lg:col-span-4 rise delay-1">
-
-      <div class="info-block">
-        <div class="lbl">Téléphone</div>
-        <div class="space-y-2 text-[16px]">
-          <div><a href="tel:+33471619328" class="link-u font-medium">04 71 61 93 28</a></div>
-          <div><a href="tel:+33682923007" class="link-u text-ink/70">06 82 92 30 07</a></div>
-        </div>
+    <!-- TopBar -->
+    <div class="nav-topbar" style="display:flex; align-items:center; justify-content:space-between;
+                width:100%; padding:0 28px; gap:16px; flex-wrap:nowrap; overflow:hidden;">
+      <div style="display:flex; gap:8px;">
+        <button class="pill pill-filled" onclick="document.getElementById('menu-overlay').classList.add('open')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          Menu
+        </button>
+        <a href="index.html" class="pill nav-hide">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Accueil
+        </a>
       </div>
-
-      <div class="info-block">
-        <div class="lbl">E-mail</div>
-        <a href="mailto:vemmisas@gmail.com" class="link-u text-[16px]">vemmisas@gmail.com</a>
-      </div>
-
-      <div class="info-block">
-        <div class="lbl">Atelier</div>
-        <address class="not-italic text-[16px] leading-[1.7] text-ink/80">
-          ZA du Solier<br>
-          9 rue de la Poissonnière<br>
-          43220 Dunières
-        </address>
-      </div>
-
-      <div class="info-block">
-        <div class="lbl">Horaires</div>
-        <div class="text-[15px] leading-[1.7] text-ink/80">
-          <div class="flex justify-between max-w-[200px]"><span>Lundi – Vendredi</span><span class="font-mono text-[13px]">07h30 – 12h<br class="sm:hidden"> / 13h30 – 17h</span></div>
-          <div class="flex justify-between max-w-[200px] mt-1 text-ink/50"><span>Samedi – Dimanche</span><span class="font-mono text-[13px]">Fermé</span></div>
-        </div>
-      </div>
-
-      <div class="info-block">
-        <div class="lbl">Localisation</div>
-        <div class="border border-line overflow-hidden" style="height:220px">
-          <iframe
-            src="https://www.openstreetmap.org/export/embed.html?bbox=4.29%2C45.19%2C4.35%2C45.22&amp;layer=mapnik&amp;marker=45.2004%2C4.3198"
-            title="VEMMI — ZA du Solier, Dunières (43220)"
-            width="100%" height="220" style="border:0; display:block;"
-            loading="lazy" allowfullscreen></iframe>
-        </div>
-        <a
-          href="https://www.openstreetmap.org/?mlat=45.2004&mlon=4.3198#map=15/45.2004/4.3198"
-          target="_blank" rel="noopener"
-          class="inline-flex items-center gap-2 font-mono text-[11px] tracking-wider text-mute mt-3 link-u">
-          Ouvrir dans OpenStreetMap
-          <svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+      <div class="nav-actions-group" style="display:flex; gap:8px; flex-wrap:nowrap;">
+        <button class="pill nav-hide" id="theme-btn" onclick="toggleTheme()">
+          <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <span id="theme-label">Clair</span>
+        </button>
+        <a href="tel:0471619328" class="pill nav-hide">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z"/></svg>
+          <span class="mono" style="font-size:12.5px;">04 71 61 93 28</span>
         </a>
       </div>
     </div>
-
-    <!-- RIGHT — formulaire -->
-    <div class="col-span-12 lg:col-span-7 lg:col-start-6 rise delay-2">
-      <div class="font-mono text-[10px] tracking-[0.22em] text-mute mb-8">— Formulaire de contact</div>
-
-      <form
-        id="contact-form"
-        onsubmit="handleSubmit(event)"
-        class="space-y-6"
-        novalidate>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="field">
-            <label for="nom">Nom / Prénom *</label>
-            <input type="text" id="nom" name="nom" required placeholder="Jean Dupont" autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="societe">Société</label>
-            <input type="text" id="societe" name="societe" placeholder="Nom de votre entreprise" autocomplete="organization">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="field">
-            <label for="email">E-mail *</label>
-            <input type="email" id="email" name="email" required placeholder="vous@exemple.fr" autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="tel">Téléphone</label>
-            <input type="tel" id="tel" name="tel" placeholder="06 XX XX XX XX" autocomplete="tel">
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="sujet">Sujet *</label>
-          <select id="sujet" name="sujet" required style="appearance:none; background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%231E2A18' stroke-width='1.4' fill='none'/></svg>\"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;">
-            <option value="">Choisir un sujet…</option>
-            <option value="devis-usinage">Devis — Usinage CN</option>
-            <option value="devis-soudure">Devis — Mécano-soudure</option>
-            <option value="devis-maintenance">Devis — Maintenance industrielle</option>
-            <option value="devis-particulier">Devis — Services particuliers</option>
-            <option value="stock-matiere">Stock matière / approvisionnement</option>
-            <option value="urgence">Intervention urgente</option>
-            <option value="autre">Autre demande</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="message">Message *</label>
-          <textarea id="message" name="message" required rows="6"
-            placeholder="Décrivez votre besoin : matériau, dimensions, quantité, délai souhaité…"></textarea>
-        </div>
-
-        <div class="field">
-          <label>Pièce jointe (plan, photo…)</label>
-          <label for="fichier" class="flex items-center gap-3 border border-line p-4 cursor-pointer hover:border-ink/40 transition group">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" class="shrink-0 text-mute group-hover:text-ink transition"><path d="M3 14.5V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1.5M10 4v9m0-9L7 7m3-3 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="font-mono text-[12px] tracking-wider text-mute group-hover:text-ink transition" id="fichier-label">Choisir un fichier (PDF, DXF, JPG…)</span>
-            <input type="file" id="fichier" name="fichier" class="sr-only" accept=".pdf,.dxf,.dwg,.jpg,.jpeg,.png,.step,.stp"
-              onchange="document.getElementById('fichier-label').textContent = this.files[0]?.name || 'Choisir un fichier'">
-          </label>
-        </div>
-
-        <!-- Error / success feedback -->
-        <div id="form-msg" class="hidden font-mono text-[12px] tracking-wider p-4 border"></div>
-
-        <button type="submit" class="btn-send">
-          Envoyer le message
-          <svg width="16" height="16" viewBox="0 0 22 22" fill="none"><path d="M5 17L17 5M17 5H8M17 5V14" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-
-        <p class="text-[12px] text-ink/50 font-mono tracking-wide">* Champs obligatoires. Aucune donnée n'est transmise à des tiers.</p>
-      </form>
-    </div>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer class="bg-paper border-t border-line">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-10 pt-20 pb-10">
+  <!-- ══════════════════════════════════════════════════════
+       MAIN BLOCK — dark rounded card
+  ══════════════════════════════════════════════════════ -->
+  <div class="main-card" style="width:100%; background:var(--bg);
+              border-top-left-radius:40px;
+              border-bottom-left-radius:40px; border-bottom-right-radius:40px;
+              padding:16px; position:relative; z-index:10; contain:layout style;">
 
-    <div class="grid grid-cols-12 gap-8 mb-20">
-      <div class="col-span-12 lg:col-span-5">
-        <div class="flex items-center gap-4 mb-6">
-          <img src="assets/vemmi-logo.png" alt="VEMMI" width="72" height="72" class="shrink-0">
-          <div>
-            <div class="font-mono text-[10px] tracking-[0.22em] text-mute leading-relaxed">VELAY ÉTUDES MÉCANIQUES<br>MAINTENANCE INDUSTRIE</div>
+    <!-- ─── Page header ─── -->
+    <div style="padding:52px 52px 8px;">
+      <div class="section-badge">Contact</div>
+      <h1 class="display contact-h1"
+          style="font-weight:800; line-height:0.94; margin:0 0 16px; font-size:clamp(48px,6vw,80px);">
+        NOUS CONTACTER.
+      </h1>
+      <p class="contact-subtitle" style="font-size:16px; color:var(--fg-2); line-height:1.6; margin:0; white-space:nowrap;">
+        Demande de devis, renseignement technique, partenariat. Notre équipe vous répond dans les meilleurs délais.
+      </p>
+    </div>
+
+    <!-- ─── Séparateur ─── -->
+    <div style="margin:32px 16px 40px; height:1px; background:var(--line);"></div>
+
+    <!-- ─── Grille 2 colonnes ─── -->
+    <div class="contact-2col"
+         style="display:grid; grid-template-columns:1fr 1fr; gap:32px; padding:0 36px 52px; align-items:stretch;">
+
+      <!-- ══ Colonne gauche : Formulaire ══ -->
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.15em; text-transform:uppercase; margin-bottom:24px;">Formulaire de contact</div>
+
+        <form
+          action="https://formspree.io/f/xpwzgvyd"
+          method="POST"
+          style="display:flex; flex-direction:column; gap:18px; flex:1;"
+          onsubmit="handleSubmit(event)">
+
+          <!-- Ligne 1 : Nom + Société -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="form-field">
+              <label for="nom">Nom *</label>
+              <input id="nom" name="nom" type="text" class="form-input" placeholder="Votre nom" required>
+            </div>
+            <div class="form-field">
+              <label for="societe">Société</label>
+              <input id="societe" name="societe" type="text" class="form-input" placeholder="Nom de l'entreprise">
+            </div>
           </div>
+
+          <!-- Ligne 2 : Email + Téléphone -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="form-field">
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" class="form-input" placeholder="votre@email.fr" required>
+            </div>
+            <div class="form-field">
+              <label for="tel">Téléphone</label>
+              <input id="tel" name="tel" type="tel" class="form-input" placeholder="06 xx xx xx xx">
+            </div>
+          </div>
+
+          <!-- Sujet -->
+          <div class="form-field">
+            <label for="sujet">Sujet *</label>
+            <select id="sujet" name="sujet" class="form-input" required>
+              <option value="" disabled selected>Choisissez un sujet…</option>
+              <option value="devis">Demande de devis</option>
+              <option value="usinage">Usinage CN</option>
+              <option value="maintenance">Maintenance industrielle</option>
+              <option value="mecano-soudure">Mécano-soudure</option>
+              <option value="particuliers">Services aux particuliers</option>
+              <option value="autre">Autre demande</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div class="form-field" style="flex:1; display:flex; flex-direction:column;">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" class="form-input"
+                      style="flex:1; resize:none;"
+                      placeholder="Décrivez votre besoin, vos contraintes, les matériaux concernés…"
+                      required></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:4px;">
+            <button type="submit" id="submit-btn"
+                    style="display:inline-flex; align-items:center; gap:9px; padding:13px 28px;
+                           border-radius:999px; background:var(--accent); color:#fff;
+                           font-size:14px; font-weight:700; font-family:'Archivo',sans-serif;
+                           border:none; cursor:pointer; transition:opacity .15s;"
+                    onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+              Envoyer le message
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            </button>
+          </div>
+
+          <!-- Feedback -->
+          <div id="form-feedback" style="display:none; padding:14px 18px; border-radius:var(--radius-md);
+               font-size:13.5px; font-weight:500; line-height:1.5;"></div>
+
+        </form>
+      </div>
+
+      <!-- ══ Colonne droite : Infos + Carte ══ -->
+      <div style="display:flex; flex-direction:column; gap:28px;">
+
+        <!-- Bloc coordonnées -->
+        <div style="flex-shrink:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px 28px 8px;">
+          <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.15em; text-transform:uppercase; margin-bottom:4px;">Coordonnées</div>
+
+          <!-- Adresse -->
+          <div class="info-row">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:4px;">Adresse</div>
+              <p class="mono" style="font-size:12px; color:var(--fg-2); line-height:1.8; margin:0;">
+                ZA du Solier<br>
+                9 rue de la Poissonnière<br>
+                43220 Dunières, Haute-Loire
+              </p>
+            </div>
+          </div>
+
+          <!-- Téléphone -->
+          <div class="info-row">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:4px;">Téléphone</div>
+              <a href="tel:0471619328" class="mono" style="display:block; font-size:12px; color:var(--fg-2); line-height:1.8; text-decoration:none; transition:color .15s;"
+                 onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--fg-2)'">04 71 61 93 28</a>
+              <a href="tel:0682923007" class="mono" style="display:block; font-size:12px; color:var(--fg-2); line-height:1.8; text-decoration:none; transition:color .15s;"
+                 onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--fg-2)'">06 82 92 30 07</a>
+            </div>
+          </div>
+
+
+          <!-- Horaires -->
+          <div class="info-row" style="border-bottom:none; padding-bottom:20px;">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:var(--fg); margin-bottom:4px;">Horaires d'atelier</div>
+              <div class="mono" style="font-size:12px; color:var(--fg-2); margin:0;
+                   display:grid; grid-template-columns:auto 1fr; gap:0 14px; line-height:1.9;">
+                <span style="color:var(--fg-3);">Lun–Jeu</span><span>07 h 00 à 15 h 00</span>
+                <span style="color:var(--fg-3);">Ven</span><span>07 h 00 à 12 h 00</span>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <p class="font-display text-[28px] lg:text-[36px] leading-[1.05] tracking-tight max-w-[440px]">
-          Précision, robustesse, <span class="font-serif italic">parole tenue</span> — depuis l'Yssingelais.
-        </p>
-      </div>
 
-      <div class="col-span-6 lg:col-span-3">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">CONTACT</div>
-        <div class="space-y-4 text-[15px]">
-          <a href="tel:+33471619328" class="block link-u">04 71 61 93 28</a>
-          <a href="tel:+33682923007" class="block link-u text-ink/60">06 82 92 30 07</a>
-          <a href="mailto:vemmisas@gmail.com" class="block link-u text-accent">vemmisas@gmail.com</a>
+        <!-- Google Map -->
+        <div style="display:flex; flex-direction:column;">
+          <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.15em; text-transform:uppercase; margin-bottom:12px;">Localisation</div>
+          <div class="map-wrap" id="map-wrap">
+            <iframe
+              src="https://maps.google.com/maps?q=VEMMI+ZA+du+Solier+9+rue+de+la+Poissonni%C3%A8re+43220+Duni%C3%A8res&output=embed&z=15"
+              title="VEMMI — ZA du Solier, 43220 Dunières"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <p class="mono" style="font-size:10.5px; color:var(--fg-3); margin:10px 0 0; line-height:1.6;">
+            ZA du Solier · 9 rue de la Poissonnière · 43220 Dunières
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Footer ─── -->
+    <footer class="footer-grid" style="margin:0 0 0; padding:40px 36px 32px;
+                   border-top:1px solid var(--line);
+                   display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:32px 24px;
+                   background:var(--bg);">
+      <!-- Col 1 : Identité -->
+      <div style="display:flex; flex-direction:row; gap:16px; align-items:flex-start;">
+        <img src="photos/logo VEMMI/logo-color.png" alt="Logo VEMMI" style="width:120px;height:120px;object-fit:contain;flex-shrink:0;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <p class="mono" style="font-size:11.5px; color:var(--fg-3); line-height:1.9; margin:0;">
+            ZA du Solier<br>
+            9 rue de la Poissonnière<br>
+            43220 Dunières
+          </p>
+          <p class="mono" style="font-size:11.5px; color:var(--fg-3); line-height:1.9; margin:0;">
+            04&nbsp;71&nbsp;61&nbsp;93&nbsp;28<br>
+            06&nbsp;82&nbsp;92&nbsp;30&nbsp;07
+          </p>
         </div>
       </div>
-
-      <div class="col-span-6 lg:col-span-2">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">ATELIER</div>
-        <address class="not-italic text-[15px] leading-[1.6] text-ink/70">
-          ZA du Solier<br>
-          9 rue de la Poissonnière<br>
-          43220 Dunières<br>
-          France
-        </address>
-      </div>
-
-      <div class="col-span-12 lg:col-span-2">
-        <div class="font-mono text-[10px] tracking-[0.22em] text-accent mb-5">PAGES</div>
-        <ul class="space-y-2 text-[14px]">
-          <li><a href="index.html" class="link-u">Accueil</a></li>
-          <li><a href="usinage.html" class="link-u text-ink/70">Usinage</a></li>
-          <li><a href="mecano-soudure.html" class="link-u text-ink/70">Mécano-soudure</a></li>
-          <li><a href="maintenance.html" class="link-u text-ink/70">Maintenance</a></li>
-          <li><a href="particuliers.html" class="link-u text-ink/70">Particuliers</a></li>
-          <li><a href="contact.html" class="link-u text-ink/70">Contact</a></li>
+      <!-- Col 2 : Services -->
+      <div>
+        <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:12px;">Services</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;">
+          <li><a href="usinage.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Usinage CN</a></li>
+          <li><a href="mecano-soudure.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Mécano-soudure</a></li>
+          <li><a href="maintenance.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Maintenance industrielle</a></li>
+          <li><a href="particuliers.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Particuliers</a></li>
         </ul>
       </div>
-    </div>
-
-    <div class="hairline mb-12"></div>
-
-    <div class="flex flex-col md:flex-row justify-between gap-4 font-mono text-[11px] tracking-[0.18em] text-ink/40">
-      <div>© 2008 — 2026 VEMMI SAS · TOUS DROITS RÉSERVÉS</div>
-      <div class="flex items-center gap-6">
-        <span>SIRET — XXX XXX XXX 00000</span>
-        <span class="hidden md:inline">MENTIONS LÉGALES</span>
-        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>ATELIER OUVERT · LUN–VEN</span>
+      <!-- Col 3 : Légal -->
+      <div>
+        <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.13em; text-transform:uppercase; margin-bottom:12px;">Légal</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;">
+          <li><a href="contact.html" style="font-size:13px; color:var(--accent); text-decoration:none; font-weight:600;">Formulaire de contact</a></li>
+          <li><a href="mentions-legales.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Mentions légales</a></li>
+          <li><a href="confidentialite.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">Politique de confidentialité</a></li>
+          <li><a href="cgv.html" style="font-size:13px; color:var(--fg-2); text-decoration:none;">CGV</a></li>
+        </ul>
       </div>
+    </footer>
+    <div class="mono" style="padding:14px 36px; border-top:1px solid var(--line);
+                              display:flex; justify-content:center; align-items:center;
+                              font-size:11px; color:var(--fg-3); background:var(--bg);">
+      <span>© 2026 VEMMI SAS · Velay Etudes Mécaniques Maintenance Industrie · Tous droits protégés</span>
     </div>
+
+  </div><!-- /main block -->
+
+</div><!-- /inner -->
+</div><!-- /outer -->
+
+<!-- ═══════════════════════════════════════════════════════
+     SIDEBAR OFFCANVAS
+═══════════════════════════════════════════════════════ -->
+<style>
+  .sb-overlay {
+    position:fixed; inset:0; z-index:40;
+    background:rgba(0,0,0,.65); backdrop-filter:blur(4px);
+    opacity:0; pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .sb-overlay.sb-open { opacity:1; pointer-events:auto; }
+
+  .sb-panel {
+    position:fixed; top:0; left:0; height:100%; z-index:50;
+    width:100%; max-width:400px;
+    background:var(--bg);
+    display:flex; flex-direction:column;
+    transform:translateX(-100%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .sb-panel.sb-open { transform:translateX(0); }
+
+  .sb-link {
+    display:block; padding:14px 16px; border-radius:var(--radius-md);
+    color:var(--fg-2); font-size:17px; font-weight:600;
+    font-family:'Archivo','Manrope',sans-serif; letter-spacing:-0.01em;
+    text-decoration:none; transition:color .2s ease, background .2s ease;
+  }
+  .sb-link:hover { color:var(--fg); background:var(--surface-2); transform:translateX(8px); }
+  .sb-link-cta { color:var(--accent) !important; }
+  .sb-link-cta:hover { background:color-mix(in oklch,var(--accent) 10%,transparent) !important; color:var(--accent) !important; }
+</style>
+
+<div id="sb-overlay" class="sb-overlay" onclick="sbClose()"></div>
+
+<div id="sb-panel" class="sb-panel" role="dialog" aria-modal="true" aria-label="Navigation">
+
+  <!-- ── Bloc 1 : Header pleine largeur ── -->
+  <div style="position:relative; width:100%; height:120px; background:var(--bg);
+              display:flex; align-items:center; justify-content:space-between;
+              padding:0 32px; z-index:20; flex-shrink:0;">
+    <a href="index.html" style="display:block;line-height:0;text-decoration:none;" aria-label="VEMMI — Accueil"><img src="photos/logo VEMMI/logo-color.png" alt="Logo VEMMI" style="width:72px;height:72px;object-fit:contain;flex-shrink:0;"></a>
+    <button onclick="sbClose()"
+            style="width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+                   background:transparent; color:var(--fg-2); display:grid; place-items:center;
+                   cursor:pointer; transition:border-color .2s, color .2s; flex-shrink:0;"
+            onmouseover="this.style.borderColor='var(--line-2)';this.style.color='var(--fg)'"
+            onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--fg-2)'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
   </div>
-</footer>
+
+  <!-- ── Bloc 2 : Nav + footer, 40px moins large ── -->
+  <div style="position:relative; width:calc(100% - 40px); flex:1; background:var(--bg);
+              display:flex; flex-direction:column; z-index:10;">
+
+    <!-- Patch S-curve : remplit l'écart de 40px à la jonction header/nav -->
+    <div aria-hidden style="position:absolute; right:-40px; top:0; width:40px; height:40px;
+                            pointer-events:none;
+                            background:radial-gradient(circle at bottom right, transparent 39.5px, var(--bg) 40px);"></div>
+
+    <!-- Navigation -->
+    <nav style="flex:1; overflow-y:auto; padding:28px 24px 0;">
+      <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.14em;
+                               text-transform:uppercase; padding:0 12px; margin-bottom:12px;">Services</div>
+      <ul style="list-style:none; padding:0; margin:0 0 20px; display:flex; flex-direction:column; gap:2px;">
+        <li><a href="usinage.html"        class="sb-link">Usinage</a></li>
+        <li><a href="maintenance.html"    class="sb-link">Maintenance industrielle</a></li>
+        <li><a href="mecano-soudure.html" class="sb-link">Mécano-soudure</a></li>
+        <li><a href="particuliers.html"   class="sb-link">Services aux particuliers</a></li>
+      </ul>
+      <div style="height:1px; background:var(--line); margin:0 12px 20px;"></div>
+      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:2px;">
+        <li><a href="index.html" class="sb-link">Accueil</a></li>
+        <li>
+          <a href="contact.html" class="sb-link sb-link-cta"
+             style="display:flex; align-items:center; justify-content:space-between;">
+            <span>Contact &amp; devis</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Footer coordonnées -->
+    <div style="margin-top:auto; padding:22px 24px 28px; border-top:1px solid var(--line);
+                flex-shrink:0; display:flex; flex-direction:column; gap:12px;">
+      <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.12em; text-transform:uppercase; margin-bottom:2px;">Contact rapide</div>
+      <a href="tel:0471619328"
+         style="display:flex; align-items:center; gap:11px; color:var(--fg-2); text-decoration:none; font-size:13px; font-weight:500; transition:color .15s;"
+         onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--fg-2)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z"/></svg>
+        <span class="mono">04 71 61 93 28</span>
+      </a>
+    </div>
+
+  </div>
+
+</div>
 
 <script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = e.target;
-    const msg  = document.getElementById('form-msg');
-    const data = new FormData(form);
+  /* ── Theme toggle ── */
+  const sunSVG = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+  const moonSVG = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
 
-    // Basic validation
-    for (const key of ['nom','email','sujet','message']) {
-      if (!data.get(key)?.trim()) {
-        msg.textContent = 'Veuillez remplir tous les champs obligatoires.';
-        msg.className = 'font-mono text-[12px] tracking-wider p-4 border border-red-400 text-red-700 bg-red-50';
-        msg.classList.remove('hidden');
-        return;
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('vemmi-theme', newTheme);
+    document.getElementById('theme-icon').innerHTML = isDark ? moonSVG : sunSVG;
+    document.getElementById('theme-label').textContent = isDark ? 'Sombre' : 'Clair';
+  }
+  (function syncBtn() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const icon = document.getElementById('theme-icon');
+    const lbl = document.getElementById('theme-label');
+    if (icon && isLight) { icon.innerHTML = moonSVG; lbl.textContent = 'Sombre'; }
+  })();
+
+  /* ── Sidebar ── */
+  function sbOpen() {
+    document.getElementById('sb-overlay').classList.add('sb-open');
+    document.getElementById('sb-panel').classList.add('sb-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function sbClose() {
+    document.getElementById('sb-overlay').classList.remove('sb-open');
+    document.getElementById('sb-panel').classList.remove('sb-open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') sbClose(); });
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.querySelector('button.pill-filled');
+    if (menuBtn) menuBtn.onclick = sbOpen;
+  });
+
+  /* ── Form submission (Formspree) ── */
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const feedback = document.getElementById('form-feedback');
+    const form = e.target;
+
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+    btn.textContent = 'Envoi en cours…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        feedback.style.display = 'block';
+        feedback.style.background = 'color-mix(in oklch, var(--accent) 10%, var(--surface-2))';
+        feedback.style.border = '1px solid var(--accent)';
+        feedback.style.color = 'var(--fg)';
+        feedback.innerHTML = '✓ &nbsp;Message envoyé. Nous vous répondrons sous 24&nbsp;h en jours ouvrés.';
+        form.reset();
+      } else {
+        throw new Error();
       }
+    } catch {
+      feedback.style.display = 'block';
+      feedback.style.background = 'color-mix(in oklch, #c0392b 10%, var(--surface-2))';
+      feedback.style.border = '1px solid #c0392b';
+      feedback.style.color = 'var(--fg)';
+      feedback.textContent = 'Une erreur est survenue. Merci de réessayer ou de nous joindre par téléphone.';
+    } finally {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.innerHTML = 'Envoyer le message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>';
+    }
+  }
+
+  /* ── Image fade-in ── */
+  document.querySelectorAll('img').forEach(img => {
+    img.style.opacity = '0';
+    img.style.transition = 'opacity .5s ease';
+    if (img.complete) img.style.opacity = '1';
+    else img.addEventListener('load', () => { img.style.opacity = '1'; });
+  });
+
+  /* ── Textarea height sync : étend le champ message pour aligner le bouton avec le bas de la carte ── */
+  function syncTextarea() {
+    const grid     = document.querySelector('.contact-2col');
+    const textarea = document.getElementById('message');
+    if (!grid || !textarea || window.innerWidth < 860) {
+      if (textarea) textarea.style.minHeight = '';
+      return;
     }
 
-    // mailto fallback (no server)
-    const subject = encodeURIComponent(`[VEMMI] ${data.get('sujet')} — ${data.get('nom')}`);
-    const body = encodeURIComponent(
-      `Nom : ${data.get('nom')}\n` +
-      `Société : ${data.get('societe') || '—'}\n` +
-      `E-mail : ${data.get('email')}\n` +
-      `Tél : ${data.get('tel') || '—'}\n\n` +
-      `Message :\n${data.get('message')}`
-    );
-    window.location.href = `mailto:vemmisas@gmail.com?subject=${subject}&body=${body}`;
+    // Reset textarea à sa hauteur min pour mesurer sans biais
+    textarea.style.minHeight = '140px';
 
-    msg.textContent = 'Votre client e-mail s\'est ouvert avec le message prérempli. Merci !';
-    msg.className = 'font-mono text-[12px] tracking-wider p-4 border border-green-400 text-green-800 bg-green-50';
-    msg.classList.remove('hidden');
+    // Mesure les hauteurs naturelles des 2 colonnes sans align-items:stretch
+    grid.style.alignItems = 'start';
+    void grid.offsetHeight; // force reflow
+
+    const leftNatural  = grid.children[0].offsetHeight;
+    const rightNatural = grid.children[1].offsetHeight;
+
+    grid.style.alignItems = ''; // restitue stretch
+
+    const diff = rightNatural - leftNatural;
+    if (diff > 0) {
+      textarea.style.minHeight = (140 + diff) + 'px';
+    }
   }
+
+  document.addEventListener('DOMContentLoaded', () => setTimeout(syncTextarea, 80));
+  window.addEventListener('load', syncTextarea);
+  window.addEventListener('resize', syncTextarea);
 </script>
 
+<!-- Back to top -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut"
+  style="position:fixed; bottom:28px; right:28px; z-index:200;
+         width:44px; height:44px; border-radius:999px;
+         background:var(--fg); border:1px solid var(--fg); color:var(--bg);
+         display:flex; align-items:center; justify-content:center;
+         opacity:0; pointer-events:none;
+         transition:opacity .25s, border-color .2s, background .2s;
+         box-shadow:0 4px 16px rgba(0,0,0,.25); cursor:pointer;">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+<script>
+  (function(){
+    var btn=document.getElementById("back-top");
+    window.addEventListener("scroll",function(){
+      var show=window.scrollY>350;
+      btn.style.opacity=show?"1":"0";
+      btn.style.pointerEvents=show?"auto":"none";
+    });
+    btn.addEventListener("mouseover",function(){this.style.borderColor="var(--accent)";this.style.color="var(--accent)";});
+    btn.addEventListener("mouseout",function(){this.style.borderColor="var(--line-2)";this.style.color="var(--fg-2)";});
+  })();
+</script>
 </body>
 </html>
