@@ -339,7 +339,7 @@
         <div class="mono" style="font-size:10px; color:var(--fg-3); letter-spacing:.15em; text-transform:uppercase; margin-bottom:24px;">Formulaire de contact</div>
 
         <form
-          action="https://formspree.io/f/xpwzgvyd"
+          action="/contact.php"
           method="POST"
           style="display:flex; flex-direction:column; gap:18px; flex:1;"
           onsubmit="handleSubmit(event)">
@@ -389,6 +389,22 @@
                       style="flex:1; resize:none;"
                       placeholder="Décrivez votre besoin, vos contraintes, les matériaux concernés…"
                       required></textarea>
+          </div>
+
+          <!-- Piège à robots : invisible pour un humain, rempli par les scripts -->
+          <div style="position:absolute; left:-9999px;" aria-hidden="true">
+            <label for="site_web">Ne pas remplir</label>
+            <input id="site_web" name="site_web" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <!-- Consentement RGPD -->
+          <div style="display:flex; align-items:flex-start; gap:10px; margin-top:2px;">
+            <input id="consentement" name="consentement" type="checkbox" value="1" required
+                   style="margin-top:3px; width:16px; height:16px; accent-color:var(--accent); cursor:pointer; flex-shrink:0;">
+            <label for="consentement" style="font-size:12.5px; line-height:1.5; color:var(--fg-2); cursor:pointer;">
+              J'accepte que mes données soient utilisées pour traiter ma demande.
+              Consultez notre <a href="confidentialite.html" style="color:var(--accent); text-decoration:underline;">politique de confidentialité</a>.
+            </label>
           </div>
 
           <!-- Submit -->
@@ -692,6 +708,7 @@
         body: new FormData(form),
         headers: { Accept: 'application/json' }
       });
+      const data = await res.json().catch(() => ({}));
       if (res.ok) {
         feedback.style.display = 'block';
         feedback.style.background = 'color-mix(in oklch, var(--accent) 10%, var(--surface-2))';
@@ -700,14 +717,16 @@
         feedback.innerHTML = '✓ &nbsp;Message envoyé. Nous vous répondrons sous 24&nbsp;h en jours ouvrés.';
         form.reset();
       } else {
-        throw new Error();
+        throw new Error(data.message || '');
       }
-    } catch {
+    } catch (err) {
       feedback.style.display = 'block';
       feedback.style.background = 'color-mix(in oklch, #c0392b 10%, var(--surface-2))';
       feedback.style.border = '1px solid #c0392b';
       feedback.style.color = 'var(--fg)';
-      feedback.textContent = 'Une erreur est survenue. Merci de réessayer ou de nous joindre par téléphone.';
+      feedback.textContent = err && err.message
+        ? err.message
+        : 'Une erreur est survenue. Merci de réessayer ou de nous joindre par téléphone.';
     } finally {
       btn.disabled = false;
       btn.style.opacity = '1';
